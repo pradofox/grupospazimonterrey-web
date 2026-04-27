@@ -371,7 +371,7 @@ footer { background: var(--dark); padding: 3.5rem 0 2rem; }
 .cta-box p { color: rgba(255,255,255,.65); font-size: .95rem; margin-bottom: 1.2rem; }
 
 /* --- responsive --- */
-@media (max-width: 900px) {
+@medía (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-visual { display: none; }
   .hero-kicker, .hero-ctas, .hero-stats { justify-content: center; }
@@ -388,7 +388,7 @@ footer { background: var(--dark); padding: 3.5rem 0 2rem; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
 }
-@media (max-width: 600px) {
+@medía (max-width: 600px) {
   .services-grid { grid-template-columns: 1fr; }
   .segmentos-grid { grid-template-columns: 1fr; }
   .proceso-steps { grid-template-columns: 1fr; }
