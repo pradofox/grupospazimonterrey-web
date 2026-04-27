@@ -371,11 +371,20 @@ footer { background: var(--dark); padding: 3.5rem 0 2rem; }
 .cta-box p { color: rgba(255,255,255,.65); font-size: .95rem; margin-bottom: 1.2rem; }
 
 /* --- responsive --- */
-@medía (max-width: 900px) {
+@media (max-width: 900px) {
+  /* secciones */
+  #servicios, #segmentos, #proceso, #testimonios, #faq { padding: 4rem 0; }
+  #nosotros { padding: 4rem 0; }
+  #cta { padding: 3.5rem 0; }
+
+  /* hero */
   .hero-grid { grid-template-columns: 1fr; }
   .hero-visual { display: none; }
   .hero-kicker, .hero-ctas, .hero-stats { justify-content: center; }
   .hero-title, .hero-desc { text-align: center; margin-inline: auto; }
+  #hero { padding: 4rem 0 3.5rem; }
+
+  /* grids */
   .services-grid { grid-template-columns: 1fr 1fr; }
   .nosotros-grid { grid-template-columns: 1fr; gap: 3rem; }
   .segmentos-grid { grid-template-columns: 1fr 1fr; }
@@ -385,17 +394,51 @@ footer { background: var(--dark); padding: 3.5rem 0 2rem; }
   .testi-wide { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .blog-grid { grid-template-columns: 1fr 1fr; }
+
+  /* nav */
   .nav-links { display: none; }
   .hamburger { display: flex; }
+
+  /* article tabla con scroll */
+  .article-body table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
-@medía (max-width: 600px) {
+
+@media (max-width: 600px) {
+  /* secciones */
+  #hero { padding: 3rem 0 2.5rem; }
+  #servicios, #segmentos, #proceso, #testimonios, #faq, #nosotros { padding: 3rem 0; }
+  #cta { padding: 3rem 0; }
+  .section-header { margin-bottom: 2rem; }
+
+  /* hero */
+  .hero-title { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+  .hero-stats { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+  .stat-num { font-size: 1.8rem; }
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas a { justify-content: center; }
+
+  /* nav */
+  .nav-logo span { display: none; }
+  .nav-wa { padding: .45rem .85rem; font-size: .78rem; }
+
+  /* grids */
   .services-grid { grid-template-columns: 1fr; }
   .segmentos-grid { grid-template-columns: 1fr; }
   .proceso-steps { grid-template-columns: 1fr; }
+  .nosotros-grid { gap: 2rem; }
   .nosotros-cards { grid-template-columns: 1fr 1fr; }
   .testimonios-grid { grid-template-columns: 1fr; }
+  .testi-wide { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; gap: .5rem; text-align: center; }
-  .hero-stats { gap: 1.5rem; }
   .blog-grid { grid-template-columns: 1fr; }
+
+  /* cta */
+  .cta-buttons { flex-direction: column; align-items: stretch; }
+  .cta-buttons a { justify-content: center; }
+
+  /* article */
+  .article-hero h1 { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+  .article-body { padding: 2rem 0 3.5rem; }
+  .article-body h2 { font-size: 1.35rem; margin-top: 2rem; }
 }
