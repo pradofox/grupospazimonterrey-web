@@ -1,0 +1,7 @@
+name = "grupospazimonterrey"
+compatibility_date = "2024-09-23"
+account_id = "79b48e78b9db791957b966c527f8039a"
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"

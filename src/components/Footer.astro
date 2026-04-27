@@ -1,0 +1,43 @@
+---
+const year = new Date().getFullYear();
+const WA = 'https://wa.me/528114132252?text=Hola%2C%20me%20interesa%20cotizar%20un%20proyecto';
+const EMAIL = 'grupospazivfox@grupospazi.mx';
+---
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="/logo-color.png" alt="Grupo Spazi Monterrey" />
+          <div class="footer-logo-text">
+            <strong>Grupo Spazi Monterrey</strong>
+            <small>Distribuidor Oficial · NL</small>
+          </div>
+        </div>
+        <p>Automatizacion de portones, control de accesos, camaras y herreria en Monterrey y area metropolitana. 14 anos de experiencia.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <a href="/#servicios">Automatizacion de Portones</a>
+        <a href="/#servicios">Control de Accesos</a>
+        <a href="/#servicios">Camaras y CCTV</a>
+        <a href="/#servicios">Alarmas y Seguridad</a>
+        <a href="/#servicios">Herreria y Fabricacion</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href={WA} target="_blank" rel="noopener">WhatsApp: 81 1413 2252</a>
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        <p style="margin-top:.8rem">Monterrey, Nuevo Leon, Mexico</p>
+        <h4 style="margin-top:1.5rem">Blog</h4>
+        <a href="/blog">Todos los articulos</a>
+        <a href="/blog/cuanto-cuesta-automatizar-porton-monterrey">Cuanto cuesta automatizar</a>
+        <a href="/blog/que-motor-porton-elegir">Que motor elegir</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; {year} Grupo Spazi Monterrey. Distribuidor oficial <span>Grupo Spazi</span> en NL.</span>
+      <span>Hecho con <span>♥</span> por <a href="https://sopadeletras.art" target="_blank" rel="noopener" style="color:var(--gold)">sopadeletras®</a></span>
+    </div>
+  </div>
+</footer>

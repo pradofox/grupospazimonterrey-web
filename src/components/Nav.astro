@@ -1,0 +1,31 @@
+---
+const WA = 'https://wa.me/528114132252?text=Hola%2C%20me%20interesa%20cotizar%20un%20proyecto';
+---
+<nav>
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/logo-w.png" alt="Grupo Spazi Monterrey" />
+      <span>Grupo Spazi Monterrey</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#servicios">Servicios</a>
+      <a href="/#nosotros">Nosotros</a>
+      <a href="/#segmentos">Clientes</a>
+      <a href="/#testimonios">Testimonios</a>
+      <a href="/blog">Blog</a>
+    </div>
+    <a href={WA} target="_blank" rel="noopener" class="nav-wa">Cotizar ahora</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-close" id="mobile-close" aria-label="Cerrar">&#x2715;</button>
+  <a href="/#servicios">Servicios</a>
+  <a href="/#nosotros">Nosotros</a>
+  <a href="/#segmentos">Clientes</a>
+  <a href="/#testimonios">Testimonios</a>
+  <a href="/blog">Blog</a>
+  <a href={WA} target="_blank" rel="noopener" style="color: #25D366;">WhatsApp</a>
+</div>

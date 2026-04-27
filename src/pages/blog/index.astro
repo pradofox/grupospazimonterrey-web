@@ -1,0 +1,74 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import WaFloat from '../../components/WaFloat.astro';
+import '../../styles/global.css';
+
+const articles = [
+  {
+    slug: 'cuanto-cuesta-automatizar-porton-monterrey',
+    category: 'Precios y cotizacion',
+    title: '¿Cuanto cuesta automatizar un porton en Monterrey?',
+    excerpt: 'Tipos de motor, factores que mueven el precio y por que la visita tecnica es el primer paso.',
+    date: 'Abril 2025',
+  },
+  {
+    slug: 'que-motor-porton-elegir',
+    category: 'Guia tecnica',
+    title: 'Que motor elegir para tu porton: guia practica',
+    excerpt: 'Axial, cremallera, pistones o tubular - cuales son las diferencias y cuando usar cada uno.',
+    date: 'Abril 2025',
+  },
+  {
+    slug: 'control-accesos-plantas-industriales-monterrey',
+    category: 'Industrial',
+    title: 'Control de accesos para plantas industriales en Monterrey',
+    excerpt: 'Lo que piden las empresas del nearshoring y como cumplirlo con sistemas robustos y confiables.',
+    date: 'Abril 2025',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Blog - Grupo Spazi Monterrey',
+  description: 'Guias tecnicas, precios y consejos sobre automatizacion de portones y seguridad en Monterrey.',
+  url: 'https://grupospazimonterrey.com/blog',
+};
+---
+<Base
+  title="Blog - Portones, Motores y Seguridad en Monterrey | Grupo Spazi"
+  description="Guias tecnicas, precios y consejos sobre automatizacion de portones, control de accesos y seguridad en Monterrey, Nuevo Leon."
+  schema={schema}
+>
+  <Nav />
+  <section style="padding:4rem 0;background:linear-gradient(135deg,#060f1e,#0C2554)">
+    <div class="container">
+      <div class="tag">Blog</div>
+      <h1 class="section-title light" style="margin-top:.5rem">Guias y consejos<br>de automatizacion</h1>
+      <p class="section-sub light" style="margin-left:0;margin-top:1rem">Informacion practica sobre portones, motores, control de accesos y seguridad en Monterrey.</p>
+    </div>
+  </section>
+  <section style="padding:4rem 0;background:var(--cream)">
+    <div class="container">
+      <div class="blog-grid">
+        {articles.map(a => (
+          <article class="blog-card">
+            <div class="blog-card-body">
+              <div class="blog-category">{a.category}</div>
+              <h2><a href={`/blog/${a.slug}`}>{a.title}</a></h2>
+              <p>{a.excerpt}</p>
+              <div class="blog-card-footer">
+                <span class="blog-date">{a.date}</span>
+                <a href={`/blog/${a.slug}`} class="blog-link">Leer →</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <Footer />
+  <WaFloat />
+</Base>

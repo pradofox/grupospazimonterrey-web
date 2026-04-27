@@ -1,0 +1,43 @@
+---
+const segments = [
+  {
+    icon: '🏠',
+    title: 'Residencial',
+    desc: 'Casas, fraccionamientos y condominios. Priorizamos confianza, estetica y soporte cercano. Trato directo, sin intermediarios.',
+    pills: ['Portones automaticos', 'Camaras', 'Control de acceso', 'Herreria'],
+  },
+  {
+    icon: '🏭',
+    title: 'Industrial',
+    desc: 'Plantas, bodegas y parques industriales. Motores de uso rudo, alto ciclo y sistemas que cumplen estandares de clientes internacionales.',
+    pills: ['Cortinas de acero', 'Control vehicular', 'CCTV 24/7', 'Acceso peatonal'],
+  },
+  {
+    icon: '🔧',
+    title: 'Instaladores y Herreros',
+    desc: 'Precio de distribuidor, disponibilidad de motores y refacciones en Monterrey. Respaldo tecnico directo del fabricante.',
+    pills: ['Precio distribuidor', 'Motores Spazi', 'Refacciones', 'Soporte tecnico'],
+  },
+];
+---
+<section id="segmentos">
+  <div class="container">
+    <div class="section-header">
+      <div class="tag">A quien atendemos</div>
+      <h2 class="section-title">Soluciones para<br>cada tipo de cliente</h2>
+      <p class="section-sub">Residencial, industrial o gremio tecnico - tenemos precio, producto y servicio para cada caso.</p>
+    </div>
+    <div class="segmentos-grid">
+      {segments.map((s, i) => (
+        <div class={`seg-card reveal${i > 0 ? ` reveal-delay-${i}` : ''}`}>
+          <div class="seg-icon">{s.icon}</div>
+          <h3>{s.title}</h3>
+          <p>{s.desc}</p>
+          <div class="seg-pills">
+            {s.pills.map(p => <span>{p}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

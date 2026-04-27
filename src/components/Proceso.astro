@@ -1,0 +1,25 @@
+---
+const steps = [
+  { n: '1', title: 'Consulta', desc: 'Nos escribes por WhatsApp o email. Nos cuentas tu proyecto en minutos.' },
+  { n: '2', title: 'Visita tecnica', desc: 'Sin costo. Evaluamos el acceso, medimos y definimos la solucion correcta.' },
+  { n: '3', title: 'Propuesta', desc: 'Te enviamos cotizacion detallada ese mismo dia o al siguiente.' },
+  { n: '4', title: 'Instalacion', desc: 'Coordinamos herreros e instaladores. Tu tienes un solo punto de contacto.' },
+];
+---
+<section id="proceso">
+  <div class="container">
+    <div class="section-header">
+      <div class="tag">Como trabajamos</div>
+      <h2 class="section-title">De la consulta al<br>proyecto funcionando</h2>
+    </div>
+    <div class="proceso-steps">
+      {steps.map((s, i) => (
+        <div class={`step reveal${i > 0 ? ` reveal-delay-${i}` : ''}`}>
+          <div class="step-num">{s.n}</div>
+          <h3>{s.title}</h3>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import WaFloat from '../../components/WaFloat.astro';
+import '../../styles/global.css';
+
+const WA = 'https://wa.me/528114132252?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20sin%20costo';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: '¿Cuanto cuesta automatizar un porton en Monterrey?',
+  description: 'Tipos de motor, factores que definen el precio y por que la visita tecnica es el primer paso.',
+  author: { '@type': 'Organization', name: 'Grupo Spazi Monterrey' },
+  publisher: { '@type': 'Organization', name: 'Grupo Spazi Monterrey', url: 'https://grupospazimonterrey.com' },
+  datePublished: '2025-04-01',
+  url: 'https://grupospazimonterrey.com/blog/cuanto-cuesta-automatizar-porton-monterrey',
+};
+---
+<Base
+  title="¿Cuanto cuesta automatizar un porton en Monterrey? | Grupo Spazi"
+  description="Conoce los factores que afectan el precio de automatizar tu porton en Monterrey. Tipos de motor, accesorios y visita tecnica sin costo."
+  schema={schema}
+>
+  <Nav />
+  <div class="article-hero">
+    <div class="container" style="max-width:760px">
+      <div class="tag">Precios y cotizacion</div>
+      <h1>¿Cuanto cuesta automatizar<br>un porton en Monterrey?</h1>
+      <p class="article-meta"><span>Grupo Spazi Monterrey</span> · Abril 2025</p>
+    </div>
+  </div>
+  <div class="article-body">
+    <div class="container" style="max-width:760px">
+
+      <h2>¿Que factores definen el precio?</h2>
+      <p>Antes de ver los numeros, hay que entender que mueve el costo:</p>
+      <ul>
+        <li><strong>Tipo de porton:</strong> ascendente seccional, corredizo, abatible o cortina metalica</li>
+        <li><strong>Peso y dimensiones:</strong> a mayor peso, motor mas robusto y precio mas alto</li>
+        <li><strong>Frecuencia de uso:</strong> residencial vs. industrial - distintos ciclos de apertura</li>
+        <li><strong>Accesorios:</strong> bateria de respaldo, fotoceldas, control por WiFi/app, teclados</li>
+        <li><strong>Condicion del porton:</strong> si requiere ajustes o reparaciones antes de instalar el motor</li>
+      </ul>
+
+      <h2>Tipos de porton en Monterrey</h2>
+
+      <h3>1. Porton de garaje ascendente (seccional)</h3>
+      <p>El mas comun en casas de Monterrey. El motor axial o de cadena eleva el porton seccional hacia el techo del garaje. El precio varia segun el peso y ancho del porton, y si incluyes accesorios como bateria de respaldo o fotoceldas.</p>
+
+      <h3>2. Porton corredizo</h3>
+      <p>Muy comun en casas con entrada lateral o fraccionamientos. El motor de cremallera mueve el porton horizontalmente. El costo depende del peso del porton - hay versiones ligeras y de uso rudo - y de si se agrega control de acceso por tarjeta o teclado.</p>
+
+      <h3>3. Porton abatible (una o dos hojas)</h3>
+      <p>Los pistones electromecanicos abren el porton como puerta batiente. Popular en residencias de nivel alto porque no requieren riel visible. El precio varia segun el numero de hojas y el peso, desde versiones ligeras hasta uso rudo de 450 kg por hoja.</p>
+
+      <h3>4. Cortina metalica enrollable</h3>
+      <p>Para locales, bodegas y negocios. El motor tubular va dentro del tubo de la cortina y no requiere sistema de balanceo, lo que hace la instalacion mas rapida. El precio depende del tamano y peso de la cortina.</p>
+
+      <h3>5. Proyectos industriales</h3>
+      <p>Plantas, bodegas, parques industriales y nearshoring en Monterrey requieren motores de uso rudo, mayor ciclo de apertura y controles de acceso mas robustos. Cada proyecto es diferente - lo cotizamos con visita tecnica sin costo.</p>
+
+      <div class="cta-box">
+        <h3>¿Cuanto cuesta tu caso especifico?</h3>
+        <p>Escribenos, te cotizamos sin compromiso el mismo dia. Visita tecnica sin costo incluida.</p>
+        <a href={WA} target="_blank" rel="noopener" class="btn-wa" style="display:inline-flex;gap:.5rem;align-items:center">
+          Cotizar por WhatsApp →
+        </a>
+      </div>
+
+      <h2>¿Vale la pena automatizar?</h2>
+      <p>Si - y los motivos van mas alla de la comodidad de no bajarte del carro:</p>
+      <ul>
+        <li>Control desde el celular - abres el porton aunque no estes en casa</li>
+        <li>Acceso para visitas o paquetes sin abrir la puerta</li>
+        <li>Mayor seguridad: el porton no se puede abrir a jalones</li>
+        <li>Bateria de respaldo para que funcione cuando se va la luz</li>
+        <li>Historial de accesos y notificaciones en tiempo real</li>
+      </ul>
+
+      <h2>¿Por que elegir Grupo Spazi Monterrey?</h2>
+      <p>Somos distribuidora oficial de Grupo Spazi en Nuevo Leon con 14 anos en el mercado. Eso significa precio de distribuidor, refacciones originales disponibles en Monterrey, y soporte tecnico post-venta por WhatsApp - no un numero de Mexico que nunca contesta.</p>
+
+    </div>
+  </div>
+  <Footer />
+  <WaFloat />
+</Base>

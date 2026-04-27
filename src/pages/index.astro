@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Band from '../components/Band.astro';
+import Servicios from '../components/Servicios.astro';
+import Nosotros from '../components/Nosotros.astro';
+import Segmentos from '../components/Segmentos.astro';
+import Proceso from '../components/Proceso.astro';
+import Testimonios from '../components/Testimonios.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import Footer from '../components/Footer.astro';
+import WaFloat from '../components/WaFloat.astro';
+import '../styles/global.css';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Grupo Spazi Monterrey',
+    description: 'Distribuidora oficial de Grupo Spazi en Monterrey. 14 anos de experiencia en automatizacion de portones, control de accesos, camaras y seguridad.',
+    url: 'https://grupospazimonterrey.com',
+    telephone: '+528114132252',
+    email: 'grupospazivfox@grupospazi.mx',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Monterrey',
+      addressRegion: 'Nuevo Leon',
+      addressCountry: 'MX',
+    },
+    areaServed: ['Monterrey', 'San Pedro Garza Garcia', 'Apodaca', 'Escobedo', 'Garcia', 'Santa Catarina', 'Guadalupe'],
+    serviceType: ['Automatizacion de portones', 'Control de accesos', 'Camaras y CCTV', 'Alarmas y seguridad', 'Herreria', 'Gestion de proyectos'],
+    foundingDate: '2012',
+    sameAs: [],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: '¿Cuanto cuesta automatizar un porton en Monterrey?', acceptedAnswer: { '@type': 'Answer', text: 'El costo varia segun el tipo de porton, el motor y los accesorios. Depende de si es ascendente, corredizo, abatible o cortina metalica, y del nivel de uso. Hacemos visita tecnica sin costo para darte un precio exacto.' } },
+      { '@type': 'Question', name: '¿Que tipo de motor necesito para mi porton?', acceptedAnswer: { '@type': 'Answer', text: 'Depende del tipo de porton: Motor axial para portones ascendentes, cremallera para corredizos, pistones para abatibles, motor tubular para cortinas enrollables.' } },
+      { '@type': 'Question', name: '¿Puedo automatizar mi porton actual sin cambiarlo?', acceptedAnswer: { '@type': 'Answer', text: 'Si, en la mayoria de los casos se puede automatizar el porton que ya tienes sin reemplazarlo. Hacemos visita tecnica sin costo para evaluar.' } },
+      { '@type': 'Question', name: '¿Cuanto tarda la instalacion?', acceptedAnswer: { '@type': 'Answer', text: 'Un motor para porton residencial se instala en 2 a 4 horas. Proyectos con camaras o control de accesos pueden tomar 1 a 2 dias.' } },
+      { '@type': 'Question', name: '¿Tienen garantia los motores Spazi?', acceptedAnswer: { '@type': 'Answer', text: 'Si. Los motores Spazi incluyen garantia de fabrica y acceso a refacciones originales. Soporte post-venta por WhatsApp desde Monterrey.' } },
+      { '@type': 'Question', name: '¿Atienden toda el area metropolitana de Monterrey?', acceptedAnswer: { '@type': 'Answer', text: 'Si. San Pedro Garza Garcia, Apodaca, Escobedo, Garcia, Santa Catarina, Guadalupe y Monterrey centro.' } },
+      { '@type': 'Question', name: '¿Venden a instaladores y herreros?', acceptedAnswer: { '@type': 'Answer', text: 'Si. Distribuidor oficial con precio de distribuidor para instaladores y herreros en Monterrey.' } },
+    ],
+  },
+];
+---
+<Base
+  title="Grupo Spazi Monterrey - Portones Automaticos, Camaras y Seguridad"
+  description="Distribuidora oficial de Grupo Spazi en Monterrey. Automatizacion de portones, control de accesos, camaras CCTV y herreria. Visita tecnica sin costo. 14 anos de experiencia."
+  schema={schema}
+>
+  <Nav />
+  <Hero />
+  <Band />
+  <Servicios />
+  <Nosotros />
+  <Segmentos />
+  <Proceso />
+  <Testimonios />
+  <Faq />
+  <Cta />
+  <Footer />
+  <WaFloat />
+</Base>
