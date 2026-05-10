@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WaFloat from '../components/WaFloat.astro';
+import '../styles/global.css';
+
+const EMAIL = 'grupospazivfox@grupospazi.mx';
+const WA = 'https://wa.me/528114132252';
+---
+<Base
+  title="Aviso de Privacidad | Grupo Spazi Monterrey"
+  description="Aviso de privacidad de Grupo Spazi Monterrey conforme a la LFPDPPP. Tratamiento de datos personales de clientes, prospectos y proveedores."
+>
+  <Nav />
+  <div class="article-hero">
+    <div class="container" style="max-width:760px">
+      <div class="tag">Legal</div>
+      <h1>Aviso de Privacidad</h1>
+      <p class="article-meta"><span>Grupo Spazi Monterrey</span> · Última actualización: Abril 2026</p>
+    </div>
+  </div>
+  <div class="article-body">
+    <div class="container" style="max-width:760px">
+
+      <h2>1. Identidad y domicilio del responsable</h2>
+      <p><strong>Grupo Spazi Monterrey</strong> (en adelante, "Grupo Spazi" o "nosotros"), con operaciones en Monterrey, Nuevo León, México, es el responsable del tratamiento de los datos personales que usted nos proporcione.</p>
+      <p>Para cualquier asunto relacionado con este Aviso de Privacidad, puede contactarnos a través de:</p>
+      <ul>
+        <li>Correo: <a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+        <li>WhatsApp: <a href={WA} target="_blank" rel="noopener">81 1413 2252</a></li>
+      </ul>
+
+      <h2>2. Datos personales que recabamos</h2>
+      <p>Para las finalidades descritas en este aviso, podemos recabar los siguientes datos personales:</p>
+      <ul>
+        <li>Nombre completo</li>
+        <li>Teléfono y/o WhatsApp</li>
+        <li>Correo electrónico</li>
+        <li>Dirección de instalación o referencias del inmueble (para visita técnica)</li>
+        <li>Información del proyecto que desea cotizar (tipo de portón, motor, accesos, etc.)</li>
+      </ul>
+      <p>No recabamos datos personales sensibles.</p>
+
+      <h2>3. Finalidades del tratamiento</h2>
+      <p>Sus datos personales serán tratados para las siguientes finalidades <strong>primarias</strong>:</p>
+      <ul>
+        <li>Atender solicitudes de cotización, información o soporte</li>
+        <li>Coordinar visitas técnicas e instalaciones</li>
+        <li>Emitir cotizaciones, facturas y comprobantes</li>
+        <li>Brindar servicio post-venta, garantía y mantenimiento</li>
+        <li>Cumplir con obligaciones contractuales y fiscales</li>
+      </ul>
+      <p>De manera <strong>secundaria</strong>, podemos utilizar sus datos para:</p>
+      <ul>
+        <li>Enviarle información sobre nuevos productos, servicios o promociones</li>
+        <li>Solicitar su retroalimentación sobre el servicio recibido</li>
+      </ul>
+      <p>Si no desea que sus datos sean tratados para las finalidades secundarias, puede manifestarlo enviándonos un mensaje al correo o WhatsApp indicados arriba. La negativa no será motivo para negarle los servicios solicitados.</p>
+
+      <h2>4. Transferencia de datos</h2>
+      <p>Sus datos personales podrán ser compartidos con terceros únicamente cuando sea necesario para cumplir con las finalidades primarias, por ejemplo:</p>
+      <ul>
+        <li>Aliados técnicos (herreros, instaladores, electricistas) que participen en su proyecto</li>
+        <li>Proveedores de servicios contables o fiscales</li>
+        <li>Autoridades competentes cuando exista requerimiento legal</li>
+      </ul>
+      <p>En todos los casos, exigimos a los terceros que protejan sus datos conforme a este aviso.</p>
+
+      <h2>5. Derechos ARCO</h2>
+      <p>Usted tiene derecho a <strong>acceder, rectificar, cancelar u oponerse</strong> al tratamiento de sus datos personales (derechos ARCO), así como a revocar el consentimiento que nos haya otorgado.</p>
+      <p>Para ejercer estos derechos, envíenos una solicitud al correo <a href={`mailto:${EMAIL}`}>{EMAIL}</a> incluyendo:</p>
+      <ul>
+        <li>Su nombre completo y medio para recibir respuesta</li>
+        <li>Copia de identificación oficial</li>
+        <li>Descripción clara del derecho que desea ejercer</li>
+      </ul>
+      <p>Le daremos respuesta en un plazo no mayor a 20 días hábiles.</p>
+
+      <h2>6. Limitación del uso o divulgación</h2>
+      <p>Puede limitar el uso o divulgación de sus datos personales solicitándolo por los mismos medios indicados para los derechos ARCO.</p>
+
+      <h2>7. Uso de cookies y tecnologías similares</h2>
+      <p>Nuestro sitio web es estático y no utiliza cookies de seguimiento ni herramientas de publicidad de terceros. Solo se almacenan los datos estrictamente necesarios para el funcionamiento básico del sitio.</p>
+
+      <h2>8. Cambios al aviso de privacidad</h2>
+      <p>Este aviso puede ser modificado en el futuro. Cualquier cambio será publicado en esta misma página, indicando la fecha de última actualización al inicio del documento.</p>
+
+      <h2>9. Consentimiento</h2>
+      <p>Al proporcionarnos sus datos personales a través de WhatsApp, correo electrónico, formularios o cualquier otro medio, usted reconoce haber leído este Aviso de Privacidad y otorga su consentimiento para el tratamiento de sus datos conforme a lo aquí establecido.</p>
+
+      <div class="cta-box">
+        <h3>¿Dudas sobre este aviso?</h3>
+        <p>Escríbenos y te respondemos lo antes posible.</p>
+        <a href={`mailto:${EMAIL}`} class="btn-wa" style="background:var(--navy);display:inline-flex;gap:.5rem;align-items:center">
+          Contactar por correo →
+        </a>
+      </div>
+
+    </div>
+  </div>
+  <Footer />
+  <WaFloat />
+</Base>

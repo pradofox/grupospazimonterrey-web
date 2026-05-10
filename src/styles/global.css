@@ -310,8 +310,14 @@ footer { background: var(--dark); padding: 3.5rem 0 2rem; }
 .footer-col h4 { font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
 .footer-col a, .footer-col p { display: block; font-size: .88rem; color: rgba(255,255,255,.45); margin-bottom: .5rem; line-height: 1.5; transition: color .2s; }
 .footer-col a:hover { color: var(--white); }
+.footer-legal { display: flex; gap: 1.5rem; justify-content: center; padding-bottom: 1.2rem; margin-bottom: 1.2rem; border-bottom: 1px solid rgba(255,255,255,.07); }
+.footer-legal a { font-size: .78rem; color: rgba(255,255,255,.5); transition: color .2s; }
+.footer-legal a:hover { color: var(--gold); }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; color: rgba(255,255,255,.22); }
 .footer-bottom span { color: var(--gold); }
+@media (max-width: 600px) {
+  .footer-legal { flex-direction: column; gap: .5rem; align-items: center; }
+}
 
 /* --- wa float --- */
 .wa-float {

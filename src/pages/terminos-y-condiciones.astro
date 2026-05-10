@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WaFloat from '../components/WaFloat.astro';
+import '../styles/global.css';
+
+const EMAIL = 'grupospazivfox@grupospazi.mx';
+const WA = 'https://wa.me/528114132252';
+---
+<Base
+  title="Términos y Condiciones | Grupo Spazi Monterrey"
+  description="Términos y condiciones de uso del sitio web y de los servicios de Grupo Spazi Monterrey."
+>
+  <Nav />
+  <div class="article-hero">
+    <div class="container" style="max-width:760px">
+      <div class="tag">Legal</div>
+      <h1>Términos y Condiciones</h1>
+      <p class="article-meta"><span>Grupo Spazi Monterrey</span> · Última actualización: Abril 2026</p>
+    </div>
+  </div>
+  <div class="article-body">
+    <div class="container" style="max-width:760px">
+
+      <h2>1. Aceptación de los términos</h2>
+      <p>El presente documento establece los términos y condiciones bajo los cuales <strong>Grupo Spazi Monterrey</strong> ("Grupo Spazi" o "nosotros") ofrece información y servicios a través del sitio <a href="https://grupospazimonterrey.com">grupospazimonterrey.com</a> y de los canales de contacto asociados (WhatsApp, correo electrónico).</p>
+      <p>El uso de este sitio implica la aceptación plena de estos términos. Si no está de acuerdo, le pedimos abstenerse de utilizar el sitio o nuestros servicios.</p>
+
+      <h2>2. Sobre Grupo Spazi Monterrey</h2>
+      <p>Somos distribuidora oficial de Grupo Spazi en Nuevo León, con 14 años de operación local. Nos dedicamos a:</p>
+      <ul>
+        <li>Automatización de portones residenciales, comerciales e industriales</li>
+        <li>Control de accesos vehicular y peatonal</li>
+        <li>Cámaras de seguridad (CCTV) y videovigilancia</li>
+        <li>Alarmas y sistemas de seguridad</li>
+        <li>Herrería y fabricación a medida</li>
+        <li>Gestión integral de proyectos relacionados</li>
+      </ul>
+
+      <h2>3. Cotizaciones y visitas técnicas</h2>
+      <p>Las cotizaciones se emiten previa visita técnica al sitio de instalación, salvo casos en que la información proporcionada por el cliente sea suficiente para emitir una propuesta preliminar.</p>
+      <ul>
+        <li>La visita técnica es sin costo y no genera obligación de contratar</li>
+        <li>Las cotizaciones tienen una vigencia de 15 días naturales salvo indicación distinta</li>
+        <li>Los precios pueden variar por cambios en insumos, tipo de cambio o ajustes del fabricante</li>
+      </ul>
+
+      <h2>4. Servicios e instalación</h2>
+      <p>Los tiempos de entrega e instalación se acuerdan en cada propuesta. Pueden ajustarse por causas ajenas a Grupo Spazi (clima, retrasos del cliente, disponibilidad de insumos especiales, etc.).</p>
+      <p>El cliente es responsable de proveer las condiciones físicas y eléctricas mínimas requeridas para la instalación, salvo que se incluyan expresamente como parte del servicio contratado.</p>
+
+      <h2>5. Garantía</h2>
+      <p>Los productos Grupo Spazi cuentan con la garantía de fábrica del fabricante, que cubre defectos en materiales y manufactura conforme a las condiciones publicadas por el fabricante.</p>
+      <p>La garantía <strong>no aplica</strong> en los siguientes casos:</p>
+      <ul>
+        <li>Daños por mal uso, sobrecarga o uso fuera de las especificaciones del equipo</li>
+        <li>Daños por fenómenos naturales, descargas eléctricas o cortocircuitos externos</li>
+        <li>Modificaciones o reparaciones realizadas por terceros no autorizados</li>
+        <li>Falta de mantenimiento preventivo</li>
+      </ul>
+      <p>El servicio de instalación tiene garantía de 30 días naturales sobre la mano de obra, contados a partir de la fecha de entrega del proyecto.</p>
+
+      <h2>6. Formas de pago</h2>
+      <p>Las condiciones de pago se acuerdan por proyecto e incluyen, según el caso, anticipo, pago contra entrega o pago a crédito previo acuerdo. Aceptamos transferencia bancaria y los métodos de pago indicados en cada cotización.</p>
+
+      <h2>7. Propiedad intelectual</h2>
+      <p>El contenido del sitio (textos, gráficos, fotografías, logotipos, código) es propiedad de Grupo Spazi Monterrey o de sus respectivos titulares, y está protegido por las leyes aplicables en materia de propiedad intelectual. Queda prohibida su reproducción total o parcial sin autorización por escrito.</p>
+      <p>"Grupo Spazi" es marca registrada de su titular en México. Grupo Spazi Monterrey opera como distribuidora oficial autorizada en Nuevo León.</p>
+
+      <h2>8. Testimonios</h2>
+      <p>Los testimonios publicados en este sitio fueron compartidos voluntariamente por clientes reales. Los nombres se publican parcialmente (nombre y apellido inicial) para proteger su privacidad, salvo cuando el cliente sea una institución y haya autorizado el uso completo de su nombre.</p>
+
+      <h2>9. Limitación de responsabilidad</h2>
+      <p>La información publicada en este sitio tiene fines informativos. Aunque procuramos que sea exacta y actualizada, no garantizamos que esté libre de errores. Grupo Spazi no será responsable por decisiones tomadas únicamente con base en información de este sitio sin haber consultado directamente con nosotros.</p>
+
+      <h2>10. Modificaciones</h2>
+      <p>Estos términos pueden actualizarse en cualquier momento. Los cambios se publicarán en esta misma página con la fecha de última actualización al inicio del documento.</p>
+
+      <h2>11. Legislación aplicable</h2>
+      <p>Estos términos se rigen por las leyes de los Estados Unidos Mexicanos. Cualquier controversia será resuelta en los tribunales competentes del Estado de Nuevo León, renunciando las partes a cualquier otro fuero que pudiera corresponderles.</p>
+
+      <h2>12. Contacto</h2>
+      <p>Para cualquier asunto relacionado con estos términos:</p>
+      <ul>
+        <li>Correo: <a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+        <li>WhatsApp: <a href={WA} target="_blank" rel="noopener">81 1413 2252</a></li>
+      </ul>
+
+      <div class="cta-box">
+        <h3>¿Listo para tu proyecto?</h3>
+        <p>Cotizamos sin compromiso. Visita técnica sin costo.</p>
+        <a href={WA} target="_blank" rel="noopener" class="btn-wa" style="display:inline-flex;gap:.5rem;align-items:center">
+          Solicitar cotización →
+        </a>
+      </div>
+
+    </div>
+  </div>
+  <Footer />
+  <WaFloat />
+</Base>
