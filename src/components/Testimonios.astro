@@ -7,11 +7,25 @@ const featured = {
   service: 'Cliente 8 años',
 };
 
-const bomberos = {
-  quote: 'Nos han dado servicio por más de 7 años en todas las estaciones. Estamos muy contentos con la rapidez y lo bien hecho del servicio. El motor de cortina de acero nos gustó tanto que quisiéramos uno igual en todas.',
-  name: 'Patronato de Bomberos de Nuevo León',
-  meta: '4 estaciones atendidas',
-  service: 'Industrial - 7+ años',
+// TEMPORAL (2026-05-18): testimonio destacado del Patronato de Bomberos NL
+// movido para no exponerlo previo a una junta con ellos. Mientras tanto se
+// destaca a Sr. Ivan G. (industrial real, ya estaba en el grid).
+// Para RESTAURAR el de Bomberos: quitar el const `highlight` de abajo, restaurar
+// `bomberos` con el bloque comentado mas abajo, volver el JSX a {bomberos.X},
+// y reponer Sr. Ivan G. en el array `cards`.
+//
+// const bomberos = {
+//   quote: 'Nos han dado servicio por más de 7 años en todas las estaciones. Estamos muy contentos con la rapidez y lo bien hecho del servicio. El motor de cortina de acero nos gustó tanto que quisiéramos uno igual en todas.',
+//   name: 'Patronato de Bomberos de Nuevo León',
+//   meta: '4 estaciones atendidas',
+//   service: 'Industrial - 7+ años',
+// };
+
+const highlight = {
+  quote: 'Está muy cómodo el control remoto para usarlo desde el montacargas, muy seguro y muy rápido. Ayuda a que no se salga el aire acondicionado de la planta y a que el manejo sea cómodo y eficiente.',
+  name: 'Sr. Iván G.',
+  meta: 'Zona industrial, Monterrey',
+  service: 'Portón ascendente industrial',
 };
 
 const cards = [
@@ -51,12 +65,14 @@ const cards = [
     meta: 'Monterrey, NL',
     service: 'Portón residencial',
   },
-  {
-    quote: 'Está muy cómodo el control remoto para usarlo desde el montacargas, muy seguro y muy rápido. Ayuda a que no se salga el aire acondicionado de la planta y a que el manejo sea cómodo y eficiente.',
-    name: 'Sr. Iván G.',
-    meta: 'Zona industrial, Monterrey',
-    service: 'Portón ascendente industrial',
-  },
+  // Sr. Ivan G. movido temporalmente al lugar destacado (ver comentario arriba).
+  // Cuando se restaure el de Bomberos al destacado, regresar este testimonio aqui:
+  // {
+  //   quote: 'Está muy cómodo el control remoto para usarlo desde el montacargas, muy seguro y muy rápido. Ayuda a que no se salga el aire acondicionado de la planta y a que el manejo sea cómodo y eficiente.',
+  //   name: 'Sr. Iván G.',
+  //   meta: 'Zona industrial, Monterrey',
+  //   service: 'Portón ascendente industrial',
+  // },
 ];
 ---
 <section id="testimonios">
@@ -78,14 +94,14 @@ const cards = [
       </div>
     </div>
 
-    <!-- Bomberos (full width highlight) -->
+    <!-- Highlight industrial (full width). TEMPORAL: ver comentario en frontmatter. -->
     <div class="testi-card" style="background:var(--cream);border-left:4px solid var(--gold);margin-bottom:1.5rem">
       <div class="testi-stars">★★★★★</div>
-      <p class="testi-quote">{bomberos.quote}</p>
+      <p class="testi-quote">{highlight.quote}</p>
       <div class="testi-author">
-        <span class="testi-name">{bomberos.name}</span>
-        <span class="testi-meta">{bomberos.meta}</span>
-        <span class="testi-service">{bomberos.service}</span>
+        <span class="testi-name">{highlight.name}</span>
+        <span class="testi-meta">{highlight.meta}</span>
+        <span class="testi-service">{highlight.service}</span>
       </div>
     </div>
 
