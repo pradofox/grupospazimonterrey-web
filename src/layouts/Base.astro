@@ -7,10 +7,19 @@ export interface Props {
   schema?: object | object[];
 }
 
+// La canonica se calcula sin el .html que agrega build.format: 'file'.
+// Si no se limpia, Astro.url.href apunta a /blog.html, que redirige (307) a
+// /blog: Google ve una canonica que no resuelve y deja la pagina sin indexar.
+const SITE = 'https://grupospazimonterrey.com';
+const cleanPath = Astro.url.pathname
+  .replace(/index\.html$/, '')
+  .replace(/\.html$/, '')
+  .replace(/\/$/, '');
+
 const {
   title,
   description,
-  canonical = Astro.url.href,
+  canonical = `${SITE}${cleanPath || '/'}`,
   ogImage = '/og-image.jpg',
   schema,
 } = Astro.props;
