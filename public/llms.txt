@@ -1,26 +1,69 @@
 # Grupo Spazi Monterrey
 
-Grupo Spazi Monterrey es la distribuidora oficial de Grupo Spazi en Monterrey, Nuevo León, México.
-Especializada en automatización de portones, control de accesos, cámaras, alarmas y herrería.
-14 años de experiencia atendiendo proyectos residenciales, industriales e instaladores en el área metropolitana de Monterrey.
+> Distribuidora oficial de Grupo Spazi en Monterrey, Nuevo León, México. 14 años
+> automatizando portones e instalando sistemas de acceso y seguridad en el área
+> metropolitana de Monterrey. Atiende clientes residenciales, industriales e
+> instaladores. Visita técnica sin costo y soporte post-venta local por WhatsApp.
 
 ## Contacto
 - WhatsApp: +52 81 1413 2252
 - Email: grupospazivfox@grupospazi.mx
 - Web: https://grupospazimonterrey.com
+- Ubicación: Monterrey, Nuevo León, México
 
 ## Servicios
-- Automatización de portones (motores axiales, cremallera, cadena, pistones)
-- Control de accesos (tarjetas, biométricos, teclados, apps)
-- Cámaras y CCTV (videovigilancia HD, acceso remoto)
-- Alarmas y seguridad (sensores, paneles, monitoreo 24/7)
-- Herrería y fabricación (portones, rejas, barandales a medida)
-- Gestión de proyectos integrales
+- Automatización de portones: motores axiales (portones ascendentes de garaje), de cremallera (corredizos), pistones electromecánicos (abatibles) y tubulares (cortinas metálicas enrollables)
+- Control de accesos: tarjetas de proximidad RFID, biométricos de huella y facial, teclados con PIN, apertura desde app móvil, barreras vehiculares y torniquetes
+- Cámaras y CCTV: videovigilancia HD, visión nocturna a color, acceso remoto desde celular, grabación 24/7 en DVR o NVR
+- Alarmas y seguridad: sensores, paneles y sistemas integrados con control de acceso
+- Herrería y fabricación a medida: portones, rejas y barandales
+- Gestión de proyectos integrales: coordina herreros, instaladores y electricistas bajo un solo punto de contacto
 
 ## Zonas de servicio
-San Pedro Garza García, Apodaca, Escobedo, García, Santa Catarina, Guadalupe y toda el área metropolitana de Monterrey.
+Monterrey, San Pedro Garza García, Apodaca, Escobedo, García, Santa Catarina,
+Guadalupe, San Nicolás de los Garza y el resto del área metropolitana de Monterrey.
 
-## Segmentos
-- Residencial: propietarios que buscan seguridad y automatización
-- Industrial: plantas, bodegas, nearshoring
-- Instaladores y herreros: precio distribuidor, refacciones, respaldo técnico
+## Segmentos que atiende
+- Residencial: casas, fraccionamientos y condominios
+- Industrial: plantas, bodegas, parques industriales y empresas de nearshoring
+- Instaladores y herreros: venta a precio de distribuidor, refacciones originales y respaldo técnico
+
+## Preguntas frecuentes
+
+### ¿Cuánto cuesta automatizar un portón en Monterrey?
+El costo varía según el tipo de portón (ascendente, corredizo, abatible o cortina
+metálica), el peso, el motor y los accesorios. Grupo Spazi Monterrey hace visita
+técnica sin costo para dar un precio exacto.
+
+### ¿Qué motor necesito para mi portón?
+Motor axial para portones ascendentes de garaje; de cremallera para corredizos;
+pistones electromecánicos para abatibles de una o dos hojas; motor tubular para
+cortinas metálicas enrollables.
+
+### ¿Se puede automatizar un portón existente sin cambiarlo?
+Sí. En la mayoría de los casos se automatiza el portón que ya se tiene, sin
+reemplazarlo. Se evalúa en visita técnica sin costo.
+
+### ¿Cuánto tarda la instalación?
+Un motor para portón residencial se instala en 2 a 4 horas. Proyectos con cámaras
+o control de accesos pueden tomar de 1 a 2 días.
+
+### ¿Los motores tienen garantía?
+Sí. Los motores Spazi incluyen garantía de fábrica, refacciones originales
+disponibles en Monterrey y soporte post-venta local por WhatsApp.
+
+### ¿Venden a instaladores y herreros?
+Sí. Como distribuidora oficial maneja precio de distribuidor para instaladores y
+herreros, con disponibilidad de motores y refacciones en Monterrey.
+
+## Por qué la eligen
+- 14 años operando en el mercado de Monterrey (la marca Spazi fue fundada en 1987)
+- Distribuidora oficial: precio de distribuidor y refacciones originales locales
+- Un solo punto de contacto que coordina herrería, instalación y electricidad
+- Soporte post-venta real por WhatsApp desde Monterrey, no un call center
+- Clientes residenciales, industriales e institucionales de largo plazo (cuentas de 7 y 8 años)
+
+## Recursos
+- [Cuánto cuesta automatizar un portón en Monterrey](https://grupospazimonterrey.com/blog/cuanto-cuesta-automatizar-porton-monterrey): factores que definen el precio por tipo de portón
+- [Qué motor elegir para tu portón](https://grupospazimonterrey.com/blog/que-motor-porton-elegir): guía técnica de motores axiales, cremallera, pistones y tubulares
+- [Control de accesos para plantas industriales en Monterrey](https://grupospazimonterrey.com/blog/control-accesos-plantas-industriales-monterrey): lo que piden las empresas del nearshoring

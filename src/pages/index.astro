@@ -14,6 +14,27 @@ import Footer from '../components/Footer.astro';
 import WaFloat from '../components/WaFloat.astro';
 import '../styles/global.css';
 
+// Testimonios reales de clientes, en formato Review para que los buscadores
+// y los motores de IA (ChatGPT, Perplexity) puedan citarlos.
+const reviews = [
+  { author: 'Antonio', body: 'Las mismas personas atienden tanto mi empresa como mi casa: motores, cámaras, herrería, pintura, control de accesos y cortina de acero. Ya tenemos 8 años trabajando sin ningún problema.' },
+  { author: 'Fernando G.', body: 'Abre rápido, me siento muy seguro. El control es comodísimo, incluso llegando en moto. No hace ruido y no se sale mi perro. Muy contento con la batería de respaldo y el WiFi para abrirlo desde el celular.' },
+  { author: 'Sra. Eva', body: 'Me siento muy tranquila desde que instalaron las cámaras. Tienen audio, las veo desde el celular y sé que todo está bien. Excelente servicio, muy buen acabado y nunca han fallado.' },
+  { author: 'Sr. Raúl B.', body: 'Me encanta el motor axial de mi portón. Si algún día se dañara, me gustaría poner uno igual.' },
+  { author: 'Sr. Juan G.', body: 'Muy cómodo en una avenida muy transitada. Fácil de entrar y salir. Me gustó mucho la atención, el servicio y lo amables de los trabajadores.' },
+  { author: 'Sra. T.', body: 'Me siento más cómoda y segura. Mis huéspedes de Airbnb hacen muy buenos comentarios de la entrada siempre iluminada, y no consume nada de energía porque es solar.' },
+  { author: 'Sra. Erica G.', body: 'Me encantó mi portón. Me gusta hasta cómo se ve con la luz del día y funciona muy bien. Me siento más segura, que abra y cierre rápido sin ningún problema.' },
+  { author: 'Sr. Iván G.', body: 'Está muy cómodo el control remoto para usarlo desde el montacargas, muy seguro y muy rápido. Ayuda a que no se salga el aire acondicionado de la planta y a que el manejo sea eficiente.' },
+];
+
+const servicios = [
+  { name: 'Automatización de portones', description: 'Instalación de motores para portones ascendentes, corredizos, abatibles y cortinas metálicas. Motores axiales, de cremallera, pistones electromecánicos y tubulares.' },
+  { name: 'Control de accesos', description: 'Sistemas de acceso vehicular y peatonal: tarjetas de proximidad, biométricos de huella o facial, teclados con PIN y apertura desde el celular.' },
+  { name: 'Cámaras y CCTV', description: 'Videovigilancia HD con acceso remoto desde el celular, visión nocturna a color y grabación 24/7 para casas, negocios y plantas industriales.' },
+  { name: 'Alarmas y seguridad', description: 'Sensores, paneles y sistemas de alarma integrados con el control de acceso para casas, comercios e industria.' },
+  { name: 'Herrería y fabricación', description: 'Fabricación a medida de portones, rejas y barandales en Monterrey, coordinada con la automatización.' },
+];
+
 const schema = [
   {
     '@context': 'https://schema.org',
@@ -23,34 +44,62 @@ const schema = [
     url: 'https://grupospazimonterrey.com',
     telephone: '+528114132252',
     email: 'grupospazivfox@grupospazi.mx',
+    priceRange: '$$',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Monterrey',
       addressRegion: 'Nuevo León',
       addressCountry: 'MX',
     },
-    areaServed: ['Monterrey', 'San Pedro Garza García', 'Apodaca', 'Escobedo', 'Garcia', 'Santa Catarina', 'Guadalupe'],
+    areaServed: ['Monterrey', 'San Pedro Garza García', 'Apodaca', 'Escobedo', 'García', 'Santa Catarina', 'Guadalupe', 'San Nicolás de los Garza'],
     serviceType: ['Automatización de portones', 'Control de accesos', 'Cámaras y CCTV', 'Alarmas y seguridad', 'Herrería', 'Gestión de proyectos'],
     foundingDate: '2012',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5',
+      reviewCount: String(reviews.length),
+      bestRating: '5',
+    },
+    review: reviews.map(r => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: r.author },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      reviewBody: r.body,
+      itemReviewed: { '@type': 'LocalBusiness', name: 'Grupo Spazi Monterrey' },
+    })),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Servicios de Grupo Spazi Monterrey',
+      itemListElement: servicios.map(s => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: s.name,
+          description: s.description,
+          areaServed: { '@type': 'City', name: 'Monterrey' },
+          provider: { '@type': 'LocalBusiness', name: 'Grupo Spazi Monterrey' },
+        },
+      })),
+    },
     sameAs: [],
   },
   {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
-      { '@type': 'Question', name: '¿Cuánto cuesta automatizar un portón en Monterrey?', acceptedAnswer: { '@type': 'Answer', text: 'El costo varía según el tipo de portón, el motor y los accesorios. Depende de si es ascendente, corredizo, abatible o cortina metalica, y del nivel de uso. Hacemos visita técnica sin costo para darte un precio exacto.' } },
+      { '@type': 'Question', name: '¿Cuánto cuesta automatizar un portón en Monterrey?', acceptedAnswer: { '@type': 'Answer', text: 'El costo varía según el tipo de portón, el motor y los accesorios. Depende de si es ascendente, corredizo, abatible o cortina metálica, y del nivel de uso. Hacemos visita técnica sin costo para darte un precio exacto.' } },
       { '@type': 'Question', name: '¿Qué tipo de motor necesito para mi portón?', acceptedAnswer: { '@type': 'Answer', text: 'Depende del tipo de portón: Motor axial para portones ascendentes, cremallera para corredizos, pistones para abatibles, motor tubular para cortinas enrollables.' } },
-      { '@type': 'Question', name: '¿Puedo automatizar mi portón actual sin cambiarlo?', acceptedAnswer: { '@type': 'Answer', text: 'Si, en la mayoria de los casos se puede automatizar el portón que ya tienes sin reemplazarlo. Hacemos visita técnica sin costo para evaluar.' } },
+      { '@type': 'Question', name: '¿Puedo automatizar mi portón actual sin cambiarlo?', acceptedAnswer: { '@type': 'Answer', text: 'Sí, en la mayoría de los casos se puede automatizar el portón que ya tienes sin reemplazarlo. Hacemos visita técnica sin costo para evaluar.' } },
       { '@type': 'Question', name: '¿Cuánto tarda la instalación?', acceptedAnswer: { '@type': 'Answer', text: 'Un motor para portón residencial se instala en 2 a 4 horas. Proyectos con cámaras o control de accesos pueden tomar 1 a 2 días.' } },
-      { '@type': 'Question', name: '¿Tienen garantía los motores Spazi?', acceptedAnswer: { '@type': 'Answer', text: 'Si. Los motores Spazi incluyen garantía de fabrica y acceso a refacciones originales. Soporte post-venta por WhatsApp desde Monterrey.' } },
-      { '@type': 'Question', name: '¿Atienden toda el area metropolitana de Monterrey?', acceptedAnswer: { '@type': 'Answer', text: 'Si. San Pedro Garza García, Apodaca, Escobedo, Garcia, Santa Catarina, Guadalupe y Monterrey centro.' } },
-      { '@type': 'Question', name: '¿Venden a instaladores y herreros?', acceptedAnswer: { '@type': 'Answer', text: 'Si. Distribuidor oficial con precio de distribuidor para instaladores y herreros en Monterrey.' } },
+      { '@type': 'Question', name: '¿Tienen garantía los motores Spazi?', acceptedAnswer: { '@type': 'Answer', text: 'Sí. Los motores Spazi incluyen garantía de fábrica y acceso a refacciones originales. Soporte post-venta por WhatsApp desde Monterrey.' } },
+      { '@type': 'Question', name: '¿Atienden toda el área metropolitana de Monterrey?', acceptedAnswer: { '@type': 'Answer', text: 'Sí. San Pedro Garza García, Apodaca, Escobedo, García, Santa Catarina, Guadalupe y Monterrey centro.' } },
+      { '@type': 'Question', name: '¿Venden a instaladores y herreros?', acceptedAnswer: { '@type': 'Answer', text: 'Sí. Distribuidor oficial con precio de distribuidor para instaladores y herreros en Monterrey.' } },
     ],
   },
 ];
 ---
 <Base
-  title="Grupo Spazi Monterrey - Portones Automaticos, Cámaras y Seguridad"
+  title="Grupo Spazi Monterrey - Portones Automáticos, Cámaras y Seguridad"
   description="Distribuidora oficial de Grupo Spazi en Monterrey. Automatización de portones, control de accesos, cámaras CCTV y herrería. Visita técnica sin costo. 14 años de experiencia."
   schema={schema}
 >

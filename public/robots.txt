@@ -1,3 +1,30 @@
 User-agent: *
 Allow: /
+
+# Crawlers de buscadores con IA. Se permiten de forma explicita: son la via por
+# la que ChatGPT, Perplexity y Claude pueden citar y recomendar el negocio.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://grupospazimonterrey.com/sitemap.xml

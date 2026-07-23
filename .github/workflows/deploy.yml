@@ -18,3 +18,9 @@ jobs:
       - run: npx wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      # Avisa a Bing y Yandex que el sitio cambio (IndexNow).
+      # Bing alimenta el indice que usa ChatGPT Search, por eso importa.
+      - name: Notificar a IndexNow
+        run: node scripts/indexnow.mjs
+        continue-on-error: true
