@@ -1,0 +1,732 @@
+---
+// LAB de diseño de Grupo Spazi Monterrey - direccion "Vivo y confiable".
+// Pagina autocontenida, sin indexar. No comparte estilos con el sitio real.
+// Navy vivo + gold calido + acento naranja. Formas redondeadas y generosas,
+// nav pildora, grid de fondo, hero con texto que entra animado. Sensacion:
+// cercano, energico, humano. El sitio real no se toca hasta aprobar aqui.
+---
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Lab · Vivo y confiable · Grupo Spazi Monterrey</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Vivo y confiable - navy con vida como base, gold calido brillante, naranja acento */
+      --navy:      #0C2554;
+      --navy-mid:  #1B3A6B;
+      --navy-soft: #2C4E86;
+      --gold:      #C8A84B;
+      --gold-hi:   #E4C15A;
+      --orange:    #EC6B2D;
+      --orange-so: #F4A46B;
+      --cream:     #F7F3EA;
+      --paper:     #FBF9F3;
+      --ink:       #12203B;
+      --muted:     #5C6A80;
+      --line:      #E4DECF;
+      --white:     #FFFFFF;
+      --green:     #2FBF71;
+
+      --r-md: 14px;
+      --r-lg: 22px;
+      --r-xl: 28px;
+      --pill: 100px;
+      --maxw: 1140px;
+      --ease: cubic-bezier(.2,.8,.2,1);
+      --spring: cubic-bezier(.34,1.56,.64,1);
+    }
+
+    * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    /* retícula sutil de fondo global */
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(color-mix(in srgb, var(--navy) 5%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--navy) 5%, transparent) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse 120% 100% at 50% 0%, #000 30%, transparent 90%);
+    }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+
+    ::selection { background: var(--gold-hi); color: var(--navy); }
+
+    /* ---------- Barra superior del lab (pildora flotante) ---------- */
+    .lab-bar {
+      position: sticky; top: 14px; z-index: 60;
+      margin: 14px auto 0; max-width: calc(var(--maxw) + 3rem); padding: 0 1.5rem;
+    }
+    .lab-bar-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      height: 56px; padding: 0 .6rem 0 1.4rem;
+      background: color-mix(in srgb, var(--white) 78%, transparent);
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      border: 1px solid color-mix(in srgb, var(--navy) 10%, transparent);
+      border-radius: var(--pill);
+      box-shadow: 0 12px 40px -18px rgba(12,37,84,.4), inset 0 1px 0 rgba(255,255,255,.7);
+    }
+    .lab-bar .brand { display: flex; align-items: center; gap: .6rem; }
+    .lab-bar .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 4px color-mix(in srgb, var(--orange) 22%, transparent); }
+    .lab-bar .tag { font-weight: 800; font-size: .85rem; letter-spacing: -.01em; color: var(--navy); }
+    .lab-bar .dir { font-family: 'JetBrains Mono', monospace; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); padding: .28rem .7rem; border-radius: var(--pill); background: color-mix(in srgb, var(--orange) 12%, transparent); }
+    .lab-bar .back { display: inline-flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .8rem; color: var(--navy); text-decoration: none; padding: .55rem 1.1rem; border-radius: var(--pill); background: var(--cream); border: 1px solid var(--line); transition: transform .2s var(--ease), background .2s; }
+    .lab-bar .back:hover { transform: translateY(-1px); background: var(--gold-hi); }
+    .lab-bar .mid { display: flex; align-items: center; gap: .8rem; }
+    @media (max-width: 720px) { .lab-bar .dir { display: none; } }
+
+    /* ---------- Estructura del lab ---------- */
+    .lab-section { padding: 5rem 0; }
+    .lab-section + .lab-section { border-top: 1px solid var(--line); }
+    .lab-head { display: flex; align-items: flex-start; gap: 1.1rem; margin-bottom: 2.8rem; }
+    .lab-num { font-family: 'JetBrains Mono', monospace; font-size: .74rem; font-weight: 600; color: var(--white); letter-spacing: .04em; background: var(--navy); width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; margin-top: .2rem; }
+    .lab-title { font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.1; color: var(--navy); }
+    .lab-note { font-size: .95rem; color: var(--muted); max-width: 62ch; margin-top: .5rem; }
+
+    .mono-label { font-family: 'JetBrains Mono', monospace; font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+    /* orbe "en linea" reutilizable */
+    .online { display: inline-flex; align-items: center; gap: .5rem; font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); }
+    .online .orb { position: relative; width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
+    .online .orb::after { content: ''; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid var(--green); animation: ping 2s var(--ease) infinite; }
+    @keyframes ping { 0% { transform: scale(.5); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
+
+    /* ---------- Intro ---------- */
+    .kicker { display: inline-flex; align-items: center; gap: .55rem; font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--orange); font-weight: 500; }
+    .kicker::before { content: ''; width: 26px; height: 2px; border-radius: 2px; background: var(--orange); }
+    .intro-title { font-size: clamp(2.6rem, 7vw, 4.6rem); font-weight: 800; line-height: 1; letter-spacing: -.035em; color: var(--navy); margin: 1.1rem 0 .8rem; }
+    .intro-title .live { color: var(--orange); position: relative; }
+    .intro-lead { font-size: 1.2rem; color: var(--ink); max-width: 60ch; }
+    .intro-lead b { color: var(--navy); font-weight: 700; }
+
+    /* ---------- 1. Tokens ---------- */
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px,1fr)); gap: 1rem; }
+    .sw { border-radius: var(--r-lg); overflow: hidden; background: var(--white); border: 1px solid var(--line); box-shadow: 0 8px 22px -18px rgba(12,37,84,.5); transition: transform .25s var(--ease); }
+    .sw:hover { transform: translateY(-4px); }
+    .sw .chip { height: 84px; display: flex; align-items: flex-end; padding: .5rem .6rem; }
+    .sw .chip .role { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; padding: .15rem .45rem; border-radius: var(--pill); background: rgba(255,255,255,.7); color: var(--navy); }
+    .sw .meta { padding: .7rem .85rem .85rem; }
+    .sw .name { font-size: .84rem; font-weight: 700; color: var(--navy); }
+    .sw .hex { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--muted); margin-top: .1rem; }
+
+    /* ---------- 2. Tipografia ---------- */
+    .type-row { padding: 1.4rem 0; border-top: 1px solid var(--line); }
+    .type-row:first-child { border-top: none; }
+    .type-tag { font-family: 'JetBrains Mono', monospace; font-size: .66rem; color: var(--orange); letter-spacing: .08em; text-transform: uppercase; margin-bottom: .5rem; }
+    .t-d1 { font-size: clamp(2.4rem,6vw,4rem); font-weight: 800; line-height: 1; letter-spacing: -.035em; color: var(--navy); }
+    .t-d1 .a { color: var(--orange); }
+    .t-d2 { font-size: clamp(1.6rem,3.4vw,2.3rem); font-weight: 700; letter-spacing: -.025em; color: var(--navy); line-height: 1.1; }
+    .t-body { font-size: 1.12rem; color: var(--ink); max-width: 64ch; }
+    .t-body b { font-weight: 700; color: var(--navy); }
+    .t-mono { font-family: 'JetBrains Mono', monospace; font-size: .9rem; color: var(--navy-mid); letter-spacing: .02em; }
+    .weights { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: baseline; }
+    .weights span { font-size: 1.7rem; color: var(--navy); }
+
+    /* ---------- 3. Firma / distintivo ---------- */
+    .sig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.2rem; }
+    .sig-card { position: relative; border-radius: var(--r-xl); padding: 1.8rem; overflow: hidden; border: 1px solid var(--line); background: var(--white); }
+    .sig-card h4 { font-family: 'JetBrains Mono', monospace; font-size: .66rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 1.2rem; }
+
+    /* firma: hero de texto animado (entra al hacer scroll) */
+    .sig-anim { background: var(--navy); color: var(--white); grid-column: 1 / -1; padding: 2.6rem 2.2rem; }
+    .sig-anim .grid-bg { position: absolute; inset: 0; background-image: linear-gradient(color-mix(in srgb,#fff 7%,transparent) 1px,transparent 1px), linear-gradient(90deg,color-mix(in srgb,#fff 7%,transparent) 1px,transparent 1px); background-size: 38px 38px; mask-image: radial-gradient(circle at 20% 30%, #000, transparent 75%); }
+    .sig-anim h4 { color: color-mix(in srgb,#fff 55%,transparent); position: relative; }
+    .sig-anim .line { position: relative; font-size: clamp(1.8rem,4.4vw,3rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.06; overflow: hidden; }
+    .sig-anim .line .word { display: inline-block; }
+    .sig-anim .line .word.hl { color: var(--gold-hi); }
+    /* estado inicial de la animacion de entrada palabra por palabra */
+    .reveal-words .word { opacity: 0; transform: translateY(105%) rotate(3deg); transition: opacity .5s var(--ease), transform .7s var(--spring); }
+    .reveal-words.in .word { opacity: 1; transform: none; }
+    .sig-anim .replay { margin-top: 1.4rem; }
+
+    /* firma: contador */
+    .sig-count .big { font-size: 4.2rem; font-weight: 800; letter-spacing: -.04em; color: var(--navy); line-height: .9; }
+    .sig-count .big sup { font-size: 1.6rem; color: var(--orange); vertical-align: super; font-weight: 700; }
+    .sig-count .cap { margin-top: .6rem; color: var(--muted); font-size: .92rem; }
+    .bar { height: 8px; border-radius: var(--pill); background: var(--cream); overflow: hidden; margin-top: 1.2rem; }
+    .bar i { display: block; height: 100%; width: 0; border-radius: var(--pill); background: linear-gradient(90deg, var(--gold), var(--orange)); transition: width 1.6s var(--ease); }
+
+    /* firma: orbe grande de estado */
+    .sig-orb { display: flex; flex-direction: column; gap: 1.1rem; align-items: flex-start; justify-content: center; }
+    .big-orb { position: relative; width: 62px; height: 62px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--gold-hi), var(--gold)); box-shadow: 0 0 0 0 color-mix(in srgb, var(--gold) 55%, transparent); animation: breathe 3s ease-in-out infinite; }
+    @keyframes breathe { 0%,100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--gold) 45%, transparent); } 50% { box-shadow: 0 0 0 16px color-mix(in srgb, var(--gold) 0%, transparent); } }
+    .sig-orb .txt b { display: block; color: var(--navy); font-weight: 800; font-size: 1.05rem; }
+    .sig-orb .txt span { color: var(--muted); font-size: .9rem; }
+
+    /* ---------- 4. Componentes ---------- */
+    .comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 1.2rem; }
+    .demo { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 1.8rem; }
+    .demo h4 { font-family: 'JetBrains Mono', monospace; font-size: .66rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 1.3rem; }
+
+    /* botones pildora */
+    .btn { display: inline-flex; align-items: center; gap: .55rem; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: .95rem; padding: .85rem 1.6rem; border-radius: var(--pill); border: none; cursor: pointer; text-decoration: none; transition: transform .2s var(--spring), box-shadow .25s var(--ease), background .2s; white-space: nowrap; }
+    .btn svg { width: 17px; height: 17px; }
+    .btn-primary { background: var(--orange); color: var(--white); box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--orange) 80%, transparent); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -10px color-mix(in srgb, var(--orange) 85%, transparent); }
+    .btn-gold { background: var(--gold-hi); color: var(--navy); }
+    .btn-gold:hover { transform: translateY(-2px); background: var(--gold); }
+    .btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid color-mix(in srgb, var(--navy) 22%, transparent); }
+    .btn-ghost:hover { transform: translateY(-2px); border-color: var(--navy); background: var(--cream); }
+    .btn-wa { background: var(--green); color: var(--white); }
+    .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 14px 26px -12px color-mix(in srgb, var(--green) 80%, transparent); }
+    .btn-navy { background: var(--navy); color: var(--white); }
+    .btn-navy:hover { transform: translateY(-2px); background: var(--navy-mid); }
+
+    /* boton magnetico */
+    .mag-wrap { display: flex; align-items: center; gap: .9rem; flex-wrap: wrap; }
+    .magnetic { will-change: transform; }
+
+    /* chips de spec en mono */
+    .chips { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .spec-chip { font-family: 'JetBrains Mono', monospace; font-size: .72rem; padding: .45rem .85rem; border-radius: var(--pill); color: var(--navy-mid); background: var(--cream); border: 1px solid var(--line); display: inline-flex; align-items: center; gap: .45rem; }
+    .spec-chip b { color: var(--orange); font-weight: 600; }
+    .spec-chip .d { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+
+    /* tarjeta de servicio redondeada */
+    .scard { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 1.6rem; transition: transform .25s var(--ease), box-shadow .3s var(--ease); cursor: default; }
+    .scard:hover { transform: translateY(-6px); box-shadow: 0 22px 40px -22px rgba(12,37,84,.5); }
+    .scard .ico { width: 52px; height: 52px; border-radius: var(--r-md); background: color-mix(in srgb, var(--navy) 8%, var(--white)); color: var(--orange); display: grid; place-items: center; margin-bottom: 1.1rem; transition: background .25s, color .25s; }
+    .scard:hover .ico { background: var(--navy); color: var(--gold-hi); }
+    .scard h5 { font-weight: 800; font-size: 1.2rem; color: var(--navy); margin-bottom: .35rem; letter-spacing: -.01em; }
+    .scard p { font-size: .92rem; color: var(--muted); }
+    .scard .go { margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); display: inline-flex; align-items: center; gap: .4rem; }
+    .scard .go svg { transition: transform .25s var(--ease); }
+    .scard:hover .go svg { transform: translateX(4px); }
+
+    /* fila de stats con contadores */
+    .stat-row { display: flex; gap: 2.8rem; flex-wrap: wrap; }
+    .stat .n { font-size: 2.9rem; font-weight: 800; line-height: 1; letter-spacing: -.03em; color: var(--navy); }
+    .stat .n sup { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--orange); vertical-align: super; }
+    .stat .l { font-family: 'JetBrains Mono', monospace; font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-top: .55rem; }
+
+    /* testimonio */
+    .quote { background: var(--navy); color: var(--white); border-radius: var(--r-xl); padding: 1.9rem; position: relative; overflow: hidden; }
+    .quote .mark { font-size: 4rem; line-height: .6; color: var(--gold-hi); font-weight: 800; opacity: .5; }
+    .quote p { font-size: 1.12rem; font-weight: 500; margin: .3rem 0 1.3rem; color: color-mix(in srgb,#fff 92%,transparent); }
+    .quote .who { display: flex; align-items: center; gap: .8rem; }
+    .quote .av { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-hi), var(--orange)); display: grid; place-items: center; font-weight: 800; color: var(--navy); flex-shrink: 0; }
+    .quote .who b { display: block; font-size: .95rem; }
+    .quote .who span { font-family: 'JetBrains Mono', monospace; font-size: .66rem; letter-spacing: .06em; color: color-mix(in srgb,#fff 55%,transparent); }
+
+    /* ---------- 5/7. En contexto ---------- */
+    .ctx { border: 1px solid var(--line); border-radius: var(--r-xl); overflow: hidden; margin-bottom: 2rem; box-shadow: 0 24px 60px -40px rgba(12,37,84,.6); }
+    .ctx-tag { font-family: 'JetBrains Mono', monospace; font-size: .66rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); padding: .7rem 1.2rem; background: var(--cream); border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: .6rem; }
+
+    /* HERO real */
+    .hero { position: relative; background: var(--navy); overflow: hidden; padding: 1.4rem; }
+    .hero .stage { position: relative; border-radius: var(--r-xl); overflow: hidden; min-height: 560px; display: flex; flex-direction: column; }
+    .hero .photo { position: absolute; inset: 0; background-image: linear-gradient(180deg, rgba(12,37,84,.32), rgba(12,37,84,.86)), url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=1400&q=75&auto=format'); background-size: cover; background-position: center; }
+    .hero .grid-bg { position: absolute; inset: 0; background-image: linear-gradient(color-mix(in srgb,#fff 7%,transparent) 1px,transparent 1px), linear-gradient(90deg,color-mix(in srgb,#fff 7%,transparent) 1px,transparent 1px); background-size: 40px 40px; mask-image: radial-gradient(ellipse 90% 70% at 30% 40%, #000, transparent 80%); }
+
+    /* nav pildora dentro del hero */
+    .hero-nav { position: relative; z-index: 3; margin: 1.1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .5rem .6rem .5rem 1.4rem; background: color-mix(in srgb, var(--navy) 55%, transparent); backdrop-filter: blur(14px); border: 1px solid color-mix(in srgb,#fff 14%,transparent); border-radius: var(--pill); }
+    .hero-nav .logo { display: flex; align-items: center; gap: .55rem; color: var(--white); font-weight: 800; letter-spacing: -.01em; }
+    .hero-nav .logo .g { width: 26px; height: 26px; border-radius: 8px; background: linear-gradient(135deg, var(--gold-hi), var(--orange)); display: grid; place-items: center; color: var(--navy); font-size: .8rem; font-weight: 800; }
+    .hero-nav .links { display: flex; gap: 1.4rem; }
+    .hero-nav .links a { color: color-mix(in srgb,#fff 82%,transparent); text-decoration: none; font-size: .88rem; font-weight: 600; transition: color .2s; }
+    .hero-nav .links a:hover { color: var(--gold-hi); }
+    .hero-nav .cta { background: var(--orange); color: #fff; font-weight: 700; font-size: .85rem; padding: .6rem 1.2rem; border-radius: var(--pill); text-decoration: none; transition: transform .2s var(--spring); }
+    .hero-nav .cta:hover { transform: translateY(-2px); }
+    @media (max-width: 860px) { .hero-nav .links { display: none; } }
+
+    .hero-body { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 2.4rem; }
+    .hero-badge { display: inline-flex; align-items: center; gap: .55rem; align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--white); background: color-mix(in srgb,#fff 12%,transparent); border: 1px solid color-mix(in srgb,#fff 18%,transparent); padding: .45rem .9rem; border-radius: var(--pill); margin-bottom: 1.3rem; }
+    .hero-badge .orb { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+    .hero-badge .orb::after { content:''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--green); animation: ping 2s var(--ease) infinite; }
+    .hero h1 { font-size: clamp(2.4rem, 5.6vw, 4.2rem); font-weight: 800; line-height: 1.02; letter-spacing: -.035em; color: var(--white); max-width: 16ch; margin-bottom: 1.2rem; }
+    .hero h1 .word { display: inline-block; }
+    .hero h1 .a { color: var(--gold-hi); }
+    .hero p { color: color-mix(in srgb,#fff 82%,transparent); font-size: 1.15rem; max-width: 46ch; margin-bottom: 1.8rem; }
+    .hero .actions { display: flex; gap: .8rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .hero .metrics { display: flex; gap: 2.4rem; flex-wrap: wrap; padding-top: 1.5rem; border-top: 1px solid color-mix(in srgb,#fff 16%,transparent); }
+    .hero .metrics .n { font-size: 2.1rem; font-weight: 800; color: var(--white); line-height: 1; letter-spacing: -.03em; }
+    .hero .metrics .n sup { font-size: .9rem; color: var(--gold-hi); }
+    .hero .metrics .l { font-family: 'JetBrains Mono', monospace; font-size: .64rem; text-transform: uppercase; letter-spacing: .08em; color: color-mix(in srgb,#fff 60%,transparent); margin-top: .4rem; }
+
+    /* marquee de servicios */
+    .marquee { position: relative; z-index: 2; overflow: hidden; background: var(--orange); border-radius: 0; }
+    .marquee .track { display: flex; gap: 2.2rem; padding: .7rem 0; white-space: nowrap; width: max-content; animation: slide 26s linear infinite; }
+    .marquee:hover .track { animation-play-state: paused; }
+    .marquee span { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #fff; display: inline-flex; align-items: center; gap: 2.2rem; }
+    .marquee span::after { content: '◆'; color: color-mix(in srgb,#fff 60%,transparent); font-size: .6rem; }
+    @keyframes slide { to { transform: translateX(-50%); } }
+
+    /* banda de servicios (segunda seccion real) */
+    .band { background: var(--cream); border-radius: var(--r-xl); padding: 2.6rem; }
+    .band-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
+    .band-head h2 { font-size: clamp(1.7rem,3.4vw,2.4rem); font-weight: 800; letter-spacing: -.03em; color: var(--navy); line-height: 1.05; max-width: 18ch; }
+    .band-head p { color: var(--muted); font-size: .95rem; max-width: 32ch; }
+    .band-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1.1rem; }
+
+    /* banda de testimonios */
+    .tband { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.1rem; }
+
+    /* reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .6s var(--ease), transform .7s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* cierre */
+    .closing { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+    .closing .fin { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--muted); letter-spacing: .06em; }
+    .closing .heart { display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1rem; font-weight: 700; color: var(--navy); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal, .reveal-words .word { opacity: 1 !important; transform: none !important; }
+    }
+
+    @media (max-width: 640px) {
+      .lab-section { padding: 3.5rem 0; }
+      .hero-body { padding: 1.6rem; }
+      .hero .metrics { gap: 1.6rem; }
+      .stat-row { gap: 1.8rem; }
+      .band { padding: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra del lab (pildora flotante) -->
+  <div class="lab-bar">
+    <div class="lab-bar-inner">
+      <div class="brand">
+        <span class="dot"></span>
+        <span class="tag">Spazi · Lab</span>
+        <span class="dir">Vivo y confiable</span>
+      </div>
+      <div class="mid">
+        <a class="back" href="/lab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+          Todas las direcciones
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <section class="lab-section" style="padding-top:3.5rem">
+    <div class="wrap">
+      <span class="kicker reveal">Dirección de diseño</span>
+      <h1 class="intro-title reveal">Vivo y <span class="live">confiable</span>.</h1>
+      <p class="intro-lead reveal">Navy con vida, gold cálido y un naranja que da energía. Formas redondeadas y generosas, retícula sutil de fondo, movimiento con propósito. La sensación que buscamos: <b>cercano, humano, esta empresa sí contesta</b>. Serio sin ser corporativo frío. El sitio real no se toca hasta aprobar aquí.</p>
+    </div>
+  </section>
+
+  <!-- 1. Tokens -->
+  <section class="lab-section" id="tokens">
+    <div class="wrap">
+      <div class="lab-head reveal">
+        <span class="lab-num">01</span>
+        <div>
+          <h2 class="lab-title">Tokens de color</h2>
+          <p class="lab-note">Navy y gold mandan; el naranja es acento de energía, nunca protagonista. Base cálida en papel y crema para que respire. Verde solo para señales de estado "en línea".</p>
+        </div>
+      </div>
+      <div class="swatches reveal">
+        <div class="sw"><div class="chip" style="background:#0C2554"><span class="role">base</span></div><div class="meta"><div class="name">Navy</div><div class="hex">#0C2554</div></div></div>
+        <div class="sw"><div class="chip" style="background:#1B3A6B"><span class="role">navy medio</span></div><div class="meta"><div class="name">Navy medio</div><div class="hex">#1B3A6B</div></div></div>
+        <div class="sw"><div class="chip" style="background:#C8A84B"><span class="role">gold</span></div><div class="meta"><div class="name">Gold</div><div class="hex">#C8A84B</div></div></div>
+        <div class="sw"><div class="chip" style="background:#E4C15A"><span class="role">gold brillante</span></div><div class="meta"><div class="name">Gold brillante</div><div class="hex">#E4C15A</div></div></div>
+        <div class="sw"><div class="chip" style="background:#EC6B2D"><span class="role">acento</span></div><div class="meta"><div class="name">Naranja</div><div class="hex">#EC6B2D</div></div></div>
+        <div class="sw"><div class="chip" style="background:#F4A46B"><span class="role">acento suave</span></div><div class="meta"><div class="name">Naranja suave</div><div class="hex">#F4A46B</div></div></div>
+        <div class="sw"><div class="chip" style="background:#F7F3EA"><span class="role">crema</span></div><div class="meta"><div class="name">Crema</div><div class="hex">#F7F3EA</div></div></div>
+        <div class="sw"><div class="chip" style="background:#FBF9F3"><span class="role" style="border:1px solid #E4DECF">papel</span></div><div class="meta"><div class="name">Papel</div><div class="hex">#FBF9F3</div></div></div>
+        <div class="sw"><div class="chip" style="background:#12203B"><span class="role">tinta</span></div><div class="meta"><div class="name">Tinta</div><div class="hex">#12203B</div></div></div>
+        <div class="sw"><div class="chip" style="background:#5C6A80"><span class="role">muted</span></div><div class="meta"><div class="name">Muted</div><div class="hex">#5C6A80</div></div></div>
+        <div class="sw"><div class="chip" style="background:#E4DECF"><span class="role" style="color:#5C6A80">línea</span></div><div class="meta"><div class="name">Línea</div><div class="hex">#E4DECF</div></div></div>
+        <div class="sw"><div class="chip" style="background:#2FBF71"><span class="role">estado</span></div><div class="meta"><div class="name">Verde en línea</div><div class="hex">#2FBF71</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Tipografia -->
+  <section class="lab-section" id="tipografia">
+    <div class="wrap">
+      <div class="lab-head reveal">
+        <span class="lab-num">02</span>
+        <div>
+          <h2 class="lab-title">Tipografía</h2>
+          <p class="lab-note">Manrope para todo: geométrica, redondeada, amigable pero seria. La jerarquía la da el peso (800 para titulares con confianza). Los datos técnicos van en JetBrains Mono, que aporta el aire de ingeniería.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="type-row"><div class="type-tag">Display · Manrope 800</div><div class="t-d1">Automatización que <span class="a">no falla</span></div></div>
+        <div class="type-row"><div class="type-tag">Título de sección · Manrope 700</div><div class="t-d2">Cada instalación, un cliente para siempre</div></div>
+        <div class="type-row"><div class="type-tag">Escala de pesos · Manrope 400 → 800</div><div class="weights"><span style="font-weight:400">Regular</span><span style="font-weight:500">Medium</span><span style="font-weight:600">Semibold</span><span style="font-weight:700">Bold</span><span style="font-weight:800">Extrabold</span></div></div>
+        <div class="type-row"><div class="type-tag">Cuerpo · Manrope 400/500</div><p class="t-body">Portones automáticos, control de accesos, cámaras y herrería a medida. Atendemos <b>residencial, industrial y a instaladores</b> en toda el área de Monterrey.</p></div>
+        <div class="type-row"><div class="type-tag">Dato técnico · JetBrains Mono</div><div class="t-mono">MOTOR AXIAL AX-1000 · 1000 KG · 220V · CICLO CONTINUO</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Firma / distintivo -->
+  <section class="lab-section" id="firma">
+    <div class="wrap">
+      <div class="lab-head reveal">
+        <span class="lab-num">03</span>
+        <div>
+          <h2 class="lab-title">Firma y micro-interacciones</h2>
+          <p class="lab-note">El distintivo de esta dirección es el movimiento vivo: texto que entra palabra por palabra, contadores que suben, un orbe que respira. Nada gratuito; cada gesto dice "estamos aquí, activos, atentos".</p>
+        </div>
+      </div>
+      <div class="sig-grid reveal">
+        <!-- texto animado de entrada -->
+        <div class="sig-card sig-anim">
+          <div class="grid-bg"></div>
+          <h4>Texto de entrada · palabra por palabra</h4>
+          <div class="line reveal-words" id="sigWords">
+            <span class="word">Portones</span> <span class="word">que</span> <span class="word hl">abren</span> <span class="word hl">rápido</span>,<br>
+            <span class="word">gente</span> <span class="word">que</span> <span class="word hl">contesta</span>.
+          </div>
+          <div class="replay">
+            <button class="btn btn-gold" id="replayBtn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-6.4 2.6L3 8"/><path d="M3 3v5h5"/></svg>
+              Volver a reproducir
+            </button>
+          </div>
+        </div>
+
+        <!-- contador -->
+        <div class="sig-card sig-count">
+          <h4>Contador animado</h4>
+          <div class="big"><span data-count="14" data-suffix="">0</span><sup>+</sup></div>
+          <div class="cap">años instalando y dando servicio en Monterrey</div>
+          <div class="bar"><i data-bar="88"></i></div>
+        </div>
+
+        <!-- orbe de estado -->
+        <div class="sig-card sig-orb">
+          <h4 style="align-self:flex-start">Orbe de estado</h4>
+          <div style="display:flex;align-items:center;gap:1rem">
+            <div class="big-orb"></div>
+            <div class="txt">
+              <b>En línea, atendiendo</b>
+              <span>respuesta por WhatsApp el mismo día</span>
+            </div>
+          </div>
+          <div class="online" style="margin-top:.4rem"><span class="orb"></span> Estamos disponibles</div>
+        </div>
+      </div>
+      <p class="lab-note reveal" style="margin-top:1.1rem">Todo es CSS + JS vanilla, sin librerías. Carga instantánea, cero impacto en SEO. El movimiento respeta <code style="font-family:'JetBrains Mono',monospace;font-size:.85em">prefers-reduced-motion</code>.</p>
+    </div>
+  </section>
+
+  <!-- 4. Componentes -->
+  <section class="lab-section" id="componentes">
+    <div class="wrap">
+      <div class="lab-head reveal">
+        <span class="lab-num">04</span>
+        <div>
+          <h2 class="lab-title">Componentes</h2>
+          <p class="lab-note">Botones píldora (el primario es magnético: síguelo con el mouse), chips de spec en mono, tarjeta de servicio que se levanta, fila de stats con contadores y testimonio en navy.</p>
+        </div>
+      </div>
+      <div class="comp-grid reveal">
+        <div class="demo">
+          <h4>Botones píldora</h4>
+          <div class="mag-wrap">
+            <a class="btn btn-primary magnetic" href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+              Cotizar - visita sin costo
+            </a>
+            <a class="btn btn-gold" href="#">Ver servicios</a>
+            <a class="btn btn-ghost" href="#">Conócenos</a>
+            <a class="btn btn-wa" href="#">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1s-.5-.1-.7.2-.8 1-.9 1.1-.3.2-.6 0a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.5.3-.5v-.5l-.9-2.2c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4A3.4 3.4 0 0 0 5.9 9c0 2 1.5 3.9 1.7 4.1s2.9 4.4 7 6c2.4 1 2.9.8 3.4.8s1.7-.7 2-1.4.3-1.3.2-1.4-.4-.2-.7-.3z"/><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20z"/></svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="demo">
+          <h4>Chips de especificación</h4>
+          <div class="chips">
+            <span class="spec-chip"><span class="d"></span><b>AXIAL</b> uso residencial</span>
+            <span class="spec-chip"><span class="d"></span><b>CREMALLERA</b> hasta 800 kg</span>
+            <span class="spec-chip"><span class="d"></span><b>CCTV</b> visión nocturna</span>
+            <span class="spec-chip"><span class="d"></span><b>RFID</b> control de acceso</span>
+            <span class="spec-chip"><span class="d"></span><b>BIOMÉTRICO</b> huella</span>
+            <span class="spec-chip"><span class="d"></span><b>14 AÑOS</b> MTY</span>
+          </div>
+        </div>
+
+        <div class="demo">
+          <h4>Tarjeta de servicio</h4>
+          <div class="scard">
+            <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18"/><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v5M16 4v5"/></svg></div>
+            <h5>Automatización de portones</h5>
+            <p>Motores axiales, de cremallera, pistones y tubulares. Para casa, negocio e industria.</p>
+            <span class="go">Ver más <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </div>
+
+        <div class="demo">
+          <h4>Fila de stats · contadores</h4>
+          <div class="stat-row">
+            <div class="stat"><div class="n"><span data-count="14">0</span><sup>+</sup></div><div class="l">Años en MTY</div></div>
+            <div class="stat"><div class="n"><span data-count="1987" data-plain="1">0</span></div><div class="l">Fundación Spazi</div></div>
+            <div class="stat"><div class="n"><span data-count="3">0</span></div><div class="l">Segmentos</div></div>
+          </div>
+        </div>
+
+        <div class="demo" style="grid-column:1/-1">
+          <h4>Testimonio</h4>
+          <div class="quote">
+            <div class="mark">&ldquo;</div>
+            <p>Las mismas personas atienden mi empresa y mi casa: motores, cámaras, herrería, control de accesos. Ya tenemos 8 años sin ningún problema.</p>
+            <div class="who">
+              <div class="av">A</div>
+              <div><b>Antonio</b><span>MONTERREY · CLIENTE 8 AÑOS</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5/7. En contexto -->
+  <section class="lab-section" id="contexto">
+    <div class="wrap">
+      <div class="lab-head reveal">
+        <span class="lab-num">05</span>
+        <div>
+          <h2 class="lab-title">En contexto</h2>
+          <p class="lab-note">La dirección aplicada de verdad: hero con foto, nav píldora, grid de fondo, título que entra animado y marquee de servicios. Debajo, una banda real de servicios y una de testimonios.</p>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div class="ctx reveal">
+        <div class="ctx-tag"><span class="online"><span class="orb"></span></span> Hero · foto + nav píldora + texto animado</div>
+        <div class="hero">
+          <div class="stage">
+            <div class="photo" role="img" aria-label="Instalación residencial (placeholder)"></div>
+            <div class="grid-bg"></div>
+
+            <!-- nav pildora -->
+            <div class="hero-nav">
+              <div class="logo"><span class="g">S</span> Grupo Spazi</div>
+              <div class="links">
+                <a href="#">Servicios</a>
+                <a href="#">Portones</a>
+                <a href="#">Accesos</a>
+                <a href="#">Nosotros</a>
+              </div>
+              <a class="cta" href="#">Cotizar</a>
+            </div>
+
+            <div class="hero-body">
+              <span class="hero-badge"><span class="orb"></span> Distribuidor oficial · Monterrey</span>
+              <h1 class="reveal-words" id="heroWords">
+                <span class="word">Portones,</span> <span class="word">accesos</span> <span class="word">y</span> <span class="word">cámaras</span> <span class="word a">que</span> <span class="word a">sí</span> <span class="word a">responden</span>
+              </h1>
+              <p>Automatización, control de accesos, CCTV y herrería a medida. Una sola llamada resuelve casa, negocio e industria. Y sí, contestamos el mismo día.</p>
+              <div class="actions">
+                <a class="btn btn-primary magnetic" href="https://wa.me/528114132252">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm5.5-5.6c-.3-.2-1.7-.9-2-1s-.5-.1-.7.2-.8 1-.9 1.1-.3.2-.6 0a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.5.3-.5v-.5l-.9-2.2c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4A3.4 3.4 0 0 0 5.9 9c0 2 1.5 3.9 1.7 4.1s2.9 4.4 7 6c2.4 1 2.9.8 3.4.8s1.7-.7 2-1.4.3-1.3.2-1.4-.4-.2-.7-.3z"/></svg>
+                  Cotizar - visita sin costo
+                </a>
+                <a class="btn btn-ghost" href="#" style="color:#fff;border-color:rgba(255,255,255,.35)">Ver servicios</a>
+              </div>
+              <div class="metrics">
+                <div><div class="n"><span data-count="14">0</span><sup>+</sup></div><div class="l">Años en MTY</div></div>
+                <div><div class="n"><span data-count="1987" data-plain="1">0</span></div><div class="l">Fundación Spazi</div></div>
+                <div><div class="n"><span data-count="3">0</span></div><div class="l">Segmentos</div></div>
+              </div>
+            </div>
+
+            <!-- marquee -->
+            <div class="marquee">
+              <div class="track">
+                <span>Automatización de portones</span><span>Control de accesos</span><span>Cámaras CCTV</span><span>Alarmas</span><span>Herrería a medida</span><span>RFID y biométrico</span>
+                <span>Automatización de portones</span><span>Control de accesos</span><span>Cámaras CCTV</span><span>Alarmas</span><span>Herrería a medida</span><span>RFID y biométrico</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Segunda seccion: banda de servicios -->
+      <div class="ctx reveal">
+        <div class="ctx-tag">Sección real · banda de servicios</div>
+        <div class="band">
+          <div class="band-head">
+            <h2>Todo lo que asegura tu propiedad, en un solo equipo</h2>
+            <p>Residencial, industrial y a instaladores. El mismo equipo, de principio a fin.</p>
+          </div>
+          <div class="band-grid">
+            <div class="scard">
+              <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg></div>
+              <h5>Portones automáticos</h5>
+              <p>Motores axial, cremallera, pistones y tubular para todo tipo de acceso.</p>
+            </div>
+            <div class="scard">
+              <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+              <h5>Control de accesos</h5>
+              <p>RFID, biométrico, teclado y app. Sabes quién entra y a qué hora.</p>
+            </div>
+            <div class="scard">
+              <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l6 4-6 4V8z"/><rect x="8" y="6" width="14" height="12" rx="2"/></svg></div>
+              <h5>Cámaras CCTV</h5>
+              <p>Visión nocturna y monitoreo remoto desde tu celular, 24/7.</p>
+            </div>
+            <div class="scard">
+              <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div>
+              <h5>Alarmas y herrería</h5>
+              <p>Alarmas conectadas y herrería a medida que combina con tu portón.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tercera seccion: banda de testimonios -->
+      <div class="ctx reveal">
+        <div class="ctx-tag">Sección real · testimonios</div>
+        <div class="band" style="background:var(--white)">
+          <div class="band-head">
+            <h2>Clientes que se quedan</h2>
+            <p>Residencial e industrial. La confianza es el producto.</p>
+          </div>
+          <div class="tband">
+            <div class="quote">
+              <div class="mark">&ldquo;</div>
+              <p>Me encantó mi portón, hasta cómo se ve. Me siento más segura, abre y cierra rápido sin ruido.</p>
+              <div class="who"><div class="av">E</div><div><b>Sra. Erica G.</b><span>RESIDENCIAL</span></div></div>
+            </div>
+            <div class="quote">
+              <div class="mark">&ldquo;</div>
+              <p>El control remoto desde el montacargas es comodísimo, seguro y rápido.</p>
+              <div class="who"><div class="av">I</div><div><b>Sr. Iván G.</b><span>INDUSTRIAL</span></div></div>
+            </div>
+            <div class="quote">
+              <div class="mark">&ldquo;</div>
+              <p>Las mismas personas atienden mi empresa y mi casa. 8 años sin ningún problema.</p>
+              <div class="who"><div class="av">A</div><div><b>Antonio</b><span>MONTERREY · 8 AÑOS</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Cierre -->
+  <div class="closing">
+    <div class="heart">
+      <span class="online"><span class="orb"></span></span> Dirección "Vivo y confiable"
+    </div>
+    <p class="fin">FIN DEL LAB · grupospazimonterrey.com/lab-vivo · noindex · Manrope + JetBrains Mono</p>
+  </div>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ---- reveal-on-scroll ---- */
+      var revealables = document.querySelectorAll('.reveal');
+      if (reduce) {
+        revealables.forEach(function (el) { el.classList.add('in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+        revealables.forEach(function (el) { io.observe(el); });
+      }
+
+      /* ---- texto de entrada palabra por palabra ---- */
+      function playWords(container) {
+        if (!container) return;
+        var words = container.querySelectorAll('.word');
+        container.classList.remove('in');
+        words.forEach(function (w) { w.style.transitionDelay = ''; });
+        // reflow para reiniciar la animacion
+        void container.offsetWidth;
+        words.forEach(function (w, i) { w.style.transitionDelay = (reduce ? 0 : i * 0.08) + 's'; });
+        container.classList.add('in');
+      }
+
+      var sigWords = document.getElementById('sigWords');
+      var heroWords = document.getElementById('heroWords');
+
+      if (reduce) {
+        [sigWords, heroWords].forEach(function (c) { if (c) c.classList.add('in'); });
+      } else {
+        var wio = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { playWords(e.target); wio.unobserve(e.target); }
+          });
+        }, { threshold: 0.4 });
+        if (sigWords) wio.observe(sigWords);
+        if (heroWords) wio.observe(heroWords);
+      }
+
+      var replay = document.getElementById('replayBtn');
+      if (replay) replay.addEventListener('click', function () { playWords(sigWords); });
+
+      /* ---- contadores animados ---- */
+      function animateCount(el) {
+        var target = parseInt(el.getAttribute('data-count'), 10);
+        var plain = el.getAttribute('data-plain') === '1'; // sin separador de miles (años)
+        if (reduce) { el.textContent = plain ? String(target) : target.toLocaleString('es-MX'); return; }
+        var dur = 1400, start = null;
+        function fmt(n) { return plain ? String(n) : n.toLocaleString('es-MX'); }
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(Math.round(target * eased));
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      var counted = new WeakSet();
+      var cio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && !counted.has(e.target)) {
+            counted.add(e.target); animateCount(e.target); cio.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.6 });
+      document.querySelectorAll('[data-count]').forEach(function (el) { cio.observe(el); });
+
+      /* ---- barra de progreso ---- */
+      var bio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.style.width = e.target.getAttribute('data-bar') + '%'; bio.unobserve(e.target); }
+        });
+      }, { threshold: 0.6 });
+      document.querySelectorAll('[data-bar]').forEach(function (el) { bio.observe(el); });
+
+      /* ---- boton magnetico ---- */
+      if (!reduce && window.matchMedia('(hover: hover)').matches) {
+        document.querySelectorAll('.magnetic').forEach(function (btn) {
+          btn.addEventListener('mousemove', function (ev) {
+            var r = btn.getBoundingClientRect();
+            var mx = ev.clientX - r.left - r.width / 2;
+            var my = ev.clientY - r.top - r.height / 2;
+            btn.style.transform = 'translate(' + (mx * 0.28) + 'px,' + (my * 0.38) + 'px)';
+          });
+          btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>

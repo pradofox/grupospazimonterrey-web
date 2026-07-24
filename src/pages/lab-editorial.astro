@@ -1,0 +1,641 @@
+---
+// LAB de diseño de Grupo Spazi Monterrey - direccion "Editorial de obra".
+// Pagina autocontenida, sin indexar. No comparte estilos con el sitio real.
+// Fotografia dramatica full-bleed + Manrope enorme + barra de specs mono como firma.
+// No tocar el sitio real hasta que Roberto apruebe una direccion.
+---
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Lab · Editorial de obra · Grupo Spazi Monterrey</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Editorial de obra - navy y gold mandan, naranja acento fuerte */
+      --navy:      #0C2554;
+      --navy-deep: #0A1B3D;
+      --gold:      #C8A84B;
+      --gold-hi:   #E4C15A;
+      --orange:    #EC6B2D;
+      --orange-so: #F4A46B;
+      --crema:     #F7F3EA;
+      --papel:     #FBF9F3;
+      --tinta:     #12203B;
+      --muted:     #5C6A80;
+      --line:      #E4DECF;
+      --white:     #FFFFFF;
+
+      --r-sm: 4px;
+      --r-md: 6px;
+      --r-lg: 8px;
+      --maxw: 1180px;
+      --ease: cubic-bezier(.2,.75,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--papel);
+      color: var(--tinta);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.5rem; }
+    ::selection { background: var(--orange); color: #fff; }
+
+    /* ---- Barra superior del lab ---- */
+    .lab-bar {
+      position: sticky; top: 0; z-index: 60;
+      background: color-mix(in srgb, var(--papel) 82%, transparent);
+      backdrop-filter: blur(12px) saturate(1.2);
+      border-bottom: 1px solid var(--line);
+    }
+    .lab-bar-inner { display: flex; align-items: center; justify-content: space-between; height: 54px; gap: 1rem; }
+    .lab-bar .brand { display: flex; align-items: baseline; gap: .7rem; min-width: 0; }
+    .lab-bar .tag { font-family: 'JetBrains Mono', monospace; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); font-weight: 600; }
+    .lab-bar .dir { font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--orange); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lab-bar a.back { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--muted); text-decoration: none; letter-spacing: .03em; white-space: nowrap; transition: color .2s var(--ease); }
+    .lab-bar a.back:hover { color: var(--navy); }
+
+    /* ---- Estructura del lab ---- */
+    .lab-section { padding: 5rem 0; border-bottom: 1px solid var(--line); }
+    .lab-head { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 2.8rem; }
+    .lab-num { font-family: 'JetBrains Mono', monospace; font-size: 2.6rem; font-weight: 500; line-height: .85; color: var(--line); -webkit-text-stroke: 0; letter-spacing: -.02em; }
+    .lab-title { font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.05; }
+    .lab-note { font-size: .95rem; color: var(--muted); max-width: 62ch; margin-top: .5rem; }
+
+    /* ---- Intro ---- */
+    .kicker { font-family: 'JetBrains Mono', monospace; font-size: .74rem; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); display: inline-flex; align-items: center; gap: .6rem; font-weight: 500; }
+    .kicker::before { content: ''; width: 26px; height: 2px; background: var(--orange); }
+    .d-huge { font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 800; line-height: .98; letter-spacing: -.035em; }
+    .d-huge em { font-style: normal; color: var(--orange); }
+    .body-lg { font-size: 1.15rem; color: var(--tinta); max-width: 64ch; line-height: 1.55; }
+
+    /* ---- 1. Tokens ---- */
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: .8rem; }
+    .sw { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--white); transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+    .sw:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(12,37,84,.12); }
+    .sw .chip { height: 82px; }
+    .sw .meta { padding: .65rem .75rem; }
+    .sw .name { font-size: .82rem; font-weight: 700; }
+    .sw .role { font-size: .72rem; color: var(--muted); }
+    .sw .hex { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--muted); margin-top: .15rem; }
+
+    /* ---- 2. Tipografia ---- */
+    .type-row { padding: 1.3rem 0; border-top: 1px dashed var(--line); }
+    .type-row:first-child { border-top: none; }
+    .type-label { font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem; }
+    .t-display { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 800; line-height: .98; letter-spacing: -.035em; }
+    .t-display em { font-style: normal; color: var(--orange); }
+    .t-h2 { font-size: 2rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.08; }
+    .t-lead { font-size: 1.2rem; font-weight: 500; color: var(--tinta); max-width: 60ch; }
+    .t-body { font-size: 1rem; color: var(--muted); max-width: 62ch; }
+    .t-mono { font-family: 'JetBrains Mono', monospace; font-size: .84rem; color: var(--navy); letter-spacing: .02em; }
+    .weights { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: baseline; }
+    .weights span { font-size: 1.7rem; letter-spacing: -.02em; }
+    .weights .wl { font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--muted); display: block; letter-spacing: .06em; }
+
+    /* ---- 3. Firma ---- */
+    /* Barra de specs mono (marquee) */
+    .specbar {
+      background: var(--navy); color: var(--crema); border-radius: var(--r-lg);
+      overflow: hidden; position: relative; border: 1px solid var(--navy-deep);
+    }
+    .specbar .track { display: flex; gap: 0; width: max-content; animation: marquee 32s linear infinite; }
+    .specbar:hover .track { animation-play-state: paused; }
+    .specbar .item { display: inline-flex; align-items: center; gap: .8rem; padding: .95rem 1.6rem; font-family: 'JetBrains Mono', monospace; font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+    .specbar .item b { color: var(--gold-hi); font-weight: 600; }
+    .specbar .item .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* Numeros de seccion grandes - demo */
+    .signature-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 1.4rem; margin-top: 1.4rem; }
+    .sig-card { border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--white); padding: 1.6rem; position: relative; overflow: hidden; }
+    .sig-card .big-num { font-family: 'JetBrains Mono', monospace; font-size: 6rem; font-weight: 500; line-height: .8; color: var(--navy); letter-spacing: -.04em; }
+    .sig-card .big-num .frac { color: var(--orange); }
+    .sig-card h5 { font-size: 1.15rem; font-weight: 700; margin: 1rem 0 .3rem; letter-spacing: -.01em; }
+    .sig-card p { font-size: .9rem; color: var(--muted); }
+
+    /* Hover-zoom demo */
+    .zoom-demo { border-radius: var(--r-lg); overflow: hidden; position: relative; height: 100%; min-height: 240px; border: 1px solid var(--line); }
+    .zoom-demo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s var(--ease); }
+    .zoom-demo:hover img { transform: scale(1.08); }
+    .zoom-demo .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 1rem 1.1rem; background: linear-gradient(transparent, rgba(10,27,61,.88)); color: #fff; }
+    .zoom-demo .cap .m { font-family: 'JetBrains Mono', monospace; font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-hi); }
+    .zoom-demo .cap .t { font-size: 1rem; font-weight: 700; margin-top: .2rem; }
+
+    /* Contador demo */
+    .counter-strip { display: flex; gap: 2.5rem; flex-wrap: wrap; margin-top: 1.4rem; padding: 1.6rem 1.8rem; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--crema); }
+
+    /* ---- 4. Componentes ---- */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 1.2rem; }
+    .demo { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 1.7rem; }
+    .demo h4 { font-family: 'JetBrains Mono', monospace; font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 1.1rem; }
+
+    .btn { display: inline-flex; align-items: center; gap: .55rem; font-weight: 700; font-size: .92rem; padding: .85rem 1.5rem; border-radius: var(--r-md); border: none; cursor: pointer; text-decoration: none; transition: transform .2s var(--ease), box-shadow .25s var(--ease), background .2s var(--ease); font-family: 'Manrope', sans-serif; letter-spacing: -.01em; }
+    .btn svg { width: 17px; height: 17px; }
+    .btn-primary { background: var(--orange); color: #fff; box-shadow: 0 6px 16px rgba(236,107,45,.28); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(236,107,45,.36); background: #f2762f; }
+    .btn-navy { background: var(--navy); color: var(--crema); }
+    .btn-navy:hover { transform: translateY(-2px); background: var(--navy-deep); box-shadow: 0 10px 24px rgba(12,37,84,.28); }
+    .btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); }
+    .btn-ghost:hover { background: var(--navy); color: var(--crema); transform: translateY(-2px); }
+    .btn-wa { background: #1FA855; color: #fff; }
+    .btn-wa:hover { transform: translateY(-2px); background: #23b95e; box-shadow: 0 10px 24px rgba(31,168,85,.3); }
+
+    /* Boton magnetico */
+    .btn-mag { will-change: transform; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: .55rem; }
+    .spec-chip { font-family: 'JetBrains Mono', monospace; font-size: .72rem; padding: .38rem .8rem; border: 1px solid var(--line); border-radius: 100px; color: var(--tinta); background: var(--papel); transition: border-color .2s var(--ease), color .2s var(--ease); }
+    .spec-chip:hover { border-color: var(--orange); }
+    .spec-chip b { color: var(--orange); font-weight: 600; }
+
+    /* Tarjeta de servicio con foto */
+    .svc-card { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--white); transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+    .svc-card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(12,37,84,.14); }
+    .svc-card .ph { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+    .svc-card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+    .svc-card:hover .ph img { transform: scale(1.07); }
+    .svc-card .ph .num { position: absolute; top: .8rem; left: .9rem; font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .12em; color: #fff; background: rgba(10,27,61,.72); backdrop-filter: blur(4px); padding: .25rem .55rem; border-radius: var(--r-sm); }
+    .svc-card .bd { padding: 1.3rem 1.4rem; }
+    .svc-card .bd h5 { font-size: 1.2rem; font-weight: 700; letter-spacing: -.01em; margin-bottom: .35rem; }
+    .svc-card .bd p { font-size: .9rem; color: var(--muted); }
+    .svc-card .bd .meta { font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: var(--navy); letter-spacing: .06em; margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--line); }
+
+    /* Stats */
+    .stat { display: flex; flex-direction: column; }
+    .stat .n { font-size: 3rem; font-weight: 800; line-height: 1; color: var(--navy); letter-spacing: -.03em; }
+    .stat .n sup { font-size: 1.1rem; color: var(--orange); vertical-align: super; font-weight: 700; }
+    .stat .l { font-family: 'JetBrains Mono', monospace; font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-top: .5rem; }
+    .stat-row { display: flex; gap: 3rem; flex-wrap: wrap; }
+
+    /* Testimonio */
+    .quote { background: var(--white); border: 1px solid var(--line); border-left: 3px solid var(--orange); border-radius: var(--r-md); padding: 1.6rem; }
+    .quote p { font-size: 1.1rem; font-weight: 500; color: var(--tinta); margin-bottom: 1.1rem; line-height: 1.5; letter-spacing: -.01em; }
+    .quote .who { display: flex; flex-direction: column; gap: .15rem; }
+    .quote .who b { font-size: .92rem; font-weight: 700; }
+    .quote .who span { font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: var(--muted); letter-spacing: .06em; }
+
+    /* ---- 5. En contexto: HERO full-bleed ---- */
+    .ctx { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; margin-bottom: 2rem; background: var(--white); }
+    .ctx-tag { font-family: 'JetBrains Mono', monospace; font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); padding: .65rem 1.1rem; background: var(--crema); border-bottom: 1px solid var(--line); }
+
+    .hero { position: relative; min-height: 620px; display: flex; align-items: flex-end; overflow: hidden; background: var(--navy-deep); }
+    .hero .photo { position: absolute; inset: 0; overflow: hidden; }
+    .hero .photo img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.02); will-change: transform; }
+    .hero .scrim {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(10,27,61,.28) 0%, rgba(10,27,61,.05) 30%, rgba(10,27,61,.72) 82%, rgba(10,27,61,.92) 100%),
+        linear-gradient(90deg, rgba(10,27,61,.78) 0%, rgba(10,27,61,.35) 42%, transparent 70%);
+    }
+    .hero .inner { position: relative; z-index: 2; padding: 3.2rem 3rem 4.6rem; max-width: 68%; }
+    .hero .htag { display: inline-flex; align-items: center; gap: .55rem; font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: #fff; background: var(--orange); padding: .42rem .85rem; border-radius: 100px; margin-bottom: 1.4rem; box-shadow: 0 6px 18px rgba(236,107,45,.35); }
+    .hero h1 { font-size: clamp(2.6rem, 5.2vw, 4.8rem); font-weight: 800; line-height: .96; letter-spacing: -.035em; color: #fff; margin-bottom: 1.2rem; text-shadow: 0 2px 30px rgba(0,0,0,.28); }
+    .hero h1 span { color: var(--gold-hi); }
+    .hero p { color: rgba(247,243,234,.86); max-width: 46ch; margin-bottom: 1.9rem; font-size: 1.12rem; line-height: 1.5; }
+    .hero .actions { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .hero .btn-cream { background: var(--crema); color: var(--navy); }
+    .hero .btn-cream:hover { transform: translateY(-2px); background: #fff; box-shadow: 0 10px 26px rgba(0,0,0,.25); }
+
+    /* Barra de specs mono cruzando el hero */
+    .hero .hero-specbar {
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+      background: var(--navy); border-top: 1px solid rgba(228,193,90,.28);
+      overflow: hidden;
+    }
+    .hero .hero-specbar .track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+    .hero .hero-specbar:hover .track { animation-play-state: paused; }
+    .hero .hero-specbar .item { display: inline-flex; align-items: center; gap: .7rem; padding: .7rem 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--crema); white-space: nowrap; }
+    .hero .hero-specbar .item b { color: var(--gold-hi); font-weight: 600; }
+    .hero .hero-specbar .item .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); }
+
+    /* Grid editorial de servicios */
+    .editorial { padding: 3rem 2.5rem; }
+    .editorial .ed-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .editorial .ed-head h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.02; max-width: 20ch; }
+    .editorial .ed-head h2 em { font-style: normal; color: var(--orange); }
+    .editorial .ed-head p { font-size: .95rem; color: var(--muted); max-width: 34ch; }
+    .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+
+    /* Banda de testimonios */
+    .band { background: var(--navy); color: var(--crema); padding: 3rem 2.5rem; }
+    .band .band-k { font-family: 'JetBrains Mono', monospace; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-hi); margin-bottom: 1.6rem; display: inline-flex; align-items: center; gap: .6rem; }
+    .band .band-k::before { content: ''; width: 24px; height: 2px; background: var(--gold-hi); }
+    .band-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+    .band-q { border: 1px solid rgba(228,193,90,.2); border-radius: var(--r-lg); padding: 1.5rem; background: rgba(255,255,255,.02); }
+    .band-q p { font-size: 1.02rem; font-weight: 500; line-height: 1.5; margin-bottom: 1.1rem; color: var(--crema); letter-spacing: -.01em; }
+    .band-q .who b { display: block; font-size: .9rem; font-weight: 700; }
+    .band-q .who span { font-family: 'JetBrains Mono', monospace; font-size: .66rem; color: rgba(247,243,234,.55); letter-spacing: .06em; }
+
+    /* ---- reveal on scroll ---- */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .specbar .track, .hero .hero-specbar .track { animation: none; }
+      .hero .photo img { transform: none !important; }
+    }
+
+    /* ---- responsive ---- */
+    @media (max-width: 860px) {
+      .signature-grid { grid-template-columns: 1fr; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .band-grid { grid-template-columns: 1fr; }
+      .hero .inner { max-width: 100%; padding: 2.6rem 1.6rem 4.4rem; }
+      .hero .scrim { background: linear-gradient(180deg, rgba(10,27,61,.35) 0%, rgba(10,27,61,.55) 45%, rgba(10,27,61,.92) 100%); }
+      .editorial, .band { padding: 2.2rem 1.4rem; }
+      .lab-bar .dir { display: none; }
+    }
+    @media (max-width: 520px) {
+      .lab-section { padding: 3.5rem 0; }
+      .lab-num { font-size: 2rem; }
+      .stat-row { gap: 2rem; }
+      .counter-strip { gap: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra del lab -->
+  <div class="lab-bar">
+    <div class="wrap lab-bar-inner">
+      <span class="brand">
+        <span class="tag">Spazi · Lab</span>
+        <span class="dir">Editorial de obra</span>
+      </span>
+      <a class="back" href="/lab">← Todas las direcciones</a>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <div class="lab-section reveal" style="padding-top:4rem">
+    <div class="wrap">
+      <span class="kicker">Dirección de diseño</span>
+      <h1 class="d-huge" style="margin:1.1rem 0 .8rem">Editorial <em>de obra</em></h1>
+      <p class="body-lg">Fotografía dramática como protagonista, titulares enormes con confianza y una barra de datos técnicos en monoespaciada cruzando la imagen. Navy y oro mandan; el naranja entra como acento fuerte, nunca de relleno. La sensación es seria y robusta: hacemos obra de verdad, con 14 años de respaldo. Este lab decide el lenguaje; el sitio real no se toca hasta aprobar aquí.</p>
+    </div>
+  </div>
+
+  <!-- 1. Tokens -->
+  <section class="lab-section reveal" id="tokens">
+    <div class="wrap">
+      <div class="lab-head">
+        <span class="lab-num">01</span>
+        <div><h2 class="lab-title">Tokens de color</h2>
+        <p class="lab-note">Navy Spazi como cimiento, oro para el prestigio y un buen naranja de obra como acento de energía. El navy y el oro cargan la marca; el naranja se usa con criterio en CTAs y detalles, jamás como color principal.</p></div>
+      </div>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#0C2554"></div><div class="meta"><div class="name">Navy</div><div class="role">Cimiento</div><div class="hex">#0C2554</div></div></div>
+        <div class="sw"><div class="chip" style="background:#0A1B3D"></div><div class="meta"><div class="name">Navy profundo</div><div class="role">Fondos</div><div class="hex">#0A1B3D</div></div></div>
+        <div class="sw"><div class="chip" style="background:#C8A84B"></div><div class="meta"><div class="name">Oro</div><div class="role">Prestigio</div><div class="hex">#C8A84B</div></div></div>
+        <div class="sw"><div class="chip" style="background:#E4C15A"></div><div class="meta"><div class="name">Oro brillante</div><div class="role">Detalle</div><div class="hex">#E4C15A</div></div></div>
+        <div class="sw"><div class="chip" style="background:#EC6B2D"></div><div class="meta"><div class="name">Naranja obra</div><div class="role">Acento / CTA</div><div class="hex">#EC6B2D</div></div></div>
+        <div class="sw"><div class="chip" style="background:#F4A46B"></div><div class="meta"><div class="name">Naranja suave</div><div class="role">Apoyo</div><div class="hex">#F4A46B</div></div></div>
+        <div class="sw"><div class="chip" style="background:#F7F3EA"></div><div class="meta"><div class="name">Crema</div><div class="role">Base clara</div><div class="hex">#F7F3EA</div></div></div>
+        <div class="sw"><div class="chip" style="background:#FBF9F3;box-shadow:inset 0 0 0 1px #E4DECF"></div><div class="meta"><div class="name">Papel</div><div class="role">Fondo</div><div class="hex">#FBF9F3</div></div></div>
+        <div class="sw"><div class="chip" style="background:#12203B"></div><div class="meta"><div class="name">Tinta</div><div class="role">Texto</div><div class="hex">#12203B</div></div></div>
+        <div class="sw"><div class="chip" style="background:#5C6A80"></div><div class="meta"><div class="name">Muted</div><div class="role">Secundario</div><div class="hex">#5C6A80</div></div></div>
+        <div class="sw"><div class="chip" style="background:#E4DECF"></div><div class="meta"><div class="name">Línea</div><div class="role">Bordes</div><div class="hex">#E4DECF</div></div></div>
+        <div class="sw"><div class="chip" style="background:#FFFFFF;box-shadow:inset 0 0 0 1px #E4DECF"></div><div class="meta"><div class="name">Blanco</div><div class="role">Tarjetas</div><div class="hex">#FFFFFF</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Tipografia -->
+  <section class="lab-section reveal" id="tipografia">
+    <div class="wrap">
+      <div class="lab-head">
+        <span class="lab-num">02</span>
+        <div><h2 class="lab-title">Tipografía</h2>
+        <p class="lab-note">Manrope para todo, con titulares muy grandes y peso 800 para la jerarquía editorial. JetBrains Mono en etiquetas y datos técnicos: modelos, kg, voltajes. Ese contraste - titular robusto contra dato de ingeniería - es la voz de Spazi.</p></div>
+      </div>
+      <div class="type-row"><div class="type-label">Display · Manrope 800</div><div class="t-display">Automatización con <em>respaldo real</em></div></div>
+      <div class="type-row"><div class="type-label">Título de sección · Manrope 700</div><div class="t-h2">Cada instalación, un cliente para siempre</div></div>
+      <div class="type-row"><div class="type-label">Entrada · Manrope 500</div><p class="t-lead">Portones automáticos, control de accesos, cámaras y herrería a la medida. Residencial, industrial y a instaladores.</p></div>
+      <div class="type-row"><div class="type-label">Cuerpo · Manrope 400</div><p class="t-body">Atendemos desde el portón de una casa hasta el control de accesos de una nave industrial. La misma gente que instala es la que da servicio, por eso los clientes se quedan años.</p></div>
+      <div class="type-row"><div class="type-label">Dato técnico · JetBrains Mono</div><div class="t-mono">MOTOR AXIAL AX-1000 · 1000 KG · 220V · CICLO CONTINUO</div></div>
+      <div class="type-row"><div class="type-label">Pesos disponibles · Manrope 400–800</div>
+        <div class="weights">
+          <span style="font-weight:400">Spazi<span class="wl">Regular 400</span></span>
+          <span style="font-weight:500">Spazi<span class="wl">Medium 500</span></span>
+          <span style="font-weight:600">Spazi<span class="wl">Semibold 600</span></span>
+          <span style="font-weight:700">Spazi<span class="wl">Bold 700</span></span>
+          <span style="font-weight:800">Spazi<span class="wl">Extrabold 800</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Firma -->
+  <section class="lab-section reveal" id="firma">
+    <div class="wrap">
+      <div class="lab-head">
+        <span class="lab-num">03</span>
+        <div><h2 class="lab-title">Elemento de firma</h2>
+        <p class="lab-note">Lo que un techero o una constructora no tienen: datos técnicos reales convertidos en gráfica. Barra de specs en monoespaciada que se mueve sola, números de sección enormes y micro-interacciones con propósito. Eso vuelve a Spazi imposible de confundir con una plantilla.</p></div>
+      </div>
+
+      <!-- Marquee de specs -->
+      <div class="type-label" style="margin-bottom:.6rem">Barra de specs · marquee (pausa al pasar el mouse)</div>
+      <div class="specbar">
+        <div class="track" id="specTrack">
+          <div class="item"><span class="dot"></span><b>MOTOR AXIAL AX-1000</b> · 1000 KG · 220V</div>
+          <div class="item"><span class="dot"></span><b>CREMALLERA</b> · HASTA 800 KG</div>
+          <div class="item"><span class="dot"></span><b>CCTV</b> · VISIÓN NOCTURNA</div>
+          <div class="item"><span class="dot"></span><b>RFID</b> · CONTROL DE ACCESO</div>
+          <div class="item"><span class="dot"></span><b>BIOMÉTRICO</b> · HUELLA + APP</div>
+          <div class="item"><span class="dot"></span><b>14 AÑOS</b> · MTY</div>
+        </div>
+      </div>
+
+      <!-- Numeros de seccion + hover-zoom -->
+      <div class="signature-grid">
+        <div class="sig-card">
+          <div class="type-label">Numeración editorial de sección</div>
+          <div class="big-num" style="margin-top:.6rem">01<span class="frac">/03</span></div>
+          <h5>Números grandes que ordenan la lectura</h5>
+          <p>Cada servicio y cada segmento se numera. Da estructura de revista técnica y guía el ojo sin recurrir a más color.</p>
+        </div>
+        <div class="zoom-demo">
+          <img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=900&q=80&auto=format" alt="Instalación residencial (placeholder)" loading="lazy" />
+          <div class="cap">
+            <div class="m">Hover-zoom · 600ms</div>
+            <div class="t">La foto se acerca, no salta</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contadores -->
+      <div class="type-label" style="margin-top:1.8rem;margin-bottom:.2rem">Contadores animados (cuentan al entrar en pantalla)</div>
+      <div class="counter-strip" data-counters>
+        <div class="stat"><span class="n"><span class="count" data-to="14">0</span><sup>+</sup></span><span class="l">Años en MTY</span></div>
+        <div class="stat"><span class="n count" data-to="1987">0</span><span class="l">Fundación Spazi</span></div>
+        <div class="stat"><span class="n count" data-to="3">0</span><span class="l">Segmentos</span></div>
+      </div>
+
+      <p class="lab-note" style="margin-top:1.2rem">Todo es HTML, CSS y JavaScript vanilla: cero librerías, carga instantánea y nulo impacto en SEO. La barra de specs puede cruzar el hero o vivir como banda entre secciones.</p>
+    </div>
+  </section>
+
+  <!-- 4. Componentes -->
+  <section class="lab-section reveal" id="componentes">
+    <div class="wrap">
+      <div class="lab-head">
+        <span class="lab-num">04</span>
+        <div><h2 class="lab-title">Componentes</h2>
+        <p class="lab-note">El sistema mínimo para armar el sitio: botones con jerarquía clara (el naranja manda la acción principal), chips de especificación en mono, tarjetas de servicio con foto, métricas con contador y testimonios reales.</p></div>
+      </div>
+      <div class="grid-2">
+        <div class="demo">
+          <h4>Botones</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:.7rem;align-items:center">
+            <a class="btn btn-primary btn-mag" href="https://wa.me/528114132252">
+              Cotizar - visita sin costo
+            </a>
+            <a class="btn btn-navy" href="#">Ver servicios</a>
+            <a class="btn btn-ghost" href="#">Conócenos</a>
+            <a class="btn btn-wa" href="https://wa.me/528114132252">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8.9-.3.2-.5 0a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2a.4.4 0 0 0 0-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.8.7 1.8.5 2.1.5a2.5 2.5 0 0 0 1.7-1.2 2 2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+              WhatsApp
+            </a>
+          </div>
+          <p style="font-size:.8rem;color:var(--muted);margin-top:1rem;font-family:'JetBrains Mono',monospace;letter-spacing:.03em">El primario naranja es magnético: sigue sutilmente al cursor.</p>
+        </div>
+
+        <div class="demo">
+          <h4>Chips de especificación</h4>
+          <div class="chips">
+            <span class="spec-chip"><b>AXIAL</b> uso residencial</span>
+            <span class="spec-chip"><b>CREMALLERA</b> hasta 800 kg</span>
+            <span class="spec-chip"><b>PISTONES</b> abatible</span>
+            <span class="spec-chip"><b>TUBULAR</b> cortina</span>
+            <span class="spec-chip"><b>CCTV</b> visión nocturna</span>
+            <span class="spec-chip"><b>RFID</b> acceso</span>
+            <span class="spec-chip"><b>BIOMÉTRICO</b> huella</span>
+          </div>
+        </div>
+
+        <div class="demo">
+          <h4>Tarjeta de servicio</h4>
+          <div class="svc-card">
+            <div class="ph">
+              <span class="num">01 / SERVICIO</span>
+              <img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=700&q=80&auto=format" alt="Instalación residencial (placeholder)" loading="lazy" />
+            </div>
+            <div class="bd">
+              <h5>Automatización de portones</h5>
+              <p>Motores axiales, de cremallera, pistones y tubulares. Para casa, negocio e industria.</p>
+              <div class="meta">AXIAL · CREMALLERA · PISTONES · TUBULAR</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo">
+          <h4>Métricas con contador</h4>
+          <div class="stat-row" data-counters>
+            <div class="stat"><span class="n"><span class="count" data-to="14">0</span><sup>+</sup></span><span class="l">Años en MTY</span></div>
+            <div class="stat"><span class="n count" data-to="1987">0</span><span class="l">Fundación Spazi</span></div>
+            <div class="stat"><span class="n count" data-to="3">0</span><span class="l">Segmentos</span></div>
+          </div>
+        </div>
+
+        <div class="demo" style="grid-column:1/-1">
+          <h4>Testimonio</h4>
+          <div class="quote">
+            <p>“Las mismas personas atienden mi empresa y mi casa: motores, cámaras, herrería, control de accesos. Ya tenemos 8 años sin ningún problema.”</p>
+            <div class="who"><b>Antonio</b><span>MONTERREY · CLIENTE 8 AÑOS</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. En contexto -->
+  <section class="lab-section reveal" id="contexto" style="border-bottom:none">
+    <div class="wrap">
+      <div class="lab-head">
+        <span class="lab-num">05</span>
+        <div><h2 class="lab-title">En contexto</h2>
+        <p class="lab-note">La dirección aplicada: hero full-bleed con foto real de obra, scrim para legibilidad y la barra de specs mono como firma cruzando la base. Debajo, la parrilla editorial de servicios y la banda de testimonios.</p></div>
+      </div>
+
+      <!-- HERO full-bleed -->
+      <div class="ctx">
+        <div class="ctx-tag">Hero · foto full-bleed + scrim + barra de specs mono</div>
+        <div class="hero">
+          <div class="photo">
+            <img id="heroImg" src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=1600&q=80&auto=format" alt="Instalación residencial (placeholder)" />
+          </div>
+          <div class="scrim"></div>
+          <div class="inner">
+            <span class="htag">Distribuidor oficial · Monterrey</span>
+            <h1>Portones que <span>no fallan</span>. Respaldo de 14 años.</h1>
+            <p>Automatización, control de accesos, cámaras y herrería a la medida. Residencial, industrial y a instaladores. Una sola llamada resuelve todo.</p>
+            <div class="actions">
+              <a class="btn btn-primary btn-mag" href="https://wa.me/528114132252">Cotizar - visita sin costo</a>
+              <a class="btn btn-cream" href="#">Ver servicios</a>
+            </div>
+          </div>
+          <div class="hero-specbar">
+            <div class="track">
+              <div class="item"><span class="dot"></span><b>MOTOR AXIAL AX-1000</b> · 1000 KG · 220V</div>
+              <div class="item"><span class="dot"></span><b>CCTV</b> · VISIÓN NOCTURNA</div>
+              <div class="item"><span class="dot"></span><b>RFID</b> · CONTROL DE ACCESO</div>
+              <div class="item"><span class="dot"></span><b>14 AÑOS</b> · MTY</div>
+              <div class="item"><span class="dot"></span><b>MOTOR AXIAL AX-1000</b> · 1000 KG · 220V</div>
+              <div class="item"><span class="dot"></span><b>CCTV</b> · VISIÓN NOCTURNA</div>
+              <div class="item"><span class="dot"></span><b>RFID</b> · CONTROL DE ACCESO</div>
+              <div class="item"><span class="dot"></span><b>14 AÑOS</b> · MTY</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid editorial de servicios -->
+      <div class="ctx">
+        <div class="ctx-tag">Sección real · parrilla editorial de servicios</div>
+        <div class="editorial">
+          <div class="ed-head">
+            <h2>Todo lo que <em>protege y automatiza</em> tu propiedad</h2>
+            <p>De la casa a la nave industrial. Un solo proveedor, catorce años de obra.</p>
+          </div>
+          <div class="svc-grid">
+            <div class="svc-card">
+              <div class="ph"><span class="num">01</span><img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=700&q=80&auto=format" alt="Instalación residencial (placeholder)" loading="lazy" /></div>
+              <div class="bd"><h5>Automatización de portones</h5><p>Axial, cremallera, pistones y tubular para casa, negocio e industria.</p><div class="meta">AXIAL · CREMALLERA · PISTONES · TUBULAR</div></div>
+            </div>
+            <div class="svc-card">
+              <div class="ph"><span class="num">02</span><img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=700&q=80&auto=format" alt="Instalación residencial (placeholder)" loading="lazy" /></div>
+              <div class="bd"><h5>Control de accesos</h5><p>RFID, biométrico, teclado y apertura desde app. Acceso seguro y rápido.</p><div class="meta">RFID · BIOMÉTRICO · TECLADO · APP</div></div>
+            </div>
+            <div class="svc-card">
+              <div class="ph"><span class="num">03</span><img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=700&q=80&auto=format" alt="Instalación residencial (placeholder)" loading="lazy" /></div>
+              <div class="bd"><h5>Cámaras y alarmas</h5><p>CCTV con visión nocturna y alarmas monitoreadas para tu tranquilidad.</p><div class="meta">CCTV · VISIÓN NOCTURNA · ALARMAS</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Banda de testimonios -->
+      <div class="ctx">
+        <div class="ctx-tag">Sección real · banda de testimonios</div>
+        <div class="band">
+          <span class="band-k">Lo dicen los clientes</span>
+          <div class="band-grid">
+            <div class="band-q">
+              <p>“Las mismas personas atienden mi empresa y mi casa: motores, cámaras, herrería, control de accesos. 8 años sin ningún problema.”</p>
+              <div class="who"><b>Antonio</b><span>MONTERREY · 8 AÑOS</span></div>
+            </div>
+            <div class="band-q">
+              <p>“Me encantó mi portón, hasta cómo se ve. Me siento más segura, abre y cierra rápido sin ruido.”</p>
+              <div class="who"><b>Sra. Erica G.</b><span>RESIDENCIAL</span></div>
+            </div>
+            <div class="band-q">
+              <p>“El control remoto desde el montacargas es comodísimo, seguro y rápido.”</p>
+              <div class="who"><b>Sr. Iván G.</b><span>INDUSTRIAL</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="lab-note" style="margin-top:1.5rem">
+        <strong>La foto manda.</strong> Toda la dirección se apoya en fotografía real de obra bien tratada con scrim; el placeholder de Unsplash solo simula la posición. La barra de specs en monoespaciada es la firma que ninguna plantilla de construcción trae y lo que vuelve esto inconfundiblemente Spazi. Reemplazar los placeholders por foto propia de instalaciones es el siguiente paso.
+      </p>
+    </div>
+  </section>
+
+  <div style="padding:2.8rem 0 4rem;text-align:center">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:.06em">FIN DEL LAB · EDITORIAL DE OBRA · grupospazimonterrey.com/lab-editorial · noindex</p>
+  </div>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* --- reveal on scroll --- */
+      var reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !reduce) {
+        var ro = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
+          });
+        }, { threshold: 0.12 });
+        reveals.forEach(function (el) { ro.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      /* --- contadores animados --- */
+      function animateCount(el) {
+        var to = parseInt(el.getAttribute('data-to'), 10);
+        var dur = 1400, start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(to * eased).toString();
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = to.toString();
+        }
+        requestAnimationFrame(step);
+      }
+      var counterGroups = document.querySelectorAll('[data-counters]');
+      if ('IntersectionObserver' in window && !reduce) {
+        var co = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.querySelectorAll('.count').forEach(animateCount);
+              co.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.4 });
+        counterGroups.forEach(function (g) { co.observe(g); });
+      } else {
+        counterGroups.forEach(function (g) {
+          g.querySelectorAll('.count').forEach(function (el) { el.textContent = el.getAttribute('data-to'); });
+        });
+      }
+
+      /* --- botones magneticos --- */
+      if (!reduce && window.matchMedia('(pointer:fine)').matches) {
+        document.querySelectorAll('.btn-mag').forEach(function (btn) {
+          btn.addEventListener('mousemove', function (ev) {
+            var r = btn.getBoundingClientRect();
+            var x = ev.clientX - r.left - r.width / 2;
+            var y = ev.clientY - r.top - r.height / 2;
+            btn.style.transform = 'translate(' + (x * 0.18) + 'px,' + (y * 0.28 - 2) + 'px)';
+          });
+          btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
+        });
+      }
+
+      /* --- parallax sutil en la foto del hero --- */
+      var heroImg = document.getElementById('heroImg');
+      if (heroImg && !reduce) {
+        var ticking = false;
+        window.addEventListener('scroll', function () {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function () {
+            var rect = heroImg.getBoundingClientRect();
+            var offset = (rect.top * -0.05);
+            heroImg.style.transform = 'scale(1.06) translateY(' + offset + 'px)';
+            ticking = false;
+          });
+        }, { passive: true });
+      }
+    })();
+  </script>
+
+</body>
+</html>
