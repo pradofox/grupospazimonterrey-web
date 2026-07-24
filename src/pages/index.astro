@@ -6,7 +6,7 @@ import WaFloat from '../components/WaFloat.astro';
 import '../styles/global.css';
 
 const WA = 'https://wa.me/528114132252?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20sin%20costo';
-const HERO_IMG = 'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=1400&q=70&auto=format';
+const HERO_IMG = 'https://images.unsplash.com/photo-1722247523663-09f0325ef054?w=1600&q=72&auto=format';
 
 // Reviews reales -> schema citable por buscadores e IA
 const reviews = [
@@ -253,7 +253,8 @@ const faqs = schema[1].mainEntity.map(q => ({ q: q.name, a: q.acceptedAnswer.tex
 <style>
   /* HERO */
   .hero { position: relative; overflow: hidden; background: var(--navy); }
-  .hero-photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  /* posicion enfocada en el porton negro de la foto (a la derecha, sobre el centro vertical) */
+  .hero-photo { position: absolute; inset: 0; background-size: cover; background-position: 68% 42%; }
   .hero-inner { position: relative; z-index: 2; padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(3rem, 6vw, 5rem); }
   .hero-badge { display: inline-flex; align-items: center; gap: .55rem; font-family: 'JetBrains Mono', monospace; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: #fff; background: color-mix(in srgb,#fff 10%,transparent); border: 1px solid color-mix(in srgb,#fff 18%,transparent); padding: .45rem .9rem; border-radius: var(--pill); margin-bottom: 1.4rem; }
   .hero-badge .orb { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 color-mix(in srgb, var(--green) 70%, transparent); animation: ping 2.4s var(--ease) infinite; }
@@ -269,9 +270,9 @@ const faqs = schema[1].mainEntity.map(q => ({ q: q.name, a: q.acceptedAnswer.tex
   .stat-l { font-family: 'JetBrains Mono', monospace; font-size: .66rem; text-transform: uppercase; letter-spacing: .08em; color: color-mix(in srgb,#fff 62%,transparent); margin-top: .5rem; }
 
   /* MARQUEE */
-  .marquee { background: var(--orange-btn); overflow: hidden; }
+  .marquee { background: var(--orange); overflow: hidden; }
   .marquee-track { display: flex; width: max-content; white-space: nowrap; animation: slide 34s linear infinite; }
-  .marquee-track span { font-family: 'JetBrains Mono', monospace; font-size: .74rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: #fff; padding: .7rem 0; }
+  .marquee-track span { font-family: 'JetBrains Mono', monospace; font-size: .74rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); padding: .7rem 0; }
   @keyframes slide { to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
@@ -323,7 +324,7 @@ const faqs = schema[1].mainEntity.map(q => ({ q: q.name, a: q.acceptedAnswer.tex
   .proc-step:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
   .proc-badge { width: 56px; height: 56px; border-radius: 50%; background: var(--navy); color: var(--gold-hi); display: grid; place-items: center; margin: 0 0 1.1rem; position: relative; z-index: 1; box-shadow: 0 0 0 6px var(--paper); transition: background .25s, color .25s; }
   .proc-badge span { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 1.15rem; }
-  .proc-step:hover .proc-badge { background: var(--orange-btn); color: #fff; box-shadow: 0 0 0 6px var(--paper); }
+  .proc-step:hover .proc-badge { background: var(--orange); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.25); box-shadow: 0 0 0 6px var(--paper); }
   .proc-step h3 { color: var(--navy); margin: 0 0 .4rem; font-size: 1.2rem; }
   .proc-step p { font-size: .92rem; color: var(--muted); }
 

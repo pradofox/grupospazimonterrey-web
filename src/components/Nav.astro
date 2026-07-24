@@ -13,10 +13,8 @@ const links = [
 <header class="nav on-dark" id="nav" data-nav>
   <div class="container nav-inner">
     <a href="/" class="nav-logo" aria-label="Grupo Spazi Monterrey - inicio">
-      <span class="nav-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M3 13h18M3 17h18"/></svg>
-      </span>
-      <span class="nav-word">Grupo <b>Spazi</b></span>
+      <img src="/logo-mark.png" alt="" width="38" height="38" class="nav-mark-img" />
+      <img src="/wordmark-white.png" alt="Grupo Spazi Monterrey" width="76" height="35" class="nav-wordmark-img" />
     </a>
 
     <nav class="nav-links" aria-label="Principal">
@@ -51,11 +49,9 @@ const links = [
   }
   .nav.scrolled { background: var(--navy); box-shadow: 0 8px 30px -18px rgba(0,0,0,.6); }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; height: var(--nav-h); }
-  .nav-logo { display: flex; align-items: center; gap: .6rem; flex-shrink: 0; }
-  .nav-mark { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(140deg, var(--navy-soft), var(--navy-mid)); border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent); color: var(--gold-hi); display: grid; place-items: center; flex-shrink: 0; }
-  .nav-mark svg { width: 19px; height: 19px; }
-  .nav-word { font-size: 1.05rem; font-weight: 600; color: color-mix(in srgb, #fff 85%, transparent); letter-spacing: -.01em; }
-  .nav-word b { font-weight: 800; color: #fff; }
+  .nav-logo { display: flex; align-items: center; gap: .55rem; flex-shrink: 0; }
+  .nav-mark-img { width: 38px; height: 38px; flex-shrink: 0; }
+  .nav-wordmark-img { height: 26px; width: auto; }
 
   .nav-links { display: flex; align-items: center; gap: 1.8rem; }
   .nav-links a {

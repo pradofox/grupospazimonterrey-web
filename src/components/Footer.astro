@@ -19,10 +19,8 @@ const zonas = ['Monterrey', 'San Pedro Garza García', 'Apodaca', 'Escobedo', 'G
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="footer-logo" aria-label="Grupo Spazi Monterrey - inicio">
-          <span class="footer-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M3 13h18M3 17h18"/></svg>
-          </span>
-          <span class="footer-word">Grupo <b>Spazi</b> <em>Monterrey</em></span>
+          <img src="/logo-mark.png" alt="" width="44" height="44" class="footer-mark-img" />
+          <img src="/wordmark-white.png" alt="Grupo Spazi Monterrey" width="92" height="43" class="footer-wordmark-img" />
         </a>
         <p>Distribuidora oficial de Grupo Spazi en Nuevo León. Automatización de portones, control de accesos, cámaras y herrería. 14 años en Monterrey.</p>
         <a href={WA} target="_blank" rel="noopener" class="footer-wa">
@@ -79,11 +77,8 @@ const zonas = ['Monterrey', 'San Pedro Garza García', 'Apodaca', 'Escobedo', 'G
   }
   .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2.5rem; }
   .footer-logo { display: inline-flex; align-items: center; gap: .6rem; margin-bottom: 1rem; }
-  .footer-mark { width: 36px; height: 36px; border-radius: 9px; background: linear-gradient(140deg, var(--navy-soft), var(--navy-mid)); border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent); color: var(--gold-hi); display: grid; place-items: center; flex-shrink: 0; }
-  .footer-mark svg { width: 20px; height: 20px; }
-  .footer-word { font-size: 1.05rem; font-weight: 600; color: color-mix(in srgb,#fff 85%,transparent); }
-  .footer-word b { font-weight: 800; color: #fff; }
-  .footer-word em { font-style: normal; font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .06em; color: var(--gold-hi); }
+  .footer-mark-img { width: 44px; height: 44px; flex-shrink: 0; }
+  .footer-wordmark-img { height: 32px; width: auto; }
   .footer-brand p { font-size: .9rem; line-height: 1.6; max-width: 32ch; margin-bottom: 1.1rem; }
   .footer-wa { display: inline-flex; align-items: center; gap: .5rem; color: #fff; font-weight: 700; font-size: .95rem; }
   .footer-wa svg { color: var(--green); }
