@@ -1,0 +1,38 @@
+---
+// Breadcrumbs con schema BreadcrumbList. items = [{label, href?}], el último sin href.
+interface Crumb { label: string; href?: string; }
+const { items } = Astro.props as { items: Crumb[] };
+const SITE = 'https://grupospazimonterrey.com';
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.label,
+    ...(c.href ? { item: `${SITE}${c.href}` } : {}),
+  })),
+};
+---
+<nav class="breadcrumbs" aria-label="Ruta de navegación">
+  <ol>
+    {items.map((c, i) => (
+      <li>
+        {c.href
+          ? <a href={c.href}>{c.label}</a>
+          : <span aria-current="page">{c.label}</span>}
+        {i < items.length - 1 && <span class="sep" aria-hidden="true">/</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<style>
+  .breadcrumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; list-style: none; padding: 0; }
+  .breadcrumbs li { display: inline-flex; align-items: center; gap: .5rem; }
+  .breadcrumbs a { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .04em; color: var(--muted); transition: color .2s; }
+  .breadcrumbs a:hover { color: var(--orange-ink); }
+  .breadcrumbs span[aria-current] { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .04em; color: var(--navy); font-weight: 500; }
+  .breadcrumbs .sep { color: var(--line); font-size: .72rem; }
+</style>

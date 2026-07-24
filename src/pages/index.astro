@@ -1,21 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import Band from '../components/Band.astro';
-import Servicios from '../components/Servicios.astro';
-import Nosotros from '../components/Nosotros.astro';
-import Segmentos from '../components/Segmentos.astro';
-import Proceso from '../components/Proceso.astro';
-import Testimonios from '../components/Testimonios.astro';
-import Faq from '../components/Faq.astro';
-import Cta from '../components/Cta.astro';
 import Footer from '../components/Footer.astro';
 import WaFloat from '../components/WaFloat.astro';
 import '../styles/global.css';
 
-// Testimonios reales de clientes, en formato Review para que los buscadores
-// y los motores de IA (ChatGPT, Perplexity) puedan citarlos.
+const WA = 'https://wa.me/528114132252?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20sin%20costo';
+const HERO_IMG = 'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=1400&q=70&auto=format';
+
+// Reviews reales -> schema citable por buscadores e IA
 const reviews = [
   { author: 'Antonio', body: 'Las mismas personas atienden tanto mi empresa como mi casa: motores, cámaras, herrería, pintura, control de accesos y cortina de acero. Ya tenemos 8 años trabajando sin ningún problema.' },
   { author: 'Fernando G.', body: 'Abre rápido, me siento muy seguro. El control es comodísimo, incluso llegando en moto. No hace ruido y no se sale mi perro. Muy contento con la batería de respaldo y el WiFi para abrirlo desde el celular.' },
@@ -27,7 +20,7 @@ const reviews = [
   { author: 'Sr. Iván G.', body: 'Está muy cómodo el control remoto para usarlo desde el montacargas, muy seguro y muy rápido. Ayuda a que no se salga el aire acondicionado de la planta y a que el manejo sea eficiente.' },
 ];
 
-const servicios = [
+const serviciosSchema = [
   { name: 'Automatización de portones', description: 'Instalación de motores para portones ascendentes, corredizos, abatibles y cortinas metálicas. Motores axiales, de cremallera, pistones electromecánicos y tubulares.' },
   { name: 'Control de accesos', description: 'Sistemas de acceso vehicular y peatonal: tarjetas de proximidad, biométricos de huella o facial, teclados con PIN y apertura desde el celular.' },
   { name: 'Cámaras y CCTV', description: 'Videovigilancia HD con acceso remoto desde el celular, visión nocturna a color y grabación 24/7 para casas, negocios y plantas industriales.' },
@@ -37,55 +30,21 @@ const servicios = [
 
 const schema = [
   {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@context': 'https://schema.org', '@type': 'LocalBusiness',
     name: 'Grupo Spazi Monterrey',
     description: 'Distribuidora oficial de Grupo Spazi en Monterrey. 14 años de experiencia en automatización de portones, control de accesos, cámaras y seguridad.',
-    url: 'https://grupospazimonterrey.com',
-    telephone: '+528114132252',
-    email: 'grupospazivfox@grupospazi.mx',
-    priceRange: '$$',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Monterrey',
-      addressRegion: 'Nuevo León',
-      addressCountry: 'MX',
-    },
+    url: 'https://grupospazimonterrey.com', telephone: '+528114132252', email: 'grupospazivfox@grupospazi.mx', priceRange: '$$',
+    address: { '@type': 'PostalAddress', addressLocality: 'Monterrey', addressRegion: 'Nuevo León', addressCountry: 'MX' },
     areaServed: ['Monterrey', 'San Pedro Garza García', 'Apodaca', 'Escobedo', 'García', 'Santa Catarina', 'Guadalupe', 'San Nicolás de los Garza'],
     serviceType: ['Automatización de portones', 'Control de accesos', 'Cámaras y CCTV', 'Alarmas y seguridad', 'Herrería', 'Gestión de proyectos'],
     foundingDate: '2012',
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5',
-      reviewCount: String(reviews.length),
-      bestRating: '5',
-    },
-    review: reviews.map(r => ({
-      '@type': 'Review',
-      author: { '@type': 'Person', name: r.author },
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-      reviewBody: r.body,
-      itemReviewed: { '@type': 'LocalBusiness', name: 'Grupo Spazi Monterrey' },
-    })),
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Servicios de Grupo Spazi Monterrey',
-      itemListElement: servicios.map(s => ({
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: s.name,
-          description: s.description,
-          areaServed: { '@type': 'City', name: 'Monterrey' },
-          provider: { '@type': 'LocalBusiness', name: 'Grupo Spazi Monterrey' },
-        },
-      })),
-    },
+    aggregateRating: { '@type': 'AggregateRating', ratingValue: '5', reviewCount: String(reviews.length), bestRating: '5' },
+    review: reviews.map(r => ({ '@type': 'Review', author: { '@type': 'Person', name: r.author }, reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, reviewBody: r.body, itemReviewed: { '@type': 'LocalBusiness', name: 'Grupo Spazi Monterrey' } })),
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Servicios de Grupo Spazi Monterrey', itemListElement: serviciosSchema.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, description: s.description, areaServed: { '@type': 'City', name: 'Monterrey' }, provider: { '@type': 'LocalBusiness', name: 'Grupo Spazi Monterrey' } } })) },
     sameAs: [],
   },
   {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
+    '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: [
       { '@type': 'Question', name: '¿Cuánto cuesta automatizar un portón en Monterrey?', acceptedAnswer: { '@type': 'Answer', text: 'El costo varía según el tipo de portón, el motor y los accesorios. Depende de si es ascendente, corredizo, abatible o cortina metálica, y del nivel de uso. Hacemos visita técnica sin costo para darte un precio exacto.' } },
       { '@type': 'Question', name: '¿Qué tipo de motor necesito para mi portón?', acceptedAnswer: { '@type': 'Answer', text: 'Depende del tipo de portón: Motor axial para portones ascendentes, cremallera para corredizos, pistones para abatibles, motor tubular para cortinas enrollables.' } },
@@ -97,6 +56,31 @@ const schema = [
     ],
   },
 ];
+
+const servicios = [
+  { icon: 'M3 8l9-5 9 5v8l-9 5-9-5z', h: 'Automatización de portones', p: 'Motores axiales, de cremallera, pistones y tubulares para portones ascendentes, corredizos, abatibles y cortinas.', chips: ['AXIAL', 'CREMALLERA', 'PISTONES'] },
+  { icon: 'M12 2a5 5 0 00-5 5v3H5v10h14V10h-2V7a5 5 0 00-5-5z', h: 'Control de accesos', p: 'Tarjetas RFID, biométrico de huella o facial, teclado con PIN y apertura desde el celular. Vehicular y peatonal.', chips: ['RFID', 'BIOMÉTRICO', 'APP'] },
+  { icon: 'M23 7l-7 5 7 5V7zM1 5h13a2 2 0 012 2v10a2 2 0 01-2 2H1z', h: 'Cámaras y CCTV', p: 'Videovigilancia HD, visión nocturna a color, acceso remoto desde el celular y grabación 24/7.', chips: ['HD', 'VISIÓN NOCTURNA', '24/7'] },
+  { icon: 'M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0', h: 'Alarmas y seguridad', p: 'Sensores, paneles y sistemas de alarma integrados con el control de acceso para casa, comercio e industria.', chips: ['SENSORES', 'PANELES'] },
+  { icon: 'M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z', h: 'Herrería a medida', p: 'Fabricación de portones, rejas y barandales en Monterrey, coordinada con la automatización. Un solo proveedor.', chips: ['A MEDIDA', 'COORDINADO'] },
+];
+
+const segmentos = [
+  { emoji: '🏠', h: 'Residencial', p: 'Casas, fraccionamientos y condominios. Trato directo, estética y soporte cercano.', pills: ['Portones', 'Cámaras', 'Acceso', 'Herrería'] },
+  { emoji: '🏭', h: 'Industrial', p: 'Plantas, bodegas y parques industriales. Motores de uso rudo y sistemas que cumplen estándares.', pills: ['Cortinas de acero', 'Control vehicular', 'CCTV 24/7'] },
+  { emoji: '🔧', h: 'Instaladores', p: 'Precio de distribuidor, refacciones originales en Monterrey y respaldo técnico del fabricante.', pills: ['Precio distribuidor', 'Refacciones', 'Soporte'] },
+];
+
+const proceso = [
+  { n: '01', h: 'Consulta', p: 'Nos escribes por WhatsApp. Nos cuentas tu proyecto en minutos.' },
+  { n: '02', h: 'Visita técnica', p: 'Sin costo. Evaluamos el acceso, medimos y definimos la solución correcta.' },
+  { n: '03', h: 'Propuesta', p: 'Cotización detallada el mismo día o al siguiente.' },
+  { n: '04', h: 'Instalación', p: 'Coordinamos todo. Tú tienes un solo punto de contacto.' },
+];
+
+const featured = reviews[0];
+const grid = [reviews[6], reviews[7], reviews[1], reviews[4], reviews[2], reviews[5]];
+const faqs = schema[1].mainEntity.map(q => ({ q: q.name, a: q.acceptedAnswer.text }));
 ---
 <Base
   title="Grupo Spazi Monterrey - Portones Automáticos, Cámaras y Seguridad"
@@ -104,15 +88,274 @@ const schema = [
   schema={schema}
 >
   <Nav />
-  <Hero />
-  <Band />
-  <Servicios />
-  <Nosotros />
-  <Segmentos />
-  <Proceso />
-  <Testimonios />
-  <Faq />
-  <Cta />
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero on-dark" id="inicio">
+      <div class="hero-photo" style={`background-image:linear-gradient(105deg, rgba(9,20,45,.94) 0%, rgba(9,20,45,.7) 48%, rgba(9,20,45,.35) 100%), url('${HERO_IMG}')`}></div>
+      <div class="grid-bg on-dark"></div>
+      <div class="container hero-inner">
+        <span class="hero-badge"><span class="orb" aria-hidden="true"></span>Distribuidor oficial · Monterrey, NL</span>
+        <h1 class="title on-dark hero-title">Seguridad y automatización<br>con <span class="hl">14 años de respaldo</span></h1>
+        <p class="lead on-dark hero-lead">Portones automáticos, control de accesos, cámaras y herrería. Atendemos proyectos residenciales, industriales y a instaladores. Una sola llamada resuelve todo.</p>
+        <div class="hero-actions">
+          <a href={WA} target="_blank" rel="noopener" class="btn btn-primary">Cotizar - visita sin costo</a>
+          <a href="#servicios" class="btn btn-ghost on-dark">Ver servicios</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-n">14<sup>+</sup></span><span class="stat-l">Años en Monterrey</span></div>
+          <div class="stat"><span class="stat-n">1987</span><span class="stat-l">Fundación Spazi</span></div>
+          <div class="stat"><span class="stat-n">3</span><span class="stat-l">Segmentos atendidos</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        {Array.from({length: 2}).map(() => (
+          <span>Portones automáticos ◆ Control de accesos ◆ Cámaras y CCTV ◆ Herrería a medida ◆ Distribuidor oficial ◆ Monterrey NL ◆ </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- SERVICIOS -->
+    <section class="section" id="servicios">
+      <div class="container">
+        <header class="s-head reveal">
+          <span class="kicker">Lo que hacemos</span>
+          <h2 class="title h2">Todo tu proyecto,<br>un solo proveedor</h2>
+          <p class="lead">Motores, accesos, cámaras y herrería. Coordinamos herreros, instaladores y electricistas para que tú solo trates con nosotros.</p>
+        </header>
+        <div class="serv-grid">
+          {servicios.map((s, i) => (
+            <article class={`serv-card reveal reveal-d${(i % 3) + 1}`}>
+              <div class="serv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={s.icon}/></svg></div>
+              <h3 class="h3">{s.h}</h3>
+              <p>{s.p}</p>
+              <div class="serv-chips">{s.chips.map(c => <span class="spec-chip"><b>{c}</b></span>)}</div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section class="section nosotros on-dark" id="nosotros">
+      <div class="grid-bg on-dark"></div>
+      <div class="container nos-inner">
+        <div class="nos-copy reveal">
+          <span class="kicker on-dark">Por qué nosotros</span>
+          <h2 class="title on-dark h2">Más que una distribuidora,<br>una aliada de confianza</h2>
+          <p class="lead on-dark">En Monterrey nos conocen por resolver. Entran por un portón automático y terminan confiándonos toda la seguridad de su propiedad o planta. Eso no se construye con publicidad: se construye con 14 años de trabajo bien hecho.</p>
+          <ul class="nos-list">
+            <li><strong>Distribuidor oficial</strong> con precio de distribuidor y refacciones originales en Monterrey.</li>
+            <li><strong>Un solo punto de contacto</strong> que coordina herrería, instalación y electricidad.</li>
+            <li><strong>Soporte post-venta real</strong> por WhatsApp, desde Monterrey. No un call center.</li>
+          </ul>
+        </div>
+        <div class="nos-cards reveal reveal-d1">
+          <div class="nos-card"><span class="nos-num">14<sup>+</sup></span><span class="nos-lbl">Años en el mercado</span></div>
+          <div class="nos-card"><span class="nos-num">1987</span><span class="nos-lbl">Fundación Spazi</span></div>
+          <div class="nos-card"><span class="nos-num">4+</span><span class="nos-lbl">Estaciones institucionales</span></div>
+          <div class="nos-card"><span class="nos-num">100%</span><span class="nos-lbl">Refacciones originales</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEGMENTOS -->
+    <section class="section" id="segmentos">
+      <div class="container">
+        <header class="s-head reveal">
+          <span class="kicker">A quién atendemos</span>
+          <h2 class="title h2">Soluciones para<br>cada tipo de cliente</h2>
+        </header>
+        <div class="seg-grid">
+          {segmentos.map((s, i) => (
+            <article class={`seg-card reveal reveal-d${i + 1}`}>
+              <div class="seg-emoji" aria-hidden="true">{s.emoji}</div>
+              <h3 class="h3">{s.h}</h3>
+              <p>{s.p}</p>
+              <div class="seg-pills">{s.pills.map(p => <span>{p}</span>)}</div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESO -->
+    <section class="section proceso" id="proceso">
+      <div class="container">
+        <header class="s-head reveal">
+          <span class="kicker">Cómo trabajamos</span>
+          <h2 class="title h2">De la consulta al<br>proyecto funcionando</h2>
+        </header>
+        <div class="proc-grid">
+          {proceso.map((s, i) => (
+            <div class={`proc-step reveal reveal-d${(i % 4) + 1}`}>
+              <span class="proc-n">{s.n}</span>
+              <h3 class="h3">{s.h}</h3>
+              <p>{s.p}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="section" id="testimonios">
+      <div class="container">
+        <header class="s-head reveal">
+          <span class="kicker">Lo que dicen nuestros clientes</span>
+          <h2 class="title h2">Cada instalación,<br>un cliente para siempre</h2>
+        </header>
+        <div class="testi-featured reveal">
+          <div class="testi-stars" aria-label="5 de 5 estrellas">★★★★★</div>
+          <p class="testi-quote-lg">{featured.body}</p>
+          <div class="testi-author"><span class="testi-av" aria-hidden="true">{featured.author[0]}</span><div><b>{featured.author}</b><span class="spec">MONTERREY · CLIENTE 8 AÑOS</span></div></div>
+        </div>
+        <div class="testi-grid">
+          {grid.map((t, i) => (
+            <blockquote class={`testi-card reveal reveal-d${(i % 3) + 1}`}>
+              <div class="testi-stars" aria-hidden="true">★★★★★</div>
+              <p>{t.body}</p>
+              <cite>{t.author}</cite>
+            </blockquote>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq">
+      <div class="container faq-inner">
+        <header class="s-head reveal">
+          <span class="kicker">Preguntas frecuentes</span>
+          <h2 class="title h2">Lo que más nos preguntan</h2>
+        </header>
+        <div class="faq-list reveal">
+          {faqs.map(f => (
+            <details class="faq-item">
+              <summary>{f.q}<span class="faq-ic" aria-hidden="true">+</span></summary>
+              <div class="faq-body"><p>{f.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
   <Footer />
   <WaFloat />
 </Base>
+
+<style>
+  /* HERO */
+  .hero { position: relative; overflow: hidden; background: var(--navy); }
+  .hero-photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  .hero-inner { position: relative; z-index: 2; padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(3rem, 6vw, 5rem); }
+  .hero-badge { display: inline-flex; align-items: center; gap: .55rem; font-family: 'JetBrains Mono', monospace; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: #fff; background: color-mix(in srgb,#fff 10%,transparent); border: 1px solid color-mix(in srgb,#fff 18%,transparent); padding: .45rem .9rem; border-radius: var(--pill); margin-bottom: 1.4rem; }
+  .hero-badge .orb { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 color-mix(in srgb, var(--green) 70%, transparent); animation: ping 2.4s var(--ease) infinite; }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--green) 60%, transparent); } 70%,100% { box-shadow: 0 0 0 8px transparent; } }
+  .hero-title { font-size: clamp(2.4rem, 6vw, 4.4rem); max-width: 18ch; margin-bottom: 1.3rem; }
+  .hero-title .hl { color: var(--gold-hi); }
+  .hero-lead { font-size: clamp(1.05rem, 1.6vw, 1.25rem); max-width: 48ch; margin-bottom: 2rem; }
+  .hero-actions { display: flex; gap: .8rem; flex-wrap: wrap; margin-bottom: 2.6rem; }
+  .hero-stats { display: flex; gap: clamp(1.5rem, 4vw, 3rem); flex-wrap: wrap; padding-top: 1.8rem; border-top: 1px solid color-mix(in srgb,#fff 16%,transparent); }
+  .stat { display: flex; flex-direction: column; }
+  .stat-n { font-size: clamp(1.9rem, 3.4vw, 2.5rem); font-weight: 800; color: #fff; line-height: 1; letter-spacing: -.03em; }
+  .stat-n sup { font-family: 'JetBrains Mono', monospace; font-size: .9rem; color: var(--gold-hi); }
+  .stat-l { font-family: 'JetBrains Mono', monospace; font-size: .66rem; text-transform: uppercase; letter-spacing: .08em; color: color-mix(in srgb,#fff 62%,transparent); margin-top: .5rem; }
+
+  /* MARQUEE */
+  .marquee { background: var(--orange); overflow: hidden; }
+  .marquee-track { display: flex; width: max-content; white-space: nowrap; animation: slide 34s linear infinite; }
+  .marquee-track span { font-family: 'JetBrains Mono', monospace; font-size: .74rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); padding: .7rem 0; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+  /* headers de sección */
+  .s-head { max-width: 640px; margin: 0 auto clamp(2.5rem, 5vw, 3.5rem); text-align: center; }
+  .s-head .kicker { justify-content: center; margin-bottom: 1rem; }
+  .s-head .lead { margin: 1rem auto 0; }
+
+  /* SERVICIOS */
+  .serv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+  .serv-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 1.8rem; transition: transform .25s var(--ease), box-shadow .3s var(--ease); }
+  .serv-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .serv-ico { width: 52px; height: 52px; border-radius: var(--r-md); background: color-mix(in srgb, var(--navy) 7%, var(--white)); color: var(--orange-ink); display: grid; place-items: center; margin-bottom: 1.1rem; transition: background .25s, color .25s; }
+  .serv-card:hover .serv-ico { background: var(--navy); color: var(--gold-hi); }
+  .serv-ico svg { width: 26px; height: 26px; }
+  .serv-card h3 { color: var(--navy); margin-bottom: .5rem; }
+  .serv-card p { font-size: .94rem; color: var(--muted); margin-bottom: 1.1rem; }
+  .serv-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+  /* NOSOTROS */
+  .nosotros { position: relative; overflow: hidden; background: var(--navy); }
+  .nos-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .nos-list { list-style: none; margin-top: 1.6rem; display: flex; flex-direction: column; gap: 1rem; }
+  .nos-list li { position: relative; padding-left: 1.8rem; color: color-mix(in srgb,#fff 74%,transparent); font-size: .98rem; }
+  .nos-list li::before { content: ''; position: absolute; left: 0; top: .5em; width: 8px; height: 8px; border-radius: 2px; background: var(--gold-hi); }
+  .nos-list strong { color: #fff; }
+  .nos-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .nos-card { background: color-mix(in srgb,#fff 5%,transparent); border: 1px solid color-mix(in srgb, var(--gold) 22%, transparent); border-radius: var(--r-lg); padding: 1.5rem; }
+  .nos-num { display: block; font-size: 2.6rem; font-weight: 800; color: var(--gold-hi); line-height: 1; letter-spacing: -.03em; }
+  .nos-num sup { font-family: 'JetBrains Mono', monospace; font-size: .9rem; }
+  .nos-lbl { display: block; font-family: 'JetBrains Mono', monospace; font-size: .66rem; text-transform: uppercase; letter-spacing: .06em; color: color-mix(in srgb,#fff 55%,transparent); margin-top: .5rem; }
+
+  /* SEGMENTOS */
+  .seg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+  .seg-card { border: 1px solid var(--line); border-radius: var(--r-xl); padding: 2rem 1.8rem; background: var(--white); transition: transform .25s var(--ease), box-shadow .3s; }
+  .seg-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+  .seg-emoji { font-size: 2rem; margin-bottom: 1rem; }
+  .seg-card h3 { color: var(--navy); margin-bottom: .6rem; }
+  .seg-card p { font-size: .94rem; color: var(--muted); margin-bottom: 1.2rem; }
+  .seg-pills { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .seg-pills span { font-family: 'JetBrains Mono', monospace; font-size: .66rem; text-transform: uppercase; letter-spacing: .04em; background: color-mix(in srgb, var(--navy) 6%, var(--white)); color: var(--navy-mid); padding: .3rem .7rem; border-radius: var(--pill); border: 1px solid var(--line); }
+
+  /* PROCESO */
+  .proceso { background: var(--cream); }
+  .proc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.3rem; }
+  .proc-step { position: relative; padding-top: 1rem; }
+  .proc-n { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 500; color: var(--orange-ink); }
+  .proc-step h3 { color: var(--navy); margin: .6rem 0 .4rem; font-size: 1.2rem; }
+  .proc-step p { font-size: .92rem; color: var(--muted); }
+
+  /* TESTIMONIOS */
+  .testi-stars { color: var(--gold); letter-spacing: .1em; font-size: .95rem; }
+  .testi-featured { background: var(--navy); color: #fff; border-radius: var(--r-xl); padding: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 1.3rem; }
+  .testi-quote-lg { font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 500; line-height: 1.45; margin: .8rem 0 1.5rem; max-width: 46ch; }
+  .testi-author { display: flex; align-items: center; gap: .9rem; }
+  .testi-av { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-hi), var(--orange)); color: var(--navy); display: grid; place-items: center; font-weight: 800; flex-shrink: 0; }
+  .testi-author b { display: block; }
+  .testi-author .spec { color: color-mix(in srgb,#fff 55%,transparent); }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
+  .testi-card { background: var(--white); border: 1px solid var(--line); border-left: 3px solid var(--gold); border-radius: var(--r-lg); padding: 1.6rem; }
+  .testi-card p { font-size: .95rem; color: var(--ink); line-height: 1.6; margin: .7rem 0 1rem; }
+  .testi-card cite { font-style: normal; font-weight: 700; color: var(--navy); font-size: .92rem; }
+
+  /* FAQ */
+  .faq { background: var(--cream); }
+  .faq-inner { max-width: 780px; }
+  .faq-list { display: flex; flex-direction: column; gap: .8rem; }
+  .faq-item { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .faq-item summary { list-style: none; cursor: pointer; padding: 1.2rem 1.4rem; font-weight: 700; color: var(--navy); display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 1rem; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-ic { font-size: 1.5rem; font-weight: 400; color: var(--orange-ink); transition: transform .25s var(--ease); flex-shrink: 0; }
+  .faq-item[open] .faq-ic { transform: rotate(45deg); }
+  .faq-body { padding: 0 1.4rem 1.3rem; }
+  .faq-body p { color: var(--muted); line-height: 1.7; font-size: .95rem; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .serv-grid, .seg-grid { grid-template-columns: 1fr 1fr; }
+    .proc-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.3rem; }
+    .nos-inner { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .serv-grid, .seg-grid, .proc-grid, .testi-grid { grid-template-columns: 1fr; }
+    .nos-cards { grid-template-columns: 1fr 1fr; }
+    .hero-actions .btn { flex: 1; }
+  }
+</style>

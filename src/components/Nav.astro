@@ -1,31 +1,132 @@
 ---
+// Nav global, responsive y accesible. Consistente en todas las páginas.
 const WA = 'https://wa.me/528114132252?text=Hola%2C%20me%20interesa%20cotizar%20un%20proyecto';
+const links = [
+  { href: '/#servicios', label: 'Servicios' },
+  { href: '/#nosotros', label: 'Nosotros' },
+  { href: '/#segmentos', label: 'Clientes' },
+  { href: '/#testimonios', label: 'Opiniones' },
+  { href: '/blog', label: 'Blog' },
+];
 ---
-<nav>
+<a href="#main" class="skip-link">Saltar al contenido</a>
+<header class="nav on-dark" id="nav" data-nav>
   <div class="container nav-inner">
-    <a href="/" class="nav-logo">
-      <img src="/logo-w.png" alt="Grupo Spazi Monterrey" />
-      <span>Grupo Spazi Monterrey</span>
+    <a href="/" class="nav-logo" aria-label="Grupo Spazi Monterrey - inicio">
+      <img src="/logo-w.png" alt="Grupo Spazi Monterrey" width="120" height="32" />
     </a>
-    <div class="nav-links">
-      <a href="/#servicios">Servicios</a>
-      <a href="/#nosotros">Nosotros</a>
-      <a href="/#segmentos">Clientes</a>
-      <a href="/#testimonios">Testimonios</a>
-      <a href="/blog">Blog</a>
+
+    <nav class="nav-links" aria-label="Principal">
+      {links.map(l => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <div class="nav-right">
+      <a href={WA} target="_blank" rel="noopener" class="btn btn-primary nav-cta">Cotizar - visita sin costo</a>
+      <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <a href={WA} target="_blank" rel="noopener" class="nav-wa">Cotizar ahora</a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
-</nav>
-<div class="mobile-menu" id="mobile-menu">
-  <button class="mobile-close" id="mobile-close" aria-label="Cerrar">&#x2715;</button>
-  <a href="/#servicios">Servicios</a>
-  <a href="/#nosotros">Nosotros</a>
-  <a href="/#segmentos">Clientes</a>
-  <a href="/#testimonios">Testimonios</a>
-  <a href="/blog">Blog</a>
-  <a href={WA} target="_blank" rel="noopener" style="color: #25D366;">WhatsApp</a>
+</header>
+
+<!-- Menú móvil (fuera del header: el backdrop-filter del nav no debe atraparlo) -->
+<div class="nav-menu" id="nav-menu" hidden>
+  <nav class="nav-menu-links" aria-label="Menú móvil">
+    {links.map(l => <a href={l.href} class="nav-menu-link">{l.label}</a>)}
+  </nav>
+  <a href={WA} target="_blank" rel="noopener" class="btn btn-primary nav-menu-cta">Cotizar por WhatsApp</a>
 </div>
+
+<style>
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: color-mix(in srgb, var(--navy) 92%, transparent);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid color-mix(in srgb, #fff 8%, transparent);
+    transition: background .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .nav.scrolled { background: var(--navy); box-shadow: 0 8px 30px -18px rgba(0,0,0,.6); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; height: var(--nav-h); }
+  .nav-logo { display: flex; align-items: center; flex-shrink: 0; }
+  .nav-logo img { height: 30px; width: auto; object-fit: contain; }
+
+  .nav-links { display: flex; align-items: center; gap: 1.8rem; }
+  .nav-links a {
+    font-size: .92rem; font-weight: 600; color: color-mix(in srgb, #fff 78%, transparent);
+    transition: color .2s; position: relative; padding: .2rem 0;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; bottom: -3px; width: 0; height: 2px;
+    background: var(--gold-hi); border-radius: 2px; transition: width .25s var(--ease);
+  }
+  .nav-links a:hover { color: #fff; }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-right { display: flex; align-items: center; gap: .8rem; flex-shrink: 0; }
+  .nav-cta { padding: .6rem 1.2rem; font-size: .86rem; min-height: 42px; }
+
+  .nav-burger { display: none; flex-direction: column; gap: 5px; width: 44px; height: 44px; align-items: center; justify-content: center; background: transparent; border: none; border-radius: var(--r-sm); }
+  .nav-burger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: transform .3s var(--ease), opacity .2s var(--ease); }
+  .nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-menu {
+    position: fixed; inset: var(--nav-h) 0 0 0; z-index: 99;
+    background: var(--navy);
+    display: flex; flex-direction: column; padding: 1.5rem;
+    gap: .3rem; transform: translateY(-8px); opacity: 0;
+    transition: opacity .25s var(--ease), transform .25s var(--ease);
+    overflow-y: auto;
+  }
+  .nav-menu[hidden] { display: none; }
+  .nav-menu.open { opacity: 1; transform: none; }
+  .nav-menu-links { display: flex; flex-direction: column; }
+  .nav-menu-link {
+    display: block; font-size: 1.4rem; font-weight: 700; color: #fff; padding: 1rem .5rem;
+    border-bottom: 1px solid color-mix(in srgb, #fff 8%, transparent);
+  }
+  .nav-menu-link:active { color: var(--gold-hi); }
+  .nav-menu-cta { margin-top: 1.4rem; width: 100%; }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-burger { display: flex; }
+  }
+  @media (min-width: 901px) {
+    .nav-menu { display: none !important; }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('nav');
+  const burger = document.getElementById('nav-burger');
+  const menu = document.getElementById('nav-menu');
+  let open = false;
+
+  const onScroll = () => nav?.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  function setMenu(v: boolean) {
+    open = v;
+    if (!burger || !menu) return;
+    burger.setAttribute('aria-expanded', String(v));
+    burger.setAttribute('aria-label', v ? 'Cerrar menú' : 'Abrir menú');
+    document.body.style.overflow = v ? 'hidden' : '';
+    if (v) {
+      menu.hidden = false;
+      requestAnimationFrame(() => menu.classList.add('open'));
+    } else {
+      menu.classList.remove('open');
+      setTimeout(() => { if (!open) menu.hidden = true; }, 250);
+    }
+  }
+
+  burger?.addEventListener('click', () => setMenu(!open));
+  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) setMenu(false); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 900 && open) setMenu(false); });
+</script>

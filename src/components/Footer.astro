@@ -1,47 +1,104 @@
 ---
+// Mega-footer: mapa del sitio + NAP para SEO local + legales.
 const year = new Date().getFullYear();
 const WA = 'https://wa.me/528114132252?text=Hola%2C%20me%20interesa%20cotizar%20un%20proyecto';
 const EMAIL = 'grupospazivfox@grupospazi.mx';
+const zonas = ['Monterrey', 'San Pedro Garza García', 'Apodaca', 'Escobedo', 'García', 'Santa Catarina', 'Guadalupe', 'San Nicolás'];
 ---
-<footer>
+<footer class="footer on-dark">
   <div class="container">
+    <!-- CTA de cierre -->
+    <div class="footer-cta">
+      <div>
+        <p class="kicker on-dark">¿Listo para empezar?</p>
+        <h2 class="title on-dark" style="font-size:clamp(1.6rem,3vw,2.2rem);margin-top:.6rem">Cuéntanos tu proyecto.<br>Te respondemos hoy.</h2>
+      </div>
+      <a href={WA} target="_blank" rel="noopener" class="btn btn-primary">Cotizar - visita sin costo</a>
+    </div>
+
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo">
-          <img src="/logo-color.png" alt="Grupo Spazi Monterrey" />
-          <div class="footer-logo-text">
-            <strong>Grupo Spazi Monterrey</strong>
-            <small>Distribuidor Oficial · NL</small>
-          </div>
-        </div>
-        <p>Automatización de portones, control de accesos, cámaras y herrería en Monterrey y area metropolitana. 14 años de experiencia.</p>
+        <img src="/logo-w.png" alt="Grupo Spazi Monterrey" width="150" height="34" class="footer-logo" />
+        <p>Distribuidora oficial de Grupo Spazi en Nuevo León. Automatización de portones, control de accesos, cámaras y herrería. 14 años en Monterrey.</p>
+        <a href={WA} target="_blank" rel="noopener" class="footer-wa">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+          81 1413 2252
+        </a>
       </div>
+
       <div class="footer-col">
-        <h4>Servicios</h4>
-        <a href="/#servicios">Automatización de Portones</a>
-        <a href="/#servicios">Control de Accesos</a>
+        <h3>Servicios</h3>
+        <a href="/#servicios">Automatización de portones</a>
+        <a href="/#servicios">Control de accesos</a>
         <a href="/#servicios">Cámaras y CCTV</a>
-        <a href="/#servicios">Alarmas y Seguridad</a>
-        <a href="/#servicios">Herrería y Fabricación</a>
+        <a href="/#servicios">Alarmas y seguridad</a>
+        <a href="/#servicios">Herrería a medida</a>
       </div>
+
       <div class="footer-col">
-        <h4>Contacto</h4>
-        <a href={WA} target="_blank" rel="noopener">WhatsApp: 81 1413 2252</a>
-        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-        <p style="margin-top:.8rem">Monterrey, Nuevo León, México</p>
-        <h4 style="margin-top:1.5rem">Blog</h4>
-        <a href="/blog">Todos los artículos</a>
+        <h3>Recursos</h3>
+        <a href="/blog">Blog</a>
         <a href="/blog/cuanto-cuesta-automatizar-porton-monterrey">Cuánto cuesta automatizar</a>
         <a href="/blog/que-motor-porton-elegir">Qué motor elegir</a>
+        <a href="/blog/control-accesos-plantas-industriales-monterrey">Control de accesos industrial</a>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contacto</h3>
+        <a href={WA} target="_blank" rel="noopener">WhatsApp: 81 1413 2252</a>
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        <p class="footer-nap">Monterrey, Nuevo León, México</p>
       </div>
     </div>
-    <div class="footer-legal">
-      <a href="/aviso-de-privacidad">Aviso de Privacidad</a>
-      <a href="/terminos-y-condiciones">Términos y Condiciones</a>
+
+    <div class="footer-zonas">
+      <span class="footer-zonas-label">Zonas que atendemos:</span>
+      {zonas.map((z, i) => <span class="footer-zona">{z}{i < zonas.length - 1 ? ' ·' : ''}</span>)}
     </div>
+
     <div class="footer-bottom">
-      <span>&copy; {year} Grupo Spazi Monterrey. Distribuidor oficial <span>Grupo Spazi</span> en NL.</span>
-      <span>Hecho con <span>♥</span> por <a href="https://sopadeletras.art" target="_blank" rel="noopener" style="color:var(--gold)">sopadeletras®</a></span>
+      <div class="footer-legal">
+        <a href="/aviso-de-privacidad">Aviso de Privacidad</a>
+        <a href="/terminos-y-condiciones">Términos y Condiciones</a>
+      </div>
+      <span class="footer-copy">&copy; {year} Grupo Spazi Monterrey · Distribuidor oficial en NL · Hecho por <a href="https://sopadeletras.art" target="_blank" rel="noopener">sopadeletras®</a></span>
     </div>
   </div>
 </footer>
+
+<style>
+  .footer { background: var(--navy); color: color-mix(in srgb, #fff 72%, transparent); padding: clamp(3rem, 6vw, 4.5rem) 0 2rem; }
+  .footer-cta {
+    display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
+    padding-bottom: 2.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid color-mix(in srgb, #fff 10%, transparent);
+  }
+  .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2.5rem; }
+  .footer-logo { height: 32px; width: auto; margin-bottom: 1rem; }
+  .footer-brand p { font-size: .9rem; line-height: 1.6; max-width: 32ch; margin-bottom: 1.1rem; }
+  .footer-wa { display: inline-flex; align-items: center; gap: .5rem; color: #fff; font-weight: 700; font-size: .95rem; }
+  .footer-wa svg { color: var(--green); }
+  .footer-col h3 { font-family: 'JetBrains Mono', monospace; font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-hi); margin-bottom: 1rem; }
+  .footer-col a { display: block; font-size: .9rem; color: color-mix(in srgb, #fff 66%, transparent); margin-bottom: .6rem; transition: color .2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-nap { font-size: .9rem; color: color-mix(in srgb, #fff 50%, transparent); margin-top: .4rem; }
+
+  .footer-zonas { margin: 2.5rem 0 0; padding-top: 1.8rem; border-top: 1px solid color-mix(in srgb, #fff 10%, transparent); display: flex; flex-wrap: wrap; gap: .4rem; align-items: baseline; }
+  .footer-zonas-label { font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-hi); margin-right: .5rem; }
+  .footer-zona { font-size: .84rem; color: color-mix(in srgb, #fff 55%, transparent); }
+
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem; padding-top: 1.4rem; border-top: 1px solid color-mix(in srgb, #fff 10%, transparent); }
+  .footer-legal { display: flex; gap: 1.4rem; }
+  .footer-legal a { font-size: .82rem; color: color-mix(in srgb, #fff 60%, transparent); }
+  .footer-legal a:hover { color: #fff; }
+  .footer-copy { font-size: .78rem; color: color-mix(in srgb, #fff 45%, transparent); }
+  .footer-copy a { color: var(--gold-hi); }
+
+  @media (max-width: 860px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 520px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+</style>
