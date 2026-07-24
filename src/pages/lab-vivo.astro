@@ -33,6 +33,8 @@
       --line:      #E4DECF;
       --white:     #FFFFFF;
       --green:     #2FBF71;
+      --green-btn: #128040;  /* verde boton: blanco pasa AA 5.0 */
+      --orange-ink:#B4500F;  /* naranja para TEXTO sobre claro: pasa AA 4.9 */
 
       --r-md: 14px;
       --r-lg: 22px;
@@ -84,7 +86,7 @@
     .lab-bar .brand { display: flex; align-items: center; gap: .6rem; }
     .lab-bar .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 4px color-mix(in srgb, var(--orange) 22%, transparent); }
     .lab-bar .tag { font-weight: 800; font-size: .85rem; letter-spacing: -.01em; color: var(--navy); }
-    .lab-bar .dir { font-family: 'JetBrains Mono', monospace; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); padding: .28rem .7rem; border-radius: var(--pill); background: color-mix(in srgb, var(--orange) 12%, transparent); }
+    .lab-bar .dir { font-family: 'JetBrains Mono', monospace; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--orange-ink); padding: .28rem .7rem; border-radius: var(--pill); background: color-mix(in srgb, var(--orange) 12%, transparent); }
     .lab-bar .back { display: inline-flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .8rem; color: var(--navy); text-decoration: none; padding: .55rem 1.1rem; border-radius: var(--pill); background: var(--cream); border: 1px solid var(--line); transition: transform .2s var(--ease), background .2s; }
     .lab-bar .back:hover { transform: translateY(-1px); background: var(--gold-hi); }
     .lab-bar .mid { display: flex; align-items: center; gap: .8rem; }
@@ -107,10 +109,10 @@
     @keyframes ping { 0% { transform: scale(.5); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
 
     /* ---------- Intro ---------- */
-    .kicker { display: inline-flex; align-items: center; gap: .55rem; font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--orange); font-weight: 500; }
+    .kicker { display: inline-flex; align-items: center; gap: .55rem; font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--orange-ink); font-weight: 500; }
     .kicker::before { content: ''; width: 26px; height: 2px; border-radius: 2px; background: var(--orange); }
     .intro-title { font-size: clamp(2.6rem, 7vw, 4.6rem); font-weight: 800; line-height: 1; letter-spacing: -.035em; color: var(--navy); margin: 1.1rem 0 .8rem; }
-    .intro-title .live { color: var(--orange); position: relative; }
+    .intro-title .live { color: var(--orange-ink); position: relative; }
     .intro-lead { font-size: 1.2rem; color: var(--ink); max-width: 60ch; }
     .intro-lead b { color: var(--navy); font-weight: 700; }
 
@@ -127,9 +129,9 @@
     /* ---------- 2. Tipografia ---------- */
     .type-row { padding: 1.4rem 0; border-top: 1px solid var(--line); }
     .type-row:first-child { border-top: none; }
-    .type-tag { font-family: 'JetBrains Mono', monospace; font-size: .66rem; color: var(--orange); letter-spacing: .08em; text-transform: uppercase; margin-bottom: .5rem; }
+    .type-tag { font-family: 'JetBrains Mono', monospace; font-size: .66rem; color: var(--orange-ink); letter-spacing: .08em; text-transform: uppercase; margin-bottom: .5rem; }
     .t-d1 { font-size: clamp(2.4rem,6vw,4rem); font-weight: 800; line-height: 1; letter-spacing: -.035em; color: var(--navy); }
-    .t-d1 .a { color: var(--orange); }
+    .t-d1 .a { color: var(--orange-ink); }
     .t-d2 { font-size: clamp(1.6rem,3.4vw,2.3rem); font-weight: 700; letter-spacing: -.025em; color: var(--navy); line-height: 1.1; }
     .t-body { font-size: 1.12rem; color: var(--ink); max-width: 64ch; }
     .t-body b { font-weight: 700; color: var(--navy); }
@@ -156,7 +158,7 @@
 
     /* firma: contador */
     .sig-count .big { font-size: 4.2rem; font-weight: 800; letter-spacing: -.04em; color: var(--navy); line-height: .9; }
-    .sig-count .big sup { font-size: 1.6rem; color: var(--orange); vertical-align: super; font-weight: 700; }
+    .sig-count .big sup { font-size: 1.6rem; color: var(--orange-ink); vertical-align: super; font-weight: 700; }
     .sig-count .cap { margin-top: .6rem; color: var(--muted); font-size: .92rem; }
     .bar { height: 8px; border-radius: var(--pill); background: var(--cream); overflow: hidden; margin-top: 1.2rem; }
     .bar i { display: block; height: 100%; width: 0; border-radius: var(--pill); background: linear-gradient(90deg, var(--gold), var(--orange)); transition: width 1.6s var(--ease); }
@@ -176,14 +178,16 @@
     /* botones pildora */
     .btn { display: inline-flex; align-items: center; gap: .55rem; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: .95rem; padding: .85rem 1.6rem; border-radius: var(--pill); border: none; cursor: pointer; text-decoration: none; transition: transform .2s var(--spring), box-shadow .25s var(--ease), background .2s; white-space: nowrap; }
     .btn svg { width: 17px; height: 17px; }
-    .btn-primary { background: var(--orange); color: var(--white); box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--orange) 80%, transparent); }
+    /* accesibilidad: foco visible por teclado */
+    a:focus-visible, button:focus-visible, .btn:focus-visible, .scard:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 3px; border-radius: 6px; }
+    .btn-primary { background: var(--orange); color: var(--ink); box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--orange) 80%, transparent); }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -10px color-mix(in srgb, var(--orange) 85%, transparent); }
     .btn-gold { background: var(--gold-hi); color: var(--navy); }
     .btn-gold:hover { transform: translateY(-2px); background: var(--gold); }
     .btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid color-mix(in srgb, var(--navy) 22%, transparent); }
     .btn-ghost:hover { transform: translateY(-2px); border-color: var(--navy); background: var(--cream); }
-    .btn-wa { background: var(--green); color: var(--white); }
-    .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 14px 26px -12px color-mix(in srgb, var(--green) 80%, transparent); }
+    .btn-wa { background: var(--green-btn); color: var(--white); }
+    .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 14px 26px -12px color-mix(in srgb, var(--green-btn) 80%, transparent); }
     .btn-navy { background: var(--navy); color: var(--white); }
     .btn-navy:hover { transform: translateY(-2px); background: var(--navy-mid); }
 
@@ -194,7 +198,7 @@
     /* chips de spec en mono */
     .chips { display: flex; flex-wrap: wrap; gap: .6rem; }
     .spec-chip { font-family: 'JetBrains Mono', monospace; font-size: .72rem; padding: .45rem .85rem; border-radius: var(--pill); color: var(--navy-mid); background: var(--cream); border: 1px solid var(--line); display: inline-flex; align-items: center; gap: .45rem; }
-    .spec-chip b { color: var(--orange); font-weight: 600; }
+    .spec-chip b { color: var(--orange-ink); font-weight: 600; }
     .spec-chip .d { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
 
     /* tarjeta de servicio redondeada */
@@ -204,14 +208,14 @@
     .scard:hover .ico { background: var(--navy); color: var(--gold-hi); }
     .scard h5 { font-weight: 800; font-size: 1.2rem; color: var(--navy); margin-bottom: .35rem; letter-spacing: -.01em; }
     .scard p { font-size: .92rem; color: var(--muted); }
-    .scard .go { margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); display: inline-flex; align-items: center; gap: .4rem; }
+    .scard .go { margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--orange-ink); display: inline-flex; align-items: center; gap: .4rem; }
     .scard .go svg { transition: transform .25s var(--ease); }
     .scard:hover .go svg { transform: translateX(4px); }
 
     /* fila de stats con contadores */
     .stat-row { display: flex; gap: 2.8rem; flex-wrap: wrap; }
     .stat .n { font-size: 2.9rem; font-weight: 800; line-height: 1; letter-spacing: -.03em; color: var(--navy); }
-    .stat .n sup { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--orange); vertical-align: super; }
+    .stat .n sup { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--orange-ink); vertical-align: super; }
     .stat .l { font-family: 'JetBrains Mono', monospace; font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-top: .55rem; }
 
     /* testimonio */
@@ -240,7 +244,7 @@
     .hero-nav .links { display: flex; gap: 1.4rem; }
     .hero-nav .links a { color: color-mix(in srgb,#fff 82%,transparent); text-decoration: none; font-size: .88rem; font-weight: 600; transition: color .2s; }
     .hero-nav .links a:hover { color: var(--gold-hi); }
-    .hero-nav .cta { background: var(--orange); color: #fff; font-weight: 700; font-size: .85rem; padding: .6rem 1.2rem; border-radius: var(--pill); text-decoration: none; transition: transform .2s var(--spring); }
+    .hero-nav .cta { background: var(--orange); color: var(--ink); font-weight: 700; font-size: .85rem; padding: .6rem 1.2rem; border-radius: var(--pill); text-decoration: none; transition: transform .2s var(--spring); }
     .hero-nav .cta:hover { transform: translateY(-2px); }
     @media (max-width: 860px) { .hero-nav .links { display: none; } }
 
@@ -262,8 +266,8 @@
     .marquee { position: relative; z-index: 2; overflow: hidden; background: var(--orange); border-radius: 0; }
     .marquee .track { display: flex; gap: 2.2rem; padding: .7rem 0; white-space: nowrap; width: max-content; animation: slide 26s linear infinite; }
     .marquee:hover .track { animation-play-state: paused; }
-    .marquee span { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #fff; display: inline-flex; align-items: center; gap: 2.2rem; }
-    .marquee span::after { content: '◆'; color: color-mix(in srgb,#fff 60%,transparent); font-size: .6rem; }
+    .marquee span { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); display: inline-flex; align-items: center; gap: 2.2rem; }
+    .marquee span::after { content: '◆'; color: color-mix(in srgb, var(--navy) 55%, transparent); font-size: .6rem; }
     @keyframes slide { to { transform: translateX(-50%); } }
 
     /* banda de servicios (segunda seccion real) */
