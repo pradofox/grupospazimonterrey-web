@@ -86,6 +86,8 @@ const {
       s.onload = () => {
         // @ts-ignore
         const lenis = new Lenis({ duration: 1.05, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        // @ts-ignore  (el nav lo usa para bloquear scroll con el menú móvil)
+        window.lenis = lenis;
         function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
         // anchors internos con scroll suave

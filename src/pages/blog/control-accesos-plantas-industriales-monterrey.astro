@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import WaFloat from '../../components/WaFloat.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import '../../styles/global.css';
 
 const WA = 'https://wa.me/528114132252?text=Hola%2C%20necesito%20cotizar%20control%20de%20acceso%20para%20una%20planta%20industrial';
@@ -24,15 +25,18 @@ const schema = {
   schema={schema}
 >
   <Nav />
-  <div class="article-hero">
+  <main id="main">
+  <section class="page-hero article-hero on-dark">
+    <div class="grid-bg on-dark"></div>
     <div class="container" style="max-width:760px">
-      <div class="tag">Industrial</div>
+      <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Blog', href: '/blog' }, { label: 'Control de accesos industrial' }]} />
+      <span class="article-tag">Industrial</span>
       <h1>Control de accesos para<br>plantas industriales en Monterrey</h1>
-      <p class="article-meta"><span>Grupo Spazi Monterrey</span> · Abril 2025</p>
+      <p class="article-meta">Grupo Spazi Monterrey · Abril 2025</p>
     </div>
-  </div>
+  </section>
   <div class="article-body">
-    <div class="container" style="max-width:760px">
+    <div class="container prose">
 
       <p>Monterrey es el hub industrial más importante del norte de México. Con el boom del nearshoring, cada vez más plantas, bodegas y parques industriales necesitan sistemas de control de acceso robustos, confiables y que cumplan con estándares internacionales de seguridad. En Grupo Spazi Monterrey llevamos 14 años atendiendo este segmento.</p>
 
@@ -90,7 +94,7 @@ const schema = {
       <div class="cta-box">
         <h3>¿Tienes una planta o bodega en Monterrey?</h3>
         <p>Cotizamos sin compromiso. Evaluamos tus accesos y te proponemos la solución más eficiente según tu operación.</p>
-        <a href={WA} target="_blank" rel="noopener" class="btn-wa" style="display:inline-flex;gap:.5rem;align-items:center">
+        <a href={WA} target="_blank" rel="noopener" class="btn btn-wa" style="display:inline-flex;gap:.5rem;align-items:center">
           Solicitar cotización →
         </a>
       </div>
@@ -104,8 +108,18 @@ const schema = {
       </ol>
       <p>14 años en el mercado industrial de Monterrey. Referencias disponibles bajo solicitud.</p>
 
+      <div class="article-foot">
+        <p class="article-foot-h">Sigue leyendo</p>
+        <div class="related-grid">
+          <a class="related-card" href="/blog/que-motor-porton-elegir"><span>Guía técnica</span><b>Qué motor elegir para tu portón</b></a>
+          <a class="related-card" href="/blog/cuanto-cuesta-automatizar-porton-monterrey"><span>Precios</span><b>Cuánto cuesta automatizar un portón</b></a>
+        </div>
+        <a href="/blog" class="back-blog">← Volver al blog</a>
+      </div>
+
     </div>
   </div>
+  </main>
   <Footer />
   <WaFloat />
 </Base>

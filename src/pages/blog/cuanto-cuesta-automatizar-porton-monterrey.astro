@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import WaFloat from '../../components/WaFloat.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import '../../styles/global.css';
 
 const WA = 'https://wa.me/528114132252?text=Hola%2C%20quiero%20una%20cotizaci%C3%B3n%20sin%20costo';
@@ -24,15 +25,18 @@ const schema = {
   schema={schema}
 >
   <Nav />
-  <div class="article-hero">
+  <main id="main">
+  <section class="page-hero article-hero on-dark">
+    <div class="grid-bg on-dark"></div>
     <div class="container" style="max-width:760px">
-      <div class="tag">Precios y cotización</div>
+      <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Blog', href: '/blog' }, { label: 'Cuánto cuesta automatizar' }]} />
+      <span class="article-tag">Precios y cotización</span>
       <h1>¿Cuánto cuesta automatizar<br>un portón en Monterrey?</h1>
-      <p class="article-meta"><span>Grupo Spazi Monterrey</span> · Abril 2025</p>
+      <p class="article-meta">Grupo Spazi Monterrey · Abril 2025</p>
     </div>
-  </div>
+  </section>
   <div class="article-body">
-    <div class="container" style="max-width:760px">
+    <div class="container prose">
 
       <h2>¿Que factores definen el precio?</h2>
       <p>Antes de ver los números, hay que entender que mueve el costo:</p>
@@ -64,7 +68,7 @@ const schema = {
       <div class="cta-box">
         <h3>¿Cuánto cuesta tu caso específico?</h3>
         <p>Escribenos, te cotizamos sin compromiso el mismo día. Visita técnica sin costo incluida.</p>
-        <a href={WA} target="_blank" rel="noopener" class="btn-wa" style="display:inline-flex;gap:.5rem;align-items:center">
+        <a href={WA} target="_blank" rel="noopener" class="btn btn-wa" style="display:inline-flex;gap:.5rem;align-items:center">
           Cotizar por WhatsApp →
         </a>
       </div>
@@ -82,8 +86,18 @@ const schema = {
       <h2>¿Por qué elegir Grupo Spazi Monterrey?</h2>
       <p>Somos distribuidora oficial de Grupo Spazi en Nuevo León con 14 años en el mercado. Eso significa precio de distribuidor, refacciones originales disponibles en Monterrey, y soporte técnico post-venta por WhatsApp - no un número de México que nunca contesta.</p>
 
+      <div class="article-foot">
+        <p class="article-foot-h">Sigue leyendo</p>
+        <div class="related-grid">
+          <a class="related-card" href="/blog/que-motor-porton-elegir"><span>Guía técnica</span><b>Qué motor elegir para tu portón</b></a>
+          <a class="related-card" href="/blog/control-accesos-plantas-industriales-monterrey"><span>Industrial</span><b>Control de accesos para plantas</b></a>
+        </div>
+        <a href="/blog" class="back-blog">← Volver al blog</a>
+      </div>
+
     </div>
   </div>
+  </main>
   <Footer />
   <WaFloat />
 </Base>

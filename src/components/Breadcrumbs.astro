@@ -31,8 +31,8 @@ const schema = {
 <style>
   .breadcrumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; list-style: none; padding: 0; }
   .breadcrumbs li { display: inline-flex; align-items: center; gap: .5rem; }
-  .breadcrumbs a { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .04em; color: var(--muted); transition: color .2s; }
-  .breadcrumbs a:hover { color: var(--orange-ink); }
-  .breadcrumbs span[aria-current] { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .04em; color: var(--navy); font-weight: 500; }
-  .breadcrumbs .sep { color: var(--line); font-size: .72rem; }
+  .breadcrumbs a { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .04em; color: var(--bc-fg, var(--muted)); transition: color .2s; }
+  .breadcrumbs a:hover { color: var(--bc-hover, var(--orange-ink)); }
+  .breadcrumbs span[aria-current] { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .04em; color: var(--bc-current, var(--navy)); font-weight: 500; }
+  .breadcrumbs .sep { color: var(--bc-sep, var(--line)); font-size: .72rem; }
 </style>

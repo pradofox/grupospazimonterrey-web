@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import WaFloat from '../../components/WaFloat.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import '../../styles/global.css';
 
 const WA = 'https://wa.me/528114132252?text=Hola%2C%20manden%20foto%20de%20su%20portón%20por%20WhatsApp';
@@ -24,15 +25,18 @@ const schema = {
   schema={schema}
 >
   <Nav />
-  <div class="article-hero">
+  <main id="main">
+  <section class="page-hero article-hero on-dark">
+    <div class="grid-bg on-dark"></div>
     <div class="container" style="max-width:760px">
-      <div class="tag">Guía técnica</div>
+      <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Blog', href: '/blog' }, { label: 'Qué motor elegir' }]} />
+      <span class="article-tag">Guía técnica</span>
       <h1>Qué motor elegir para<br>tu portón: guía práctica</h1>
-      <p class="article-meta"><span>Grupo Spazi Monterrey</span> · Abril 2025</p>
+      <p class="article-meta">Grupo Spazi Monterrey · Abril 2025</p>
     </div>
-  </div>
+  </section>
   <div class="article-body">
-    <div class="container" style="max-width:760px">
+    <div class="container prose">
 
       <p>Elegir el motor equivocado para tu portón es el error más común - y el más caro. Un motor subdimensionado se fuerza, falla rápido y pierde garantía. Uno sobredimensionado es dinero tirado. Esta guía te explica cuándo usar cada tipo.</p>
 
@@ -100,13 +104,23 @@ const schema = {
       <div class="cta-box">
         <h3>¿No sabes qué motor necesitas?</h3>
         <p>Mándanos foto de tu portón por WhatsApp y te decimos en minutos qué motor es el correcto.</p>
-        <a href={WA} target="_blank" rel="noopener" class="btn-wa" style="display:inline-flex;gap:.5rem;align-items:center">
+        <a href={WA} target="_blank" rel="noopener" class="btn btn-wa" style="display:inline-flex;gap:.5rem;align-items:center">
           Mandar foto por WhatsApp →
         </a>
       </div>
 
+      <div class="article-foot">
+        <p class="article-foot-h">Sigue leyendo</p>
+        <div class="related-grid">
+          <a class="related-card" href="/blog/cuanto-cuesta-automatizar-porton-monterrey"><span>Precios</span><b>Cuánto cuesta automatizar un portón</b></a>
+          <a class="related-card" href="/blog/control-accesos-plantas-industriales-monterrey"><span>Industrial</span><b>Control de accesos para plantas</b></a>
+        </div>
+        <a href="/blog" class="back-blog">← Volver al blog</a>
+      </div>
+
     </div>
   </div>
+  </main>
   <Footer />
   <WaFloat />
 </Base>

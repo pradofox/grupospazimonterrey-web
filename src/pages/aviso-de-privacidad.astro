@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import WaFloat from '../components/WaFloat.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import '../styles/global.css';
 
 const EMAIL = 'grupospazivfox@grupospazi.mx';
@@ -13,15 +14,18 @@ const WA = 'https://wa.me/528114132252';
   description="Aviso de privacidad de Grupo Spazi Monterrey conforme a la LFPDPPP. Tratamiento de datos personales de clientes, prospectos y proveedores."
 >
   <Nav />
-  <div class="article-hero">
+  <main id="main">
+  <section class="page-hero article-hero on-dark">
+    <div class="grid-bg on-dark"></div>
     <div class="container" style="max-width:760px">
-      <div class="tag">Legal</div>
+      <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Aviso de Privacidad' }]} />
+      <span class="article-tag">Legal</span>
       <h1>Aviso de Privacidad</h1>
-      <p class="article-meta"><span>Grupo Spazi Monterrey</span> · Última actualización: Abril 2026</p>
+      <p class="article-meta">Grupo Spazi Monterrey · Última actualización: Abril 2026</p>
     </div>
-  </div>
+  </section>
   <div class="article-body">
-    <div class="container" style="max-width:760px">
+    <div class="container prose">
 
       <h2>1. Identidad y domicilio del responsable</h2>
       <p><strong>Grupo Spazi Monterrey</strong> (en adelante, "Grupo Spazi" o "nosotros"), con operaciones en Monterrey, Nuevo León, México, es el responsable del tratamiento de los datos personales que usted nos proporcione.</p>
@@ -92,13 +96,14 @@ const WA = 'https://wa.me/528114132252';
       <div class="cta-box">
         <h3>¿Dudas sobre este aviso?</h3>
         <p>Escríbenos y te respondemos lo antes posible.</p>
-        <a href={`mailto:${EMAIL}`} class="btn-wa" style="background:var(--navy);display:inline-flex;gap:.5rem;align-items:center">
+        <a href={`mailto:${EMAIL}`} class="btn btn-wa" style="background:var(--navy);display:inline-flex;gap:.5rem;align-items:center">
           Contactar por correo →
         </a>
       </div>
 
     </div>
   </div>
+  </main>
   <Footer />
   <WaFloat />
 </Base>

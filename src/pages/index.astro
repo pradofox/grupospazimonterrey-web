@@ -189,16 +189,17 @@ const faqs = schema[1].mainEntity.map(q => ({ q: q.name, a: q.acceptedAnswer.tex
         <header class="s-head reveal">
           <span class="kicker">Cómo trabajamos</span>
           <h2 class="title h2">De la consulta al<br>proyecto funcionando</h2>
+          <p class="lead">Cuatro pasos simples. Tú tienes un solo punto de contacto de principio a fin.</p>
         </header>
-        <div class="proc-grid">
+        <ol class="proc-grid">
           {proceso.map((s, i) => (
-            <div class={`proc-step reveal reveal-d${(i % 4) + 1}`}>
-              <span class="proc-n">{s.n}</span>
+            <li class={`proc-step reveal reveal-d${(i % 4) + 1}`}>
+              <div class="proc-badge"><span>{s.n}</span></div>
               <h3 class="h3">{s.h}</h3>
               <p>{s.p}</p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
 
@@ -268,9 +269,9 @@ const faqs = schema[1].mainEntity.map(q => ({ q: q.name, a: q.acceptedAnswer.tex
   .stat-l { font-family: 'JetBrains Mono', monospace; font-size: .66rem; text-transform: uppercase; letter-spacing: .08em; color: color-mix(in srgb,#fff 62%,transparent); margin-top: .5rem; }
 
   /* MARQUEE */
-  .marquee { background: var(--orange); overflow: hidden; }
+  .marquee { background: var(--orange-btn); overflow: hidden; }
   .marquee-track { display: flex; width: max-content; white-space: nowrap; animation: slide 34s linear infinite; }
-  .marquee-track span { font-family: 'JetBrains Mono', monospace; font-size: .74rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); padding: .7rem 0; }
+  .marquee-track span { font-family: 'JetBrains Mono', monospace; font-size: .74rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: #fff; padding: .7rem 0; }
   @keyframes slide { to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
@@ -314,11 +315,16 @@ const faqs = schema[1].mainEntity.map(q => ({ q: q.name, a: q.acceptedAnswer.tex
   .seg-pills span { font-family: 'JetBrains Mono', monospace; font-size: .66rem; text-transform: uppercase; letter-spacing: .04em; background: color-mix(in srgb, var(--navy) 6%, var(--white)); color: var(--navy-mid); padding: .3rem .7rem; border-radius: var(--pill); border: 1px solid var(--line); }
 
   /* PROCESO */
-  .proceso { background: var(--cream); }
-  .proc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.3rem; }
-  .proc-step { position: relative; padding-top: 1rem; }
-  .proc-n { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 500; color: var(--orange-ink); }
-  .proc-step h3 { color: var(--navy); margin: .6rem 0 .4rem; font-size: 1.2rem; }
+  .proceso { background: linear-gradient(180deg, var(--cream), var(--paper)); }
+  .proc-grid { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.3rem; position: relative; }
+  /* línea conectora detrás de los badges (desktop) */
+  .proc-grid::before { content: ''; position: absolute; top: 34px; left: 12.5%; right: 12.5%; height: 2px; background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--navy) 22%, transparent) 0 8px, transparent 8px 16px); }
+  .proc-step { position: relative; background: var(--white); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 1.6rem 1.5rem; transition: transform .25s var(--ease), box-shadow .3s var(--ease); }
+  .proc-step:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .proc-badge { width: 56px; height: 56px; border-radius: 50%; background: var(--navy); color: var(--gold-hi); display: grid; place-items: center; margin: 0 0 1.1rem; position: relative; z-index: 1; box-shadow: 0 0 0 6px var(--paper); transition: background .25s, color .25s; }
+  .proc-badge span { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 1.15rem; }
+  .proc-step:hover .proc-badge { background: var(--orange-btn); color: #fff; box-shadow: 0 0 0 6px var(--paper); }
+  .proc-step h3 { color: var(--navy); margin: 0 0 .4rem; font-size: 1.2rem; }
   .proc-step p { font-size: .92rem; color: var(--muted); }
 
   /* TESTIMONIOS */
@@ -349,7 +355,8 @@ const faqs = schema[1].mainEntity.map(q => ({ q: q.name, a: q.acceptedAnswer.tex
   /* RESPONSIVE */
   @media (max-width: 900px) {
     .serv-grid, .seg-grid { grid-template-columns: 1fr 1fr; }
-    .proc-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.3rem; }
+    .proc-grid { grid-template-columns: 1fr 1fr; gap: 1.3rem; }
+    .proc-grid::before { display: none; }
     .nos-inner { grid-template-columns: 1fr; }
     .testi-grid { grid-template-columns: 1fr 1fr; }
   }

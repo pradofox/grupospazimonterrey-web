@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import WaFloat from '../../components/WaFloat.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import '../../styles/global.css';
 
 const articles = [
@@ -43,32 +44,36 @@ const schema = {
   schema={schema}
 >
   <Nav />
-  <section style="padding:4rem 0;background:linear-gradient(135deg,#060f1e,#0C2554)">
-    <div class="container">
-      <div class="tag">Blog</div>
-      <h1 class="section-title light" style="margin-top:.5rem">Guías y consejos<br>de automatización</h1>
-      <p class="section-sub light" style="margin-left:0;margin-top:1rem">Información práctica sobre portones, motores, control de accesos y seguridad en Monterrey.</p>
-    </div>
-  </section>
-  <section style="padding:4rem 0;background:var(--cream)">
-    <div class="container">
-      <div class="blog-grid">
-        {articles.map(a => (
-          <article class="blog-card">
-            <div class="blog-card-body">
-              <div class="blog-category">{a.category}</div>
-              <h2><a href={`/blog/${a.slug}`}>{a.title}</a></h2>
-              <p>{a.excerpt}</p>
-              <div class="blog-card-footer">
-                <span class="blog-date">{a.date}</span>
-                <a href={`/blog/${a.slug}`} class="blog-link">Leer →</a>
-              </div>
-            </div>
-          </article>
-        ))}
+  <main id="main">
+    <section class="page-hero on-dark">
+      <div class="grid-bg on-dark"></div>
+      <div class="container">
+        <Breadcrumbs items={[{ label: 'Inicio', href: '/' }, { label: 'Blog' }]} />
+        <span class="kicker on-dark">Guías y consejos</span>
+        <h1 class="title on-dark h1" style="margin-top:1rem">Portones, motores<br>y seguridad en Monterrey</h1>
+        <p class="lead on-dark" style="margin-top:1rem">Información práctica sobre automatización, control de accesos y cámaras. Escrito por quien lo instala todos los días.</p>
       </div>
-    </div>
-  </section>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="blog-grid">
+          {articles.map(a => (
+            <article class="blog-card reveal">
+              <div class="blog-card-body">
+                <div class="blog-cat">{a.category}</div>
+                <h2><a href={`/blog/${a.slug}`}>{a.title}</a></h2>
+                <p>{a.excerpt}</p>
+                <div class="blog-card-foot">
+                  <span class="blog-date">{a.date}</span>
+                  <a href={`/blog/${a.slug}`} class="blog-readmore">Leer →</a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
   <Footer />
   <WaFloat />
 </Base>
