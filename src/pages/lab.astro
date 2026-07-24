@@ -14,7 +14,7 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Bricolage+Grotesque:opsz,wght@10..48,600;10..48,700;10..48,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       /* Precision calida - base clara y calida, tinta navy templada, laton en vez de oro frio */
@@ -191,10 +191,28 @@
     .heroB .stat .n { color:var(--paper); }
     .heroB .stat .l { color: color-mix(in srgb, var(--paper) 55%, transparent); }
 
+    /* ---- hero C (calido audaz, inspirado en Roofivo pero con firma tecnica) ---- */
+    .heroC { position:relative; min-height:520px; display:flex; align-items:flex-end; padding:2.5rem; background:#241C10; overflow:hidden; }
+    .heroC .photo { position:absolute; inset:0; background:linear-gradient(115deg,#2A200F,#3a2c15); display:grid; place-items:center; }
+    .heroC .photo::after { content:'FOTO REAL DE OBRA · FULL-BLEED'; font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.12em; color:rgba(246,240,228,.35); }
+    .heroC .scrim { position:absolute; inset:0; background:linear-gradient(90deg, rgba(20,15,7,.92) 0%, rgba(20,15,7,.55) 45%, transparent 75%); }
+    .heroC .inner { position:relative; max-width:60%; }
+    .heroC .rust-tag { display:inline-flex; align-items:center; gap:.5rem; font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:#F6F0E4; background:#C1541F; padding:.4rem .8rem; border-radius:100px; margin-bottom:1.2rem; }
+    .heroC h1 { font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(2.6rem,6vw,4.6rem); line-height:.96; letter-spacing:-.025em; color:#F8F4EC; margin-bottom:1.1rem; }
+    .heroC h1 span { color:#E08A3C; }
+    .heroC p { color:rgba(246,240,228,.72); max-width:42ch; margin-bottom:1.6rem; font-size:1.05rem; }
+    .heroC .actions { display:flex; gap:.7rem; flex-wrap:wrap; }
+    .heroC .btn-rust { background:#C1541F; color:#fff; }
+    .heroC .btn-rust:hover { background:#D4611F; transform:translateY(-2px); }
+    .heroC .btn-cream { background:#F6F0E4; color:#241C10; }
+    .heroC .specbar { position:absolute; bottom:0; left:0; right:0; display:flex; gap:2rem; padding:.7rem 2.5rem; background:#C1541F; font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:#F6F0E4; overflow:hidden; white-space:nowrap; }
+
     @media (max-width: 780px) {
       .heroA { grid-template-columns:1fr; }
       .heroA-art { aspect-ratio:16/10; order:-1; }
       .heroB .inner { max-width:100%; }
+      .heroC .inner { max-width:100%; }
+      .heroC .scrim { background:linear-gradient(0deg, rgba(20,15,7,.94) 30%, rgba(20,15,7,.5)); }
       .lab-bar nav { display:none; }
     }
   </style>
@@ -398,6 +416,33 @@
         </div>
       </div>
 
+      <div class="ctx">
+        <div class="ctx-tag">Hero C · cálido audaz (inspirado en Roofivo + firma técnica de Spazi)</div>
+        <div class="heroC">
+          <div class="photo"></div>
+          <div class="scrim"></div>
+          <div class="inner">
+            <span class="rust-tag">Distribuidor oficial · Monterrey</span>
+            <h1>Portones que <span>no fallan</span>. Respaldo de 14 años.</h1>
+            <p>Automatización, control de accesos, cámaras y herrería. Para casa, negocio e industria. Una sola llamada resuelve todo.</p>
+            <div class="actions">
+              <a class="btn btn-rust" href="#">Cotizar - visita sin costo</a>
+              <a class="btn btn-cream" href="#">Ver servicios</a>
+            </div>
+          </div>
+          <div class="specbar">
+            <span>AXIAL · CREMALLERA · PISTONES · TUBULAR</span>
+            <span>·</span>
+            <span>CCTV · RFID · BIOMÉTRICO</span>
+            <span>·</span>
+            <span>14 AÑOS · MTY</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="lab-note" style="margin-top:1.5rem">
+        <strong>Hero C</strong> toma lo bueno de Roofivo (base cálida, acento óxido bold, grotesca enorme con confianza, foto protagonista) pero le suma lo que un techero no puede tener: la barra de specs técnicas en monoespaciada. Eso es lo que evita que sea "otro Roofivo" y lo vuelve Spazi. Requiere una buena foto de obra para funcionar - ese sigue siendo el pendiente clave.
+      </p>
     </div>
   </section>
 
