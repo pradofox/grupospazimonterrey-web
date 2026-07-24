@@ -1,0 +1,409 @@
+---
+// LAB de diseño de Grupo Spazi Monterrey - direccion "Precision calida".
+// Pagina autocontenida, sin indexar. No comparte estilos con el sitio real.
+// Sirve para decidir el lenguaje visual antes de aplicarlo. No tocar el sitio
+// hasta que Roberto apruebe una direccion aqui.
+---
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Lab · Grupo Spazi Monterrey</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Precision calida - base clara y calida, tinta navy templada, laton en vez de oro frio */
+      --paper:   #F4EFE6;
+      --paper-2: #EDE6D8;
+      --ink:     #17212B;
+      --ink-2:   #3C4854;
+      --muted:   #6B7480;
+      --line:    #D9D0BF;
+      --brass:   #A87C3D;
+      --brass-hi:#C79C57;
+      --clay:    #B0563A;
+      --night:   #101821;
+      --white:   #FFFFFF;
+
+      --r-sm: 4px;
+      --r-md: 10px;
+      --r-lg: 18px;
+      --maxw: 1120px;
+      --ease: cubic-bezier(.2,.7,.2,1);
+    }
+
+    * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ---- Barra superior del lab ---- */
+    .lab-bar {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--paper) 85%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .lab-bar-inner { display: flex; align-items: center; justify-content: space-between; height: 52px; }
+    .lab-bar .tag { font-family: 'JetBrains Mono', monospace; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--brass); }
+    .lab-bar nav { display: flex; gap: 1.2rem; }
+    .lab-bar nav a { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--muted); text-decoration: none; letter-spacing: .04em; }
+    .lab-bar nav a:hover { color: var(--ink); }
+
+    /* ---- Estructura del lab ---- */
+    .lab-section { padding: 4.5rem 0; border-bottom: 1px solid var(--line); }
+    .lab-head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; }
+    .lab-num { font-family: 'JetBrains Mono', monospace; font-size: .75rem; color: var(--brass); letter-spacing: .1em; }
+    .lab-title { font-family: 'Fraunces', serif; font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 500; letter-spacing: -.01em; }
+    .lab-note { font-size: .9rem; color: var(--muted); max-width: 60ch; margin-top: .4rem; }
+
+    /* Marca de registro (corner brackets) - detalle tecnico de firma */
+    .reg { position: relative; }
+    .reg::before, .reg::after {
+      content: ''; position: absolute; width: 12px; height: 12px; pointer-events: none;
+      border-color: var(--brass); border-style: solid; border-width: 0;
+    }
+    .reg::before { top: 8px; left: 8px; border-top-width: 1.5px; border-left-width: 1.5px; }
+    .reg::after  { bottom: 8px; right: 8px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+    /* ---- 1. Tokens ---- */
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: .8rem; }
+    .sw { border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; background: var(--white); }
+    .sw .chip { height: 76px; }
+    .sw .meta { padding: .6rem .7rem; }
+    .sw .name { font-size: .8rem; font-weight: 600; }
+    .sw .hex { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--muted); }
+
+    /* ---- 2. Tipografia ---- */
+    .type-row { padding: 1rem 0; border-top: 1px dashed var(--line); }
+    .type-row:first-child { border-top: none; }
+    .type-label { font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: .3rem; }
+    .d1 { font-family: 'Fraunces', serif; font-size: clamp(2.4rem,6vw,4rem); font-weight: 500; line-height: 1.02; letter-spacing: -.02em; }
+    .d1 em { font-style: italic; color: var(--brass); }
+    .d2 { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 500; letter-spacing: -.01em; }
+    .body-lg { font-size: 1.1rem; color: var(--ink-2); max-width: 62ch; }
+    .kicker { font-family: 'JetBrains Mono', monospace; font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--brass); display: inline-flex; align-items: center; gap: .5rem; }
+    .kicker::before { content: ''; width: 22px; height: 1.5px; background: var(--brass); }
+    .spec { font-family: 'JetBrains Mono', monospace; font-size: .82rem; color: var(--ink-2); }
+
+    /* ---- 3. Firma: plano tecnico animado ---- */
+    .blueprint {
+      position: relative; height: 300px; border-radius: var(--r-lg); overflow: hidden;
+      background:
+        linear-gradient(var(--night), #0b131c);
+      border: 1px solid #26333f;
+    }
+    .blueprint .grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(color-mix(in srgb, var(--brass) 18%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--brass) 18%, transparent) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 100%);
+    }
+    .blueprint .scan {
+      position: absolute; inset: 0 auto 0 0; width: 40%;
+      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--brass-hi) 22%, transparent));
+      animation: scan 4.5s var(--ease) infinite;
+    }
+    @keyframes scan { 0%,100% { transform: translateX(-40%); } 50% { transform: translateX(210%); } }
+    .blueprint svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .bp-line { stroke: var(--brass-hi); stroke-width: 1.4; fill: none; opacity: .9; }
+    .bp-line.draw { stroke-dasharray: 400; stroke-dashoffset: 400; animation: draw 3s var(--ease) forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    .bp-node { fill: var(--brass-hi); }
+    .bp-node.pulse { animation: pulse 2.2s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+    @keyframes pulse { 0%,100% { opacity:.4; } 50% { opacity: 1; } }
+    .bp-label { fill: color-mix(in srgb, var(--brass-hi) 80%, white); font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .1em; }
+
+    /* ---- 4. Componentes ---- */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 1.2rem; }
+    .demo { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 1.6rem; }
+    .demo h4 { font-family: 'JetBrains Mono', monospace; font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 1rem; }
+
+    .btn { display: inline-flex; align-items: center; gap: .55rem; font-weight: 600; font-size: .92rem; padding: .8rem 1.4rem; border-radius: var(--r-md); border: none; cursor: pointer; text-decoration: none; transition: transform .15s var(--ease), box-shadow .2s; font-family: 'Inter', sans-serif; }
+    .btn-primary { background: var(--ink); color: var(--paper); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(23,33,43,.22); }
+    .btn-brass { background: var(--brass); color: #1c130a; }
+    .btn-brass:hover { transform: translateY(-2px); background: var(--brass-hi); }
+    .btn-ghost { background: transparent; color: var(--ink); position: relative; padding: .8rem 1.5rem; }
+    .btn-ghost::before, .btn-ghost::after { content:''; position:absolute; width:10px; height:10px; border:1.5px solid var(--brass); transition: all .2s var(--ease); }
+    .btn-ghost::before { top:0; left:0; border-right:none; border-bottom:none; }
+    .btn-ghost::after { bottom:0; right:0; border-left:none; border-top:none; }
+    .btn-ghost:hover::before { top:-3px; left:-3px; }
+    .btn-ghost:hover::after { bottom:-3px; right:-3px; }
+    .btn-wa { background: #1FA855; color:#fff; }
+
+    .chips { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .spec-chip { font-family:'JetBrains Mono', monospace; font-size:.72rem; padding:.3rem .7rem; border:1px solid var(--line); border-radius:100px; color:var(--ink-2); background:var(--paper); }
+    .spec-chip b { color: var(--brass); font-weight:600; }
+
+    .scard { background: var(--paper); border:1px solid var(--line); border-radius: var(--r-md); padding:1.4rem; }
+    .scard .ico { width:42px;height:42px;border-radius:var(--r-sm); background:var(--ink); color:var(--brass-hi); display:grid;place-items:center; margin-bottom:.9rem; }
+    .scard h5 { font-family:'Fraunces',serif; font-weight:600; font-size:1.15rem; margin-bottom:.3rem; }
+    .scard p { font-size:.9rem; color:var(--muted); }
+
+    .stat { display:flex; flex-direction:column; }
+    .stat .n { font-family:'Fraunces',serif; font-size:2.6rem; font-weight:500; line-height:1; color:var(--ink); }
+    .stat .n sup { font-family:'JetBrains Mono',monospace; font-size:.9rem; color:var(--brass); vertical-align:super; }
+    .stat .l { font-family:'JetBrains Mono',monospace; font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-top:.5rem; }
+    .stat-row { display:flex; gap:2.5rem; flex-wrap:wrap; }
+
+    .quote { background:var(--white); border:1px solid var(--line); border-left:3px solid var(--brass); border-radius: var(--r-md); padding:1.5rem; }
+    .quote p { font-family:'Fraunces',serif; font-size:1.05rem; font-style:italic; color:var(--ink-2); margin-bottom:1rem; }
+    .quote .who { display:flex; flex-direction:column; gap:.1rem; }
+    .quote .who b { font-size:.9rem; }
+    .quote .who span { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--muted); letter-spacing:.05em; }
+
+    /* ---- 5. En contexto: hero A (claro, calido) ---- */
+    .ctx { border:1px solid var(--line); border-radius: var(--r-lg); overflow:hidden; margin-bottom:2rem; }
+    .ctx-tag { font-family:'JetBrains Mono',monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); padding:.6rem 1rem; background:var(--paper-2); border-bottom:1px solid var(--line); }
+
+    .heroA { background: var(--paper); padding: 3.5rem 2.5rem; display:grid; grid-template-columns: 1.1fr .9fr; gap:2.5rem; align-items:center; }
+    .heroA .k { margin-bottom:1.2rem; }
+    .heroA h1 { font-family:'Fraunces',serif; font-size: clamp(2rem,4vw,3.2rem); font-weight:500; line-height:1.05; letter-spacing:-.02em; margin-bottom:1.1rem; }
+    .heroA h1 em { font-style:italic; color:var(--brass); }
+    .heroA p { color:var(--ink-2); max-width:44ch; margin-bottom:1.6rem; }
+    .heroA .actions { display:flex; gap:.8rem; flex-wrap:wrap; margin-bottom:2rem; }
+    .heroA .metrics { display:flex; gap:2rem; padding-top:1.4rem; border-top:1px solid var(--line); }
+    .heroA-art { position:relative; aspect-ratio:4/5; border-radius:var(--r-md); overflow:hidden; background:var(--night); border:1px solid #26333f; }
+
+    /* ---- hero B (nocturno, tecnico) ---- */
+    .heroB { background: var(--night); color: var(--paper); padding: 3.5rem 2.5rem; position:relative; overflow:hidden; }
+    .heroB .grid-bg { position:absolute; inset:0; background-image: linear-gradient(color-mix(in srgb, var(--brass) 10%, transparent) 1px,transparent 1px), linear-gradient(90deg,color-mix(in srgb, var(--brass) 10%, transparent) 1px,transparent 1px); background-size:32px 32px; mask-image: radial-gradient(circle at 80% 20%, #000, transparent 70%); }
+    .heroB .inner { position:relative; max-width:60%; }
+    .heroB .k { color:var(--brass-hi); margin-bottom:1.2rem; }
+    .heroB h1 { font-family:'Fraunces',serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:500; line-height:1.05; letter-spacing:-.02em; margin-bottom:1.1rem; }
+    .heroB h1 em { font-style:italic; color:var(--brass-hi); }
+    .heroB p { color: color-mix(in srgb, var(--paper) 70%, transparent); max-width:46ch; margin-bottom:1.6rem; }
+    .heroB .metrics { display:flex; gap:2rem; margin-top:2rem; padding-top:1.4rem; border-top:1px solid #2a3844; }
+    .heroB .stat .n { color:var(--paper); }
+    .heroB .stat .l { color: color-mix(in srgb, var(--paper) 55%, transparent); }
+
+    @media (max-width: 780px) {
+      .heroA { grid-template-columns:1fr; }
+      .heroA-art { aspect-ratio:16/10; order:-1; }
+      .heroB .inner { max-width:100%; }
+      .lab-bar nav { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lab-bar">
+    <div class="wrap lab-bar-inner">
+      <span class="tag">Spazi · Lab</span>
+      <nav>
+        <a href="#tokens">Tokens</a>
+        <a href="#tipografia">Tipo</a>
+        <a href="#firma">Firma</a>
+        <a href="#componentes">Componentes</a>
+        <a href="#contexto">En contexto</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <div class="lab-section" style="padding-top:3.5rem">
+    <div class="wrap">
+      <span class="kicker">Direccion de diseño</span>
+      <h1 class="d1" style="margin:1rem 0 .6rem">Precisión <em>cálida</em></h1>
+      <p class="body-lg">Lenguaje de plano técnico - retícula, datos en monoespaciada, marcas de registro - sobre una base cálida y humana. Habla de ingeniería y de 14 años de confianza al mismo tiempo. Este lab decide el lenguaje; el sitio real no se toca hasta aprobar aquí.</p>
+    </div>
+  </div>
+
+  <!-- 1. Tokens -->
+  <section class="lab-section" id="tokens">
+    <div class="wrap">
+      <div class="lab-head">
+        <span class="lab-num">01</span>
+        <div><h2 class="lab-title">Tokens de color</h2>
+        <p class="lab-note">Base cálida en papel, tinta navy templada (no el navy frío actual), latón cálido en vez del oro frío, y un clay para acentos humanos puntuales.</p></div>
+      </div>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#F4EFE6"></div><div class="meta"><div class="name">Papel</div><div class="hex">#F4EFE6</div></div></div>
+        <div class="sw"><div class="chip" style="background:#EDE6D8"></div><div class="meta"><div class="name">Papel 2</div><div class="hex">#EDE6D8</div></div></div>
+        <div class="sw"><div class="chip" style="background:#17212B"></div><div class="meta"><div class="name">Tinta</div><div class="hex">#17212B</div></div></div>
+        <div class="sw"><div class="chip" style="background:#A87C3D"></div><div class="meta"><div class="name">Latón</div><div class="hex">#A87C3D</div></div></div>
+        <div class="sw"><div class="chip" style="background:#C79C57"></div><div class="meta"><div class="name">Latón claro</div><div class="hex">#C79C57</div></div></div>
+        <div class="sw"><div class="chip" style="background:#B0563A"></div><div class="meta"><div class="name">Clay</div><div class="hex">#B0563A</div></div></div>
+        <div class="sw"><div class="chip" style="background:#101821"></div><div class="meta"><div class="name">Noche</div><div class="hex">#101821</div></div></div>
+        <div class="sw"><div class="chip" style="background:#D9D0BF"></div><div class="meta"><div class="name">Línea</div><div class="hex">#D9D0BF</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Tipografia -->
+  <section class="lab-section" id="tipografia">
+    <div class="wrap">
+      <div class="lab-head">
+        <span class="lab-num">02</span>
+        <div><h2 class="lab-title">Tipografía</h2>
+        <p class="lab-note">La fusión vive aquí: titulares en Fraunces (serif cálida, con carácter) contra etiquetas técnicas en JetBrains Mono. Cuerpo en Inter. El contraste serif-cálido / mono-técnico ES el concepto.</p></div>
+      </div>
+      <div class="type-row"><div class="type-label">Display · Fraunces 500</div><div class="d1">Automatización con <em>precisión</em></div></div>
+      <div class="type-row"><div class="type-label">Título de sección · Fraunces 500</div><div class="d2">Cada instalación, un cliente para siempre</div></div>
+      <div class="type-row"><div class="type-label">Kicker · JetBrains Mono</div><div class="kicker">Distribuidor oficial · MTY</div></div>
+      <div class="type-row"><div class="type-label">Cuerpo · Inter</div><p class="body-lg">Portones automáticos, control de accesos, cámaras y herrería. Atendemos proyectos residenciales, industriales y a instaladores.</p></div>
+      <div class="type-row"><div class="type-label">Dato técnico · JetBrains Mono</div><div class="spec">MOTOR AXIAL AX-1000 · 1000 kg · 220V · ciclo continuo</div></div>
+    </div>
+  </section>
+
+  <!-- 3. Firma -->
+  <section class="lab-section" id="firma">
+    <div class="wrap">
+      <div class="lab-head">
+        <span class="lab-num">03</span>
+        <div><h2 class="lab-title">Elemento de firma</h2>
+        <p class="lab-note">Lo que hoy le falta a Spazi: un motivo propio. Un plano técnico animado - retícula, barrido de escaneo, nodos de acceso y línea que se dibula sola. Es el "mapa de foimax" de Spazi: técnico, sobrio, memorable.</p></div>
+      </div>
+      <div class="blueprint reg">
+        <div class="grid"></div>
+        <div class="scan"></div>
+        <svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid meet">
+          <!-- plano esquematico de un acceso: carril + porton + nodos de control -->
+          <path class="bp-line draw" d="M80 210 H520" />
+          <path class="bp-line draw" d="M120 210 V90 H360 V210" style="animation-delay:.4s" />
+          <path class="bp-line" d="M120 150 H360" opacity=".4" />
+          <path class="bp-line" d="M240 90 V210" opacity=".4" />
+          <circle class="bp-node pulse" cx="120" cy="210" r="5" />
+          <circle class="bp-node pulse" cx="360" cy="210" r="5" style="animation-delay:.6s" />
+          <circle class="bp-node pulse" cx="480" cy="150" r="4" style="animation-delay:1s" />
+          <text class="bp-label" x="128" y="234">A-01</text>
+          <text class="bp-label" x="330" y="234">A-02</text>
+          <text class="bp-label" x="452" y="140">CTRL</text>
+          <text class="bp-label" x="250" y="80">PORTÓN 2.4M</text>
+        </svg>
+      </div>
+      <p class="lab-note" style="margin-top:1rem">Nota: es CSS + SVG puro, sin librerías. Carga instantánea, cero impacto en SEO. Puede vivir de fondo en el hero, sutil, o como sección aparte.</p>
+    </div>
+  </section>
+
+  <!-- 4. Componentes -->
+  <section class="lab-section" id="componentes">
+    <div class="wrap">
+      <div class="lab-head">
+        <span class="lab-num">04</span>
+        <div><h2 class="lab-title">Componentes</h2>
+        <p class="lab-note">Botones (nota el fantasma con marcas de registro que se abren al pasar el mouse), chips de especificación en mono, tarjetas de servicio, métricas y testimonios.</p></div>
+      </div>
+      <div class="grid-2">
+        <div class="demo">
+          <h4>Botones</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:.7rem;align-items:center">
+            <a class="btn btn-primary" href="#">Cotizar - visita sin costo</a>
+            <a class="btn btn-brass" href="#">Ver servicios</a>
+            <a class="btn btn-ghost" href="#">Conócenos</a>
+            <a class="btn btn-wa" href="#">WhatsApp</a>
+          </div>
+        </div>
+        <div class="demo">
+          <h4>Chips de especificación</h4>
+          <div class="chips">
+            <span class="spec-chip"><b>AXIAL</b> uso residencial</span>
+            <span class="spec-chip"><b>CREMALLERA</b> hasta 800 kg</span>
+            <span class="spec-chip"><b>CCTV</b> visión nocturna</span>
+            <span class="spec-chip"><b>RFID</b> control de acceso</span>
+          </div>
+        </div>
+        <div class="demo">
+          <h4>Tarjeta de servicio</h4>
+          <div class="scard reg">
+            <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/></svg></div>
+            <h5>Automatización de portones</h5>
+            <p>Motores axiales, de cremallera, pistones y tubulares. Para casa, negocio e industria.</p>
+          </div>
+        </div>
+        <div class="demo">
+          <h4>Métricas</h4>
+          <div class="stat-row">
+            <div class="stat"><span class="n">14<sup>+</sup></span><span class="l">Años en MTY</span></div>
+            <div class="stat"><span class="n">1987</span><span class="l">Fundación Spazi</span></div>
+            <div class="stat"><span class="n">3</span><span class="l">Segmentos</span></div>
+          </div>
+        </div>
+        <div class="demo" style="grid-column:1/-1">
+          <h4>Testimonio</h4>
+          <div class="quote">
+            <p>"Las mismas personas atienden mi empresa y mi casa: motores, cámaras, herrería, control de accesos. Ya tenemos 8 años sin ningún problema."</p>
+            <div class="who"><b>Antonio</b><span>MONTERREY · CLIENTE 8 AÑOS</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. En contexto -->
+  <section class="lab-section" id="contexto" style="border-bottom:none">
+    <div class="wrap">
+      <div class="lab-head">
+        <span class="lab-num">05</span>
+        <div><h2 class="lab-title">En contexto · dos heros</h2>
+        <p class="lab-note">La misma dirección en dos temperaturas. A: claro y cálido (lo humano al frente). B: nocturno y técnico (la ingeniería al frente). Dime cuál se siente más Spazi.</p></div>
+      </div>
+
+      <div class="ctx">
+        <div class="ctx-tag">Hero A · claro, cálido</div>
+        <div class="heroA">
+          <div>
+            <span class="kicker k">Distribuidor oficial · Monterrey</span>
+            <h1>Seguridad y automatización con <em>14 años de respaldo</em></h1>
+            <p>Portones, control de accesos, cámaras y herrería. Residencial, industrial y a instaladores. Una sola llamada resuelve todo.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="#">Cotizar - visita sin costo</a>
+              <a class="btn btn-ghost" href="#">Ver servicios</a>
+            </div>
+            <div class="metrics">
+              <div class="stat"><span class="n">14<sup>+</sup></span><span class="l">Años en MTY</span></div>
+              <div class="stat"><span class="n">1987</span><span class="l">Fundación Spazi</span></div>
+            </div>
+          </div>
+          <div class="heroA-art">
+            <div class="grid" style="position:absolute;inset:0;background-image:linear-gradient(color-mix(in srgb,#A87C3D 16%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,#A87C3D 16%,transparent) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(circle at 50% 40%,#000 60%,transparent)"></div>
+            <svg viewBox="0 0 300 375" style="position:absolute;inset:0;width:100%;height:100%"><path class="bp-line draw" d="M60 300 H240"/><path class="bp-line draw" d="M90 300 V150 H210 V300" style="animation-delay:.4s"/><circle class="bp-node pulse" cx="90" cy="300" r="5"/><circle class="bp-node pulse" cx="210" cy="300" r="5" style="animation-delay:.6s"/><text class="bp-label" x="120" y="140">PORTÓN 2.4M</text></svg>
+            <div style="position:absolute;bottom:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--brass-hi);letter-spacing:.08em">FOTO REAL DE INSTALACIÓN AQUÍ</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ctx">
+        <div class="ctx-tag">Hero B · nocturno, técnico</div>
+        <div class="heroB">
+          <div class="grid-bg"></div>
+          <div class="inner">
+            <span class="kicker k">Distribuidor oficial · Monterrey</span>
+            <h1>Automatización con <em>precisión</em>, respaldo de <em>14 años</em></h1>
+            <p>Motores, accesos, cámaras y herrería para casa, negocio e industria. Ingeniería que no falla cuando más la usas.</p>
+            <div class="actions" style="display:flex;gap:.8rem;flex-wrap:wrap">
+              <a class="btn btn-brass" href="#">Cotizar - visita sin costo</a>
+              <a class="btn btn-ghost" href="#" style="color:var(--paper)">Ver servicios</a>
+            </div>
+            <div class="metrics">
+              <div class="stat"><span class="n">14<sup>+</sup></span><span class="l">Años en MTY</span></div>
+              <div class="stat"><span class="n">4</span><span class="l">Estaciones atendidas</span></div>
+              <div class="stat"><span class="n">3</span><span class="l">Segmentos</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div style="padding:2.5rem 0 4rem;text-align:center">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:.05em">FIN DEL LAB · grupospazimonterrey.com/lab · noindex</p>
+  </div>
+
+</body>
+</html>
