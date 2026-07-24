@@ -48,6 +48,12 @@ const links = [
     transition: background .25s var(--ease), box-shadow .25s var(--ease);
   }
   .nav.scrolled { background: var(--navy); box-shadow: 0 8px 30px -18px rgba(0,0,0,.6); }
+  /* Con el menu abierto, el <body> se congela con position:fixed (bloqueo de
+     scroll robusto en iOS/Android). Eso rompe el "sticky" del header, porque
+     pierde el contexto normal de scroll y queda en su lugar dentro del body
+     desplazado (fuera de pantalla). Forzamos "fixed" real al viewport mientras
+     el menu esta abierto para que se quede pegado arriba, donde debe estar. */
+  :global(html.menu-open) .nav { position: fixed; top: 0; left: 0; right: 0; }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; height: var(--nav-h); }
   .nav-logo { display: flex; align-items: center; gap: .55rem; flex-shrink: 0; }
   .nav-mark-img { width: 38px; height: 38px; flex-shrink: 0; }
@@ -112,16 +118,42 @@ const links = [
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  let scrollY = 0;
+
   function setMenu(v: boolean) {
     open = v;
     if (!burger || !menu) return;
     burger.setAttribute('aria-expanded', String(v));
     burger.setAttribute('aria-label', v ? 'Cerrar menú' : 'Abrir menú');
-    // Bloquea el scroll: Lenis (si está) + overflow como respaldo
-    document.body.style.overflow = v ? 'hidden' : '';
+
     // @ts-ignore
     const lenis = window.lenis;
     if (lenis) { v ? lenis.stop() : lenis.start(); }
+
+    // Bloqueo de scroll robusto: overflow:hidden solo NO alcanza en Safari/Chrome
+    // movil (el scroll tactil se sigue colando), y eso hace que el header
+    // sticky "salte" al top real del documento en vez de quedarse pegado al
+    // overlay. Congelamos el body en su scroll actual con position:fixed.
+    // menu-open en <html> fuerza el header a position:fixed real (ver CSS):
+    // sticky se rompe cuando su ancestro (body) deja de ser scrolleable.
+    document.documentElement.classList.toggle('menu-open', v);
+    if (v) {
+      scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+    } else {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      // scrollTo via Lenis si esta activo, para que no pisone su propio
+      // estado interno y "rebote" el scroll de vuelta en el siguiente frame.
+      if (lenis?.scrollTo) lenis.scrollTo(scrollY, { immediate: true });
+      else window.scrollTo(0, scrollY);
+    }
+
     if (v) {
       menu.hidden = false;
       requestAnimationFrame(() => menu.classList.add('open'));
